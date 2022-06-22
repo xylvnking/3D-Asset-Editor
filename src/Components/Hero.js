@@ -1,17 +1,23 @@
 import React from 'react'
+import { heroMain, heroImage, heroContent, bigType, bigType2 } from './Hero.module.css'
 
-const styles = {
-    
-    width: "100vw",
-    
-}
 
 export default function Hero() {
   return (
-    <div style={styles}>
-        <h1>HeroSection</h1>
-        <h3>The tagline of the brand, will be going right here.</h3>
-        <button>Shop Now</button>
+    <div className={heroMain}>
+        <div className={heroImage}>
+            <h2 className={bigType}>
+                CYBER<br />PREP
+            </h2>
+            <h2 className={bigType2}>
+                CYBER<br />PREP
+            </h2>
+            <div className={heroContent}>
+                <h1>Cyberprep Jewelry</h1>
+                <p>Embrace an opulent future.</p>
+                <button>Shop Now</button>
+            </div>
+        </div>
     </div>
   )
 }

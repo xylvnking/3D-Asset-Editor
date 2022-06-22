@@ -1,17 +1,19 @@
 .navstyles {
     background-color: rgb(35, 35, 35);
     color: rgb(230, 230, 230);
-    font-family: Gill Sans, sans-serif;
+    font-family: 'Space Mono', monospace;
+
     
     
-    font-size: 1.5rem;
+    font-size: 2.5rem;
 }
 
 
 
 ul {
     margin-top: 0px;
-    height: 50px;
+    margin-bottom: 0;
+    height: 100px;
     list-style-type: none;
     display: flex;
     align-items: center;
@@ -24,8 +26,8 @@ li {
     align-items: center;
     justify-content: center;
     /* background-color: black; */
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 50px;
+    padding-right: 50px;
     height: 100%;
     
 }

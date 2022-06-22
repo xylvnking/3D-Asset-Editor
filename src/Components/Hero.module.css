@@ -1,0 +1,125 @@
+
+
+.heroMain {
+    background-color: rgb(0, 0, 0);
+    height: 100vh;
+    
+
+}
+
+.heroImage {
+    opacity: 1;
+    height: 100%;
+    /* background: url("../images/heroTemp.jpg") no-repeat center center; */
+    background: url("../images/blueTexture.jpg") no-repeat center center;
+    width: 100%;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+
+}
+
+.heroContent {
+    /* height: 50%; */
+    padding: 2rem 10rem 2rem 15rem;
+    font-size: 3rem;
+    font-weight: 400;
+    display: flex;
+    align-items: flex-end;
+    /* justify-content: center; */
+    flex-direction: column;
+    /* margin: 2rem; */
+    margin-right: 10rem;
+
+    background: rgba(255, 255, 255, 0.238);
+    backdrop-filter: blur(25px);
+    border-radius: 200px 0px 200px 0px;
+    transition: border-radius 3s, backdrop-filter 3s;
+    
+
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+
+
+
+}
+
+.heroContent:hover {
+    transition: border-radius 1s, backdrop-filter 1s;
+    border-radius: 0px 200px 0px 200px;
+    backdrop-filter: blur(25px);
+
+
+}
+
+.heroContent p {
+    /* margin-right: 2rem; */
+    
+    /* padding-top: .1rem; */
+    padding-bottom: .1rem;
+    margin: 0;
+    font-family: 'Space Mono', monospace;
+}
+
+.heroContent h1 {
+    /* padding-top: 1rem; */
+    padding-bottom: 1rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    font-family: 'Space Mono', monospace;
+}
+
+.heroContent button {
+    
+    margin-top: 2.5rem;
+    background-color: rgb(255, 255, 255);
+    padding: 25px;
+    font-size: 3rem;
+    border-radius: 50px 0px 50px 0px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: none;
+    transition: border-radius .2s;
+    font-family: 'Space Mono', monospace;
+
+
+}
+
+.heroContent button:hover {
+    transition: border-radius 1s;
+    background-color: rgb(0, 0, 0);
+    color: aliceblue;
+    border-radius: 0px 50px 0px 50px;
+
+}
+
+.bigType {
+    font-size: 50rem;
+    top: 0px;
+    margin: 0px;
+    line-height: 50rem;
+    /* margin-top: auto; */
+    /* background-color: aquamarine; */
+    position: absolute;
+    font-weight: 100;
+    color: rgba(240, 248, 255, 0.299);
+    font-family: Andale Mono, monospace	
+}
+
+.bigType2 {
+    font-size: 55rem;
+    padding-top: 10px;
+    padding-left: 200px;
+    /* padding: 10rem; */
+    top: 0px;
+    margin: 0px;
+    line-height: 50rem;
+    /* margin-top: auto; */
+    /* background-color: aquamarine; */
+    position: absolute;
+    font-weight: 100;
+    color: rgba(206, 232, 255, 0.154);
+    font-family: Andale Mono, monospace	
+
+}

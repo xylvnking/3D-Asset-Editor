@@ -1,6 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
+
+
 body {
     width: 100%;
     
     margin: 0px;
-    
+    /* color: rgb(255, 255, 255); */
+    font-family: Gill Sans, sans-serif;
+
 }
