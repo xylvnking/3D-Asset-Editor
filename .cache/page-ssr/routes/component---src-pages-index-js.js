@@ -11,6 +11,8 @@ exports.modules = {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "bigType": () => (/* binding */ bigType),
+/* harmony export */   "bigType2": () => (/* binding */ bigType2),
 /* harmony export */   "heroContent": () => (/* binding */ heroContent),
 /* harmony export */   "heroImage": () => (/* binding */ heroImage),
 /* harmony export */   "heroMain": () => (/* binding */ heroMain)
@@ -19,6 +21,8 @@ __webpack_require__.r(__webpack_exports__);
 var heroMain = "Hero-module--heroMain--Tj68J";
 var heroImage = "Hero-module--heroImage--o9XM-";
 var heroContent = "Hero-module--heroContent--nsVlj";
+var bigType = "Hero-module--bigType--2mmiQ";
+var bigType2 = "Hero-module--bigType2--f9Tn4";
 
 
 /***/ }),
@@ -61,9 +65,13 @@ function Hero() {
     className: _Hero_module_css__WEBPACK_IMPORTED_MODULE_1__.heroMain
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Hero_module_css__WEBPACK_IMPORTED_MODULE_1__.heroImage
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
+    className: _Hero_module_css__WEBPACK_IMPORTED_MODULE_1__.bigType
+  }, "CYBER", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "PREP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
+    className: _Hero_module_css__WEBPACK_IMPORTED_MODULE_1__.bigType2
+  }, "CYBER", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "PREP"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Hero_module_css__WEBPACK_IMPORTED_MODULE_1__.heroContent
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "HeroSection"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h3", null, "The tagline of the brand, will be going right here."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "Shop Now"))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Cyberprep Jewelry"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Embrace an opulent future."), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "Shop Now"))));
 }
 
 /***/ }),

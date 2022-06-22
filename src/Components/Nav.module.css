@@ -1,11 +1,12 @@
 .navstyles {
-    background-color: rgb(35, 35, 35);
-    color: rgb(230, 230, 230);
+    background-color: rgba(255, 255, 255, 0);
+    color: rgb(82, 82, 82);
     font-family: 'Space Mono', monospace;
-
-    
-    
+    backdrop-filter: blur(50px);
+    position: fixed;
     font-size: 2.5rem;
+    width: 100%;
+    z-index: 999;
 }
 
 
@@ -25,15 +26,17 @@ li {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* background-color: black; */
     padding-left: 50px;
     padding-right: 50px;
     height: 100%;
+    transition: background-color 1s, color 1s;
+    color: rgb(57, 57, 57);
     
 }
 
 li:hover {
-    background-color: gainsboro;
+    
+    background-color: rgb(255, 255, 255);
     color: rgb(35, 35, 35);
     cursor: pointer;
 }
