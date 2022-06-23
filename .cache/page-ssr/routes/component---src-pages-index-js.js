@@ -2,6 +2,74 @@ exports.id = "component---src-pages-index-js";
 exports.ids = ["component---src-pages-index-js"];
 exports.modules = {
 
+/***/ "./node_modules/@react-three/drei/core/PerspectiveCamera.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@react-three/drei/core/PerspectiveCamera.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PerspectiveCamera": () => (/* binding */ PerspectiveCamera)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-4f1a8e2f.esm.js");
+/* harmony import */ var react_merge_refs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-merge-refs */ "./node_modules/react-merge-refs/dist/react-merge-refs.esm.js");
+
+
+
+
+
+const PerspectiveCamera = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(({
+  makeDefault,
+  ...props
+}, ref) => {
+  const set = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.w)(({
+    set
+  }) => set);
+  const camera = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.w)(({
+    camera
+  }) => camera);
+  const size = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.w)(({
+    size
+  }) => size);
+  const cameraRef = react__WEBPACK_IMPORTED_MODULE_1__.useRef();
+  react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect(() => {
+    const {
+      current: cam
+    } = cameraRef;
+
+    if (cam && !props.manual) {
+      cam.aspect = size.width / size.height;
+      cam.updateProjectionMatrix();
+    }
+  }, [size, props]);
+  react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect(() => {
+    if (makeDefault && cameraRef.current) {
+      const oldCam = camera;
+      set(() => ({
+        camera: cameraRef.current
+      }));
+      return () => set(() => ({
+        camera: oldCam
+      }));
+    } // The camera should not be part of the dependency list because this components camera is a stable reference
+    // that must exchange the default, and clean up after itself on unmount.
+
+  }, [cameraRef, makeDefault, set]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("perspectiveCamera", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    ref: (0,react_merge_refs__WEBPACK_IMPORTED_MODULE_2__["default"])([cameraRef, ref])
+  }, props));
+});
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/@react-three/fiber/dist/index-4f1a8e2f.esm.js":
 /*!********************************************************************!*\
   !*** ./node_modules/@react-three/fiber/dist/index-4f1a8e2f.esm.js ***!
@@ -4120,41 +4188,79 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-4f1a8e2f.esm.js");
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
 /* harmony import */ var three_examples_jsm_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three/examples/jsm/controls/OrbitControls */ "./node_modules/three/examples/jsm/controls/OrbitControls.js");
 /* harmony import */ var _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Customizer.module.css */ "./src/Components/CustomizerFolder/Customizer.module.css");
+/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/PerspectiveCamera.js");
 
 
 
 
-
-const CameraController = () => {
-  const {
-    camera,
-    gl
-  } = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.w)();
-  (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
-    const controls = new three_examples_jsm_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_1__.OrbitControls(camera, gl.domElement);
-    controls.minDistance = 3;
-    controls.maxDistance = 20;
-    return () => {
-      controls.dispose();
-    };
-  }, [camera, gl]);
-  return null;
-};
+ // const CameraController = () => {
+//     const { camera, gl } = useThree();
+//     useEffect(
+//       () => {
+//         const controls = new OrbitControls(camera, gl.domElement);
+//         controls.minDistance = 3;
+//         controls.maxDistance = 20;
+//         return () => {
+//           controls.dispose();
+//         };
+//       },
+//       [camera, gl]
+//     );
+//     return null;
+//   };
 
 function Customizer3D() {
+  const {
+    0: cubeRotation,
+    1: setCubeRotation
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(100);
+
+  const rotateCube = () => {
+    setCubeRotation(prev => {
+      return cubeRotation + 45;
+    });
+  };
+
+  const {
+    0: cubeRotation2,
+    1: setCubeRotation2
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(100);
+
+  const rotateCube2 = () => {
+    setCubeRotation2(prev => {
+      return cubeRotation2 + 45;
+    });
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerCanvas
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.Canvas, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CameraController, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ambientLight", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pointLight", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.Canvas, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_4__.PerspectiveCamera, {
+    makeDefault: true,
+    near: 1,
+    far: 1000,
+    position: [0, 0, 12.5],
+    rotateY: [50]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
+    // rotation-x={Math.PI * 0.25} rotation-y={Math.PI * 0.25}
+    "rotation-x": cubeRotation2 // rotation-y={Math.PI * 0.25}
+    ,
+    "rotation-y": cubeRotation
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ambientLight", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pointLight", {
     position: [10, 10, 10]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("boxGeometry", {
     args: [5, 5, 5]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshStandardMaterial", {
     color: "#7BEDFA"
-  }))));
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: rotateCube // style={width: 300px}
+
+  }, "Rotate Y"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: rotateCube2 // style={width: 300px}
+
+  }, "Rotate X"));
 }
 
 /***/ }),
@@ -6050,6 +6156,35 @@ exports.FetchError = FetchError;
   \***********************/
 /***/ (() => {
 
+
+
+/***/ }),
+
+/***/ "./node_modules/react-merge-refs/dist/react-merge-refs.esm.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/react-merge-refs/dist/react-merge-refs.esm.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function mergeRefs(refs) {
+  return function (value) {
+    refs.forEach(function (ref) {
+      if (typeof ref === "function") {
+        ref(value);
+      } else if (ref != null) {
+        ref.current = value;
+      }
+    });
+  };
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mergeRefs);
+//# sourceMappingURL=react-merge-refs.esm.js.map
 
 
 /***/ }),

@@ -8,22 +8,22 @@ import { PerspectiveCamera } from '@react-three/drei'
 
 
 
-// const CameraController = () => {
-//     const { camera, gl } = useThree();
-//     useEffect(
-//       () => {
-//         const controls = new OrbitControls(camera, gl.domElement);
+const CameraController = () => {
+    const { camera, gl } = useThree();
+    useEffect(
+      () => {
+        const controls = new OrbitControls(camera, gl.domElement);
   
-//         controls.minDistance = 3;
-//         controls.maxDistance = 20;
-//         return () => {
-//           controls.dispose();
-//         };
-//       },
-//       [camera, gl]
-//     );
-//     return null;
-//   };
+        controls.minDistance = 3;
+        controls.maxDistance = 20;
+        return () => {
+          controls.dispose();
+        };
+      },
+      [camera, gl]
+    );
+    return null;
+  };
 
 
 export default function Customizer3D() {
@@ -44,21 +44,26 @@ export default function Customizer3D() {
         })
     }
 
+    const [objectColor, setObjectColor] = useState("#00ffb3")
+
 
     return (
         <div className={customizerCanvas}>
             {/* <h1>threacttttt</h1> */}
             
             <Canvas>
-                {/* <CameraController /> */}
-                <PerspectiveCamera 
+                <CameraController />
+                {/* <PerspectiveCamera 
                 makeDefault
                 near={1}
                 far={1000}
                 position={[0, 0, 12.5]}
                 rotateY={[50]}
 
-                />
+                /> */}
+
+                <gridHelper args={[20,30]}/>
+
                 <mesh
                     // rotation-x={Math.PI * 0.25} rotation-y={Math.PI * 0.25}
                     
@@ -70,7 +75,7 @@ export default function Customizer3D() {
                     <pointLight position={[10, 10, 10]} />
                     <boxGeometry args={[5, 5, 5]} />
                     {/* <sphereGeometry args={[-10, -5, -5]} /> */}
-                    <meshStandardMaterial color={"#7BEDFA"}/>
+                    <meshStandardMaterial color={objectColor}/>
                     
                 </mesh>
                 

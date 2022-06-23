@@ -1,5 +1,5 @@
 .customizerContainer {
-    height: 100vh;
+    height: 90vh;
     font-family: 'Space Mono', monospace;
 }
 
@@ -14,11 +14,12 @@
 
 .customizerCanvas {
     margin: 1rem;
-    width: 75vw; 
-    height: 75vh;
-    background-color: aquamarine;
+    width: 60vw; 
+    height: 85vh;
+    background-color: rgb(56, 56, 56);
+    
     position: absolute;
     border-style: solid;
     border-color: black;
-    
+
 }
