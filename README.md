@@ -35,3 +35,21 @@ when using gatsby static image and css modules, doing the after selector thing g
 When you're using a css module, if you just try to use a default selector like h1 {} you'll end up affecting all the h1
 
 You want to use classes and specify that way
+
+# background images
+
+To make background images resize properly (especially when zooming out far to emulate ultrawide) use the following technique
+
+```shell
+.container {
+    # height: 100vh; # 
+    
+}
+
+.sectionWithImage {
+    background: url("../image.jpg") no-repeat center center;
+    background-size: cover; # this makes sure that it always covers - the image doesn't resize with the page
+    height: 100%;
+    
+}
+```

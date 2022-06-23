@@ -7,7 +7,9 @@
 .heroImage {
     opacity: 1;
     height: 100%;
+
     background: url("../images/blueTexture.jpg") no-repeat center center;
+    background-size: cover;
     width: 100%;
     display: flex;
     align-items: flex-end;

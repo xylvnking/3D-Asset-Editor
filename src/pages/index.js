@@ -3,6 +3,7 @@ import Hero from "../Components/Hero"
 import '../style.css'
 import Nav from "../Components/Nav"
 import DefaultItems from "../Components/DefaultItems"
+import BrandBuilder from "../Components/BrandBuilder"
 
 
 
@@ -12,6 +13,7 @@ const IndexPage = () => {
       <Nav />
       <Hero />
       <DefaultItems />
+      <BrandBuilder />
       <footer></footer>
     </main>
     

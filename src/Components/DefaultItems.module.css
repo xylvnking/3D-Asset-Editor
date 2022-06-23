@@ -3,6 +3,7 @@
     font-family: 'Space Mono', monospace;
     overflow-x: auto;
     padding: 2rem 0rem 2rem 2rem;
+    /* max-height: 100vh; */
 }
 
 
@@ -23,6 +24,7 @@
     
     box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
     height: 700px;
+    /* max-height: 60vh; */
 }
 
 .productCard:hover {
