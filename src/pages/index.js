@@ -4,7 +4,7 @@ import '../style.css'
 import Nav from "../Components/Nav"
 import DefaultItems from "../Components/DefaultItems"
 import BrandBuilder from "../Components/BrandBuilder"
-import Customizer from "../Components/Customizer"
+import Customizer from "../Components/CustomizerFolder/Customizer"
 
 
 

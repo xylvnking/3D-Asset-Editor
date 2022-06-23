@@ -55,3 +55,27 @@ To make background images resize properly (especially when zooming out far to em
     
 }
 ```
+
+# accesing file directories
+
+in order to access the images folder from Customizer.js the following is required:
+```
+src
+│      
+│
+└───Components
+│   │   
+│   │
+│   └───CustomizerFolder
+│       │   Customizer.module.css
+|       |   background: url("../../images/DotPattern.png");
+│   
+└───images
+    │   DotPattern.png
+```
+
+
+# asset links
+[Dot Pattern](https://www.toptal.com/designers/subtlepatterns/dot-grid-pattern/)
+[Topography Pattern](https://www.toptal.com/designers/subtlepatterns/topography/)
+[css box shadows](https://getcssscan.com/css-box-shadow-examples)
