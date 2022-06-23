@@ -2,6 +2,7 @@ import * as React from "react"
 import Hero from "../Components/Hero"
 import '../style.css'
 import Nav from "../Components/Nav"
+import DefaultItems from "../Components/DefaultItems"
 
 
 
@@ -9,12 +10,8 @@ const IndexPage = () => {
   return (
     <main>
       <Nav />
-      <section>
-        <Hero />
-      </section>
-      
-      <h2>yes it is now blank</h2>
-      <a></a>
+      <Hero />
+      <DefaultItems />
       <footer></footer>
     </main>
     

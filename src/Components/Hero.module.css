@@ -17,17 +17,17 @@
 }
 
 .heroContent {
-    padding: 2rem 10rem 2rem 15rem;
-    font-size: 3rem;
+    padding: 2rem 8rem 2rem 8rem;
+    font-size: 1.8rem;
     font-weight: 400;
     display: flex;
     align-items: flex-end;
     flex-direction: column;
-    margin-right: 10rem;
+    margin-right: 2rem;
     background: rgba(255, 255, 255, 0.238);
     backdrop-filter: blur(25px);
     border-radius: 200px 0px 200px 0px;
-    transition: border-radius 3s;
+    transition: border-radius 1s;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
@@ -53,20 +53,20 @@
 
 .heroContent button {
     
-    margin-top: 2.5rem;
+    margin-top: 1rem;
     background-color: rgb(255, 255, 255);
-    padding: 25px;
-    font-size: 3rem;
+    padding: 20px;
+    font-size: 2rem;
     border-radius: 50px 0px 50px 0px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     border: none;
-    transition: border-radius 3s;
+    transition: border-radius 1s, background-color 1s;
     font-family: 'Space Mono', monospace;
 
 }
 
 .heroContent button:hover {
-    transition: border-radius 1s;
+    transition: border-radius 1s, background-color 1s;
     background-color: rgb(0, 0, 0);
     color: aliceblue;
     border-radius: 0px 50px 0px 50px;

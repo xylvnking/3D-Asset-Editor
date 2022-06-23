@@ -7,11 +7,16 @@
     font-size: 2.5rem;
     width: 100%;
     z-index: 999;
+    
 }
 
-
+.navIcon {
+    display: none;
+    /* background-color: aqua; */
+}
 
 ul {
+    display: contents;
     margin-top: 0px;
     margin-bottom: 0;
     height: 100px;
@@ -40,3 +45,24 @@ li:hover {
     color: rgb(35, 35, 35);
     cursor: pointer;
 }
+
+@media only screen and (max-width: 950px) {
+    .navstyles {
+        backdrop-filter: none;
+
+    }
+    li {
+        display: none;
+    }
+    ul {
+        justify-content: flex-end;
+        padding-right: 3rem;
+    }
+    .navIcon {
+        display: block;
+        /* background-color: blue; */
+        justify-self: flex-end;
+    }
+}
+
+
