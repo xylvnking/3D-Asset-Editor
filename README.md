@@ -16,6 +16,8 @@ font-family: 'Space Mono', monospace;
 </style>
 ```
 
+[Cinzel](https://fonts.google.com/specimen/Cinzel?preview.text=Embrace%20an%20opulent%20future.&preview.text_type=custom)
+
 # Static Image
 when using gatsby static image and css modules, doing the after selector thing gotta be a certain way
 

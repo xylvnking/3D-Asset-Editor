@@ -2,7 +2,13 @@
     background-color: rgba(255, 255, 255, 0);
     color: rgb(82, 82, 82);
     font-family: 'Space Mono', monospace;
+
     backdrop-filter: blur(50px);
+    /* backdrop-filter: hue-rotate(120deg); */
+
+
+
+
     position: fixed;
     font-size: 2.5rem;
     width: 100%;
@@ -19,7 +25,7 @@ ul {
     display: contents;
     margin-top: 0px;
     margin-bottom: 0;
-    height: 100px;
+    height: 80px;
     list-style-type: none;
     display: flex;
     align-items: center;
