@@ -4,6 +4,7 @@ import '../style.css'
 import Nav from "../Components/Nav"
 import DefaultItems from "../Components/DefaultItems"
 import BrandBuilder from "../Components/BrandBuilder"
+import Customizer from "../Components/Customizer"
 
 
 
@@ -14,6 +15,7 @@ const IndexPage = () => {
       <Hero />
       <DefaultItems />
       <BrandBuilder />
+      <Customizer />
       <footer></footer>
     </main>
     

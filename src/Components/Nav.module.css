@@ -9,8 +9,14 @@
 
     /* mix-blend-mode: darken; */
 
-
-
+    border-bottom: 1px;
+    border-top: 0px;
+    border-left: 0px;
+    border-right: 0px;
+    
+    border-color: rgb(255, 255, 255);
+    border-style: solid;
+    
 
 
     position: fixed;
@@ -34,6 +40,8 @@ ul {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    
     
 }
 

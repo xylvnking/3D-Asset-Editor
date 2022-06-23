@@ -1,0 +1,11 @@
+.customizerContainer {
+    height: 100vh;
+    font-family: 'Space Mono', monospace;
+}
+
+.customizerMain {
+    background: url("../images/DotPattern.png");
+    /* background-size: cover; */
+    height: 100%;
+}
+
