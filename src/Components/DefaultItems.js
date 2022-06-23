@@ -24,6 +24,18 @@ export default function DefaultItems() {
         <ProductCard />
         <ProductCard />
         <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
+        <ProductCard />
     </div>
   )
 }
