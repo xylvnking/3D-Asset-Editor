@@ -4093,16 +4093,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _Customizer_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Customizer.module.css */ "./src/Components/CustomizerFolder/Customizer.module.css");
 /* harmony import */ var _Customizer3D__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Customizer3D */ "./src/Components/CustomizerFolder/Customizer3D.js");
+/* harmony import */ var _CustomizerControls__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./CustomizerControls */ "./src/Components/CustomizerFolder/CustomizerControls.js");
 
  // import { Customizer3D } from './Customizer3D'
 
 
+
 function Customizer() {
+  const {
+    0: color,
+    1: setColor
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#aabbcc");
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_1__.customizerContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_1__.customizerMain
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Customizer3D__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Customizer3D__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    color: color
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CustomizerControls__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    color: color,
+    setColor: setColor
+  })));
 }
 
 /***/ }),
@@ -4124,16 +4135,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
 /* harmony import */ var three_examples_jsm_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three/examples/jsm/controls/OrbitControls */ "./node_modules/three/examples/jsm/controls/OrbitControls.js");
 /* harmony import */ var _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Customizer.module.css */ "./src/Components/CustomizerFolder/Customizer.module.css");
-/* harmony import */ var react_colorful__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-colorful */ "./node_modules/react-colorful/dist/index.mjs");
 
 
 
 
 
- // const YourComponent = () => {
-//   const [color, setColor] = useState("#aabbcc");
-//   return <HexColorPicker color={color} onChange={setColor} />;
-// };
 
 const CameraController = () => {
   const {
@@ -4151,7 +4157,7 @@ const CameraController = () => {
   return null;
 };
 
-function Customizer3D() {
+function Customizer3D(props) {
   const {
     0: cubeRotation,
     1: setCubeRotation
@@ -4174,20 +4180,9 @@ function Customizer3D() {
     });
   };
 
-  const {
-    0: objectColor,
-    1: setObjectColor
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#00ffb3");
-  const {
-    0: color,
-    1: setColor
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#aabbcc");
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerCanvas
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.Canvas, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_5__.HexColorPicker, {
-    color: color,
-    onChange: setColor
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CameraController, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("gridHelper", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.Canvas, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CameraController, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("gridHelper", {
     args: [20, 30]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
     // rotation-x={Math.PI * 0.25} rotation-y={Math.PI * 0.25}
@@ -4199,7 +4194,7 @@ function Customizer3D() {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("boxGeometry", {
     args: [5, 5, 5]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshStandardMaterial", {
-    color: objectColor
+    color: props.color
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: rotateCube // style={width: 300px}
 
@@ -4207,6 +4202,34 @@ function Customizer3D() {
     onClick: rotateCube2 // style={width: 300px}
 
   }, "Rotate X"));
+}
+
+/***/ }),
+
+/***/ "./src/Components/CustomizerFolder/CustomizerControls.js":
+/*!***************************************************************!*\
+  !*** ./src/Components/CustomizerFolder/CustomizerControls.js ***!
+  \***************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ CustomizerControls)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Customizer_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Customizer.module.css */ "./src/Components/CustomizerFolder/Customizer.module.css");
+/* harmony import */ var react_colorful__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-colorful */ "./node_modules/react-colorful/dist/index.mjs");
+
+
+
+function CustomizerControls(props) {
+  // const [color, setColor] = useState("#aabbcc");
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_2__.HexColorPicker, {
+    color: props.color,
+    onChange: props.setColor
+  });
 }
 
 /***/ }),
