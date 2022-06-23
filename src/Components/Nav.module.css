@@ -3,8 +3,12 @@
     color: rgb(82, 82, 82);
     font-family: 'Space Mono', monospace;
 
-    backdrop-filter: blur(50px);
+    /* backdrop-filter: blur(50px); */
     /* backdrop-filter: hue-rotate(120deg); */
+    backdrop-filter: blur(15px);
+
+    /* mix-blend-mode: darken; */
+
 
 
 
@@ -42,6 +46,11 @@ li {
     height: 100%;
     transition: background-color 1s, color 1s;
     color: rgb(57, 57, 57);
+    /* backdrop-filter: invert(100%); */
+    /* color: rgba(240, 248, 255, 0.084); */
+    
+
+
     
 }
 
