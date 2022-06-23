@@ -3131,12 +3131,14 @@ var bounce = "BrandBuilder-module--bounce--mUKzS";
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "customizerCanvas": () => (/* binding */ customizerCanvas),
 /* harmony export */   "customizerContainer": () => (/* binding */ customizerContainer),
 /* harmony export */   "customizerMain": () => (/* binding */ customizerMain)
 /* harmony export */ });
 // Exports
 var customizerContainer = "Customizer-module--customizerContainer--+lQC-";
 var customizerMain = "Customizer-module--customizerMain--VYLaS";
+var customizerCanvas = "Customizer-module--customizerCanvas--7aHgW";
 
 
 /***/ }),
@@ -4092,6 +4094,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Customizer_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Customizer.module.css */ "./src/Components/CustomizerFolder/Customizer.module.css");
 /* harmony import */ var _Customizer3D__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Customizer3D */ "./src/Components/CustomizerFolder/Customizer3D.js");
 
+ // import { Customizer3D } from './Customizer3D'
 
 
 function Customizer() {
@@ -4099,7 +4102,7 @@ function Customizer() {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_1__.customizerContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_1__.customizerMain
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Customizer3D__WEBPACK_IMPORTED_MODULE_2__.Customizer3D, null)));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Customizer3D__WEBPACK_IMPORTED_MODULE_2__["default"], null)));
 }
 
 /***/ }),
@@ -4117,9 +4120,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-4f1a8e2f.esm.js");
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-4f1a8e2f.esm.js");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
 /* harmony import */ var three_examples_jsm_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three/examples/jsm/controls/OrbitControls */ "./node_modules/three/examples/jsm/controls/OrbitControls.js");
+/* harmony import */ var _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Customizer.module.css */ "./src/Components/CustomizerFolder/Customizer.module.css");
+
 
 
 
@@ -4128,7 +4133,7 @@ const CameraController = () => {
   const {
     camera,
     gl
-  } = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.w)();
+  } = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.w)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     const controls = new three_examples_jsm_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_1__.OrbitControls(camera, gl.domElement);
     controls.minDistance = 3;
@@ -4142,14 +4147,11 @@ const CameraController = () => {
 
 function Customizer3D() {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    style: {
-      width: "50vw",
-      height: "50vh"
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "threacttttt"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.Canvas, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CameraController, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ambientLight", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pointLight", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerCanvas
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.Canvas, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CameraController, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ambientLight", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pointLight", {
     position: [10, 10, 10]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("boxGeometry", {
-    args: [1, 1, 1]
+    args: [5, 5, 5]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshStandardMaterial", {
     color: "#7BEDFA"
   }))));

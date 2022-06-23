@@ -13,9 +13,12 @@
 }
 
 .customizerCanvas {
-    margin: 0;
+    margin: 1rem;
     width: 75vw; 
     height: 75vh;
     background-color: aquamarine;
     position: absolute;
+    border-style: solid;
+    border-color: black;
+    
 }
