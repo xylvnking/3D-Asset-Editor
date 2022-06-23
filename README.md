@@ -15,3 +15,23 @@
 font-family: 'Space Mono', monospace;
 </style>
 ```
+
+# Static Image
+when using gatsby static image and css modules, doing the after selector thing gotta be a certain way
+
+```shell
+.productCard { # container
+    background-color: aqua;
+    width: 400px;
+    height: 400px; 
+}
+
+.productCard Img { #this is how you reference <StaticImage />
+    width: 100px;
+}
+```
+
+# css modules
+When you're using a css module, if you just try to use a default selector like h1 {} you'll end up affecting all the h1
+
+You want to use classes and specify that way

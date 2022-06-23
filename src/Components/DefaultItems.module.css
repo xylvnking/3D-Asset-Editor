@@ -1,0 +1,57 @@
+.productCards {
+    display: flex;
+    font-family: 'Space Mono', monospace;
+    overflow-x: auto;
+}
+
+
+
+.productCard {
+    background-color: rgb(193, 226, 255);
+    width: 400px;
+    margin: 2rem;
+    border-radius: 50px 0px 50px 0px;
+    display: flex;
+    flex-shrink: 0;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    
+
+    
+    
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    height: 700px;
+}
+
+.productCard:hover {
+    
+    box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 0px 1px inset, rgba(0, 0, 0, 0.9) 0px 0px 0px 1px;
+    transform: scale(1.01);
+    
+
+
+}
+
+.productCardTitle {
+    font-size: 2rem;
+    padding: 25px;
+    margin: .5rem;
+    
+}
+
+.productCardDescription {
+    font-size: 1rem;
+    padding: 25px;
+    margin: .5rem;
+}
+
+.productCard Img {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 50px 50px 50px 50px; 
+    
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+    
+}
