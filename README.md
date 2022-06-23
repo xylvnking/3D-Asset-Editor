@@ -6,6 +6,7 @@
 - React Three Fiber
 - React Three Drei
 - CSS modules
+- [react-colorful](https://github.com/omgovich/react-colorful)
 
 # Really nice fonts used:
 [Space Mono](https://fonts.google.com/specimen/Space+Mono?preview.text=Embrace%20an%20opulent%20future.&preview.text_type=custom#standard-styles)
@@ -79,3 +80,9 @@ src
 [Dot Pattern](https://www.toptal.com/designers/subtlepatterns/dot-grid-pattern/)
 [Topography Pattern](https://www.toptal.com/designers/subtlepatterns/topography/)
 [css box shadows](https://getcssscan.com/css-box-shadow-examples)
+
+# error messages learned
+```shell
+# this happened because I imported a color picker and tried to use it inside of my React Three Fiber <Canvas />
+Div is not part of the THREE namespace! Did you forget to extend?
+```

@@ -8,6 +8,7 @@ import { PerspectiveCamera } from '@react-three/drei'
 
 
 
+
 const CameraController = () => {
     const { camera, gl } = useThree();
     useEffect(
@@ -26,10 +27,9 @@ const CameraController = () => {
   };
 
 
-export default function Customizer3D() {
+export default function Customizer3D(props) {
 
     const [cubeRotation, setCubeRotation] = useState(100)
-
     const rotateCube = () => {
         setCubeRotation((prev) => {
             return cubeRotation + 45
@@ -37,20 +37,17 @@ export default function Customizer3D() {
     }
 
     const [cubeRotation2, setCubeRotation2] = useState(100)
-
     const rotateCube2 = () => {
         setCubeRotation2((prev) => {
             return cubeRotation2 + 45
         })
     }
 
-    const [objectColor, setObjectColor] = useState("#00ffb3")
-
-
     return (
         <div className={customizerCanvas}>
             {/* <h1>threacttttt</h1> */}
             
+            {/* <HexColorPicker color={color} onChange={setColor} /> */}
             <Canvas>
                 <CameraController />
                 {/* <PerspectiveCamera 
@@ -75,7 +72,7 @@ export default function Customizer3D() {
                     <pointLight position={[10, 10, 10]} />
                     <boxGeometry args={[5, 5, 5]} />
                     {/* <sphereGeometry args={[-10, -5, -5]} /> */}
-                    <meshStandardMaterial color={objectColor}/>
+                    <meshStandardMaterial color={props.color}/>
                     
                 </mesh>
                 
