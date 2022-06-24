@@ -3133,12 +3133,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "customizerCanvas": () => (/* binding */ customizerCanvas),
 /* harmony export */   "customizerContainer": () => (/* binding */ customizerContainer),
+/* harmony export */   "customizerControls": () => (/* binding */ customizerControls),
+/* harmony export */   "customizerFlex": () => (/* binding */ customizerFlex),
 /* harmony export */   "customizerMain": () => (/* binding */ customizerMain)
 /* harmony export */ });
 // Exports
 var customizerContainer = "Customizer-module--customizerContainer--+lQC-";
 var customizerMain = "Customizer-module--customizerMain--VYLaS";
+var customizerFlex = "Customizer-module--customizerFlex--doWwJ";
 var customizerCanvas = "Customizer-module--customizerCanvas--7aHgW";
+var customizerControls = "Customizer-module--customizerControls--0u8qk";
 
 
 /***/ }),
@@ -4108,12 +4112,14 @@ function Customizer() {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_1__.customizerContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_1__.customizerMain
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_1__.customizerFlex
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Customizer3D__WEBPACK_IMPORTED_MODULE_2__["default"], {
     color: color
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CustomizerControls__WEBPACK_IMPORTED_MODULE_3__["default"], {
     color: color,
     setColor: setColor
-  })));
+  }))));
 }
 
 /***/ }),
@@ -4165,7 +4171,7 @@ function Customizer3D(props) {
 
   const rotateCube = () => {
     setCubeRotation(prev => {
-      return cubeRotation + 45;
+      return prev + 360;
     });
   };
 
@@ -4176,7 +4182,7 @@ function Customizer3D(props) {
 
   const rotateCube2 = () => {
     setCubeRotation2(prev => {
-      return cubeRotation2 + 45;
+      return prev + 360;
     });
   };
 
@@ -4194,14 +4200,23 @@ function Customizer3D(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("boxGeometry", {
     args: [5, 5, 5]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshStandardMaterial", {
-    color: props.color
+    color: props.color,
+    roughness: 10
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: rotateCube // style={width: 300px}
 
   }, "Rotate Y"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: rotateCube2 // style={width: 300px}
 
-  }, "Rotate X"));
+  }, "Rotate X"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    id: "typeinp",
+    type: "range",
+    min: "0",
+    max: "5" // value={cubeRotation} 
+    ,
+    onChange: rotateCube,
+    step: ".1"
+  }));
 }
 
 /***/ }),
@@ -4225,11 +4240,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function CustomizerControls(props) {
-  // const [color, setColor] = useState("#aabbcc");
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_2__.HexColorPicker, {
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_1__.customizerControls
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_2__.HexColorPicker, {
     color: props.color,
     onChange: props.setColor
-  });
+  }));
 }
 
 /***/ }),

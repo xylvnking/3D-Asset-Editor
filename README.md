@@ -86,3 +86,8 @@ src
 # this happened because I imported a color picker and tried to use it inside of my React Three Fiber <Canvas />
 Div is not part of the THREE namespace! Did you forget to extend?
 ```
+
+# misc resources/links
+[react-three-fiber by example]("https://onion2k.github.io/r3f-by-example/)
+[Unsplash Free Photos](https://unsplash.com/)
+[Intro to react three fiber](https://youtu.be/DPl34H2ISsk)

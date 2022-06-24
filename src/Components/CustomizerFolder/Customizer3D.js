@@ -32,14 +32,14 @@ export default function Customizer3D(props) {
     const [cubeRotation, setCubeRotation] = useState(100)
     const rotateCube = () => {
         setCubeRotation((prev) => {
-            return cubeRotation + 45
+            return prev + 360
         })
     }
 
     const [cubeRotation2, setCubeRotation2] = useState(100)
     const rotateCube2 = () => {
         setCubeRotation2((prev) => {
-            return cubeRotation2 + 45
+            return prev + 360
         })
     }
 
@@ -72,7 +72,11 @@ export default function Customizer3D(props) {
                     <pointLight position={[10, 10, 10]} />
                     <boxGeometry args={[5, 5, 5]} />
                     {/* <sphereGeometry args={[-10, -5, -5]} /> */}
-                    <meshStandardMaterial color={props.color}/>
+
+                    <meshStandardMaterial 
+                    color={props.color}
+                    roughness={.1}
+                    />
                     
                 </mesh>
                 
@@ -85,6 +89,14 @@ export default function Customizer3D(props) {
                 onClick={rotateCube2}
                 // style={width: 300px}
                 >Rotate X</button>
+                <input 
+                id="typeinp" 
+                type="range" 
+                min="0" max="5" 
+                // value={cubeRotation} 
+                onChange={rotateCube}
+                step=".1"
+                />
         </div>
     )
 }
