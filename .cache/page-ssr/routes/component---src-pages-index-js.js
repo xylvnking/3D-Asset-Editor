@@ -4164,57 +4164,65 @@ const CameraController = () => {
 };
 
 function Customizer3D(props) {
+  //Object rotation being set with sliders
   const {
-    0: cubeRotation,
-    1: setCubeRotation
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(100);
-
-  const rotateCube = () => {
-    setCubeRotation(prev => {
-      return prev + 360;
-    });
-  };
-
+    0: xRotation,
+    1: setXRotation
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
   const {
-    0: cubeRotation2,
-    1: setCubeRotation2
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(100);
-
-  const rotateCube2 = () => {
-    setCubeRotation2(prev => {
-      return prev + 360;
-    });
-  };
-
+    0: zRotation,
+    1: setZRotation
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
+  const {
+    0: yRotation,
+    1: setYRotation
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
+  console.log(xRotation);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerCanvas
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.Canvas, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CameraController, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("gridHelper", {
     args: [20, 30]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
     // rotation-x={Math.PI * 0.25} rotation-y={Math.PI * 0.25}
-    "rotation-x": cubeRotation2 // rotation-y={Math.PI * 0.25}
-    ,
-    "rotation-y": cubeRotation
+    rotation: [xRotation, yRotation, zRotation]
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ambientLight", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pointLight", {
     position: [10, 10, 10]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("boxGeometry", {
     args: [5, 5, 5]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("sphereGeometry", {
+    args: [-10, -5, -5]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshStandardMaterial", {
     color: props.color,
     roughness: .1
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: rotateCube // style={width: 300px}
-
-  }, "Rotate Y"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: rotateCube2 // style={width: 300px}
-
-  }, "Rotate X"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
-    max: "5" // value={cubeRotation} 
+    max: "11" // value={value} 
+    // onChange={rotateX}
     ,
-    onChange: rotateCube,
+    value: xRotation,
+    onChange: e => setXRotation(e.target.value),
+    step: ".1"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    id: "typeinp",
+    type: "range",
+    min: "0",
+    max: "11" // value={value} 
+    // onChange={rotateX}
+    ,
+    value: yRotation,
+    onChange: e => setYRotation(e.target.value),
+    step: ".1"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    id: "typeinp",
+    type: "range",
+    min: "0",
+    max: "11" // value={value} 
+    // onChange={rotateX}
+    ,
+    value: zRotation,
+    onChange: e => setZRotation(e.target.value),
     step: ".1"
   }));
 }

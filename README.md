@@ -91,3 +91,32 @@ Div is not part of the THREE namespace! Did you forget to extend?
 [react-three-fiber by example]("https://onion2k.github.io/r3f-by-example/)
 [Unsplash Free Photos](https://unsplash.com/)
 [Intro to react three fiber](https://youtu.be/DPl34H2ISsk)
+
+# Getting value from slider to affect R3F object rotation
+
+```shell
+# define state for each axis
+
+export default function Customizer3D() {
+
+    # define state for each axis
+    const [xRotation, setXRotation] = useState(0)
+
+    return (
+        <div>
+            <Canvas>
+                <mesh rotation={[xRotation, yRotation, zRotation]}> 
+                    # <geometry, light, material etc />
+                </mesh>
+            </Canvas>
+            <input 
+                id="typeinp" 
+                type="range" 
+                min="0" max="11" # for whatever reason, this is the value that allows for a "full rotation"
+                value={xRotation} # i think this is redundant and can be removed
+                onChange={(e) => setXRotation(e.target.value)} # using slider value to drive xRotation
+                step=".01"
+            />
+        </div>
+    )
+```
