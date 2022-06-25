@@ -5,10 +5,22 @@
 
     /* backdrop-filter: blur(50px); */
     /* backdrop-filter: hue-rotate(120deg); */
-    backdrop-filter: blur(15px);
-
     /* mix-blend-mode: darken; */
 
+
+
+
+
+
+    /* DISABLED TEMP TO EASE PERFORMANCE PRE OPTIMIZATION */
+    /* backdrop-filter: blur(15px); */
+
+
+
+
+
+
+    
     border-bottom: 1px;
     border-top: 0px;
     border-left: 0px;

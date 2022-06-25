@@ -6,7 +6,7 @@ import CustomizerControls from './CustomizerControls';
 
 export default function Customizer() {
 
-  const [color, setColor] = useState("#aabbcc");
+  const [color, setColor] = useState("#27a1e3");
 
   return (
     <div className={customizerContainer}>

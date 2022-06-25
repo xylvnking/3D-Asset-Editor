@@ -4189,8 +4189,6 @@ function Customizer3D(props) {
     position: [10, 10, 10]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("boxGeometry", {
     args: [5, 5, 5]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("sphereGeometry", {
-    args: [-10, -5, -5]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshStandardMaterial", {
     color: props.color,
     roughness: .1
@@ -4200,30 +4198,30 @@ function Customizer3D(props) {
     min: "0",
     max: "11" // value={value} 
     // onChange={rotateX}
+    // value={xRotation}
     ,
-    value: xRotation,
     onChange: e => setXRotation(e.target.value),
-    step: ".1"
+    step: ".01"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
     max: "11" // value={value} 
     // onChange={rotateX}
+    // value={yRotation}
     ,
-    value: yRotation,
     onChange: e => setYRotation(e.target.value),
-    step: ".1"
+    step: ".01"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
     max: "11" // value={value} 
     // onChange={rotateX}
+    // value={zRotation}
     ,
-    value: zRotation,
     onChange: e => setZRotation(e.target.value),
-    step: ".1"
+    step: ".01"
   }));
 }
 
