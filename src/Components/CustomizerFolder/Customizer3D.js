@@ -9,7 +9,18 @@ import { PerspectiveCamera } from '@react-three/drei'
 import { HexColorPicker } from "react-colorful";
 
 
+/*
 
+TO DO:
+
+- set up lighting rigs
+
+- should this all be passed in as props? so that the controls component can receive/control them too?
+    - would it be better to have controls here too? just so it's one self-contained component?
+
+
+
+*/
 
 
 const CameraController = () => {
