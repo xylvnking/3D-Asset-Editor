@@ -4201,7 +4201,7 @@ function Customizer3D(props) {
     args: [5, 5, 5]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshStandardMaterial", {
     color: props.color,
-    roughness: 10
+    roughness: .1
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: rotateCube // style={width: 300px}
 

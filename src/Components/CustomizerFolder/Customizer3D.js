@@ -29,19 +29,34 @@ const CameraController = () => {
 
 export default function Customizer3D(props) {
 
-    const [cubeRotation, setCubeRotation] = useState(100)
-    const rotateCube = () => {
-        setCubeRotation((prev) => {
-            return prev + 360
+
+
+    // Updating rotation of object according to button presses
+    // Not satisfied at all with the implementation
+    // It's not smooth and feels awful to use.
+    // Also didn't include a minus set cause I'll be redoing it and didn't wanna pollute the code more than this for now.
+    const [xRotation, setXRotation] = useState(0)
+    const rotateX = () => {
+        setXRotation((prev) => {
+            return prev + .5
         })
     }
 
-    const [cubeRotation2, setCubeRotation2] = useState(100)
-    const rotateCube2 = () => {
-        setCubeRotation2((prev) => {
-            return prev + 360
+    const [zRotation, setZRotation] = useState(0)
+    const rotateZ = () => {
+        setZRotation((prev) => {
+            return prev + .5
         })
     }
+
+    const [yRotation, setYRotation] = useState(0)
+    const rotateY = () => {
+        setYRotation((prev) => {
+            return prev + .5
+        })
+    }
+
+    console.log(xRotation)
 
     return (
         <div className={customizerCanvas}>
@@ -63,10 +78,10 @@ export default function Customizer3D(props) {
 
                 <mesh
                     // rotation-x={Math.PI * 0.25} rotation-y={Math.PI * 0.25}
-                    
-                    rotation-x={cubeRotation2} 
+                    rotation={[xRotation, yRotation, zRotation]}
+                    // rotation-x={cubeRotation2} 
                     // rotation-y={Math.PI * 0.25}
-                    rotation-y={cubeRotation}
+                    // rotation-y={cubeRotation}
                 >
                     <ambientLight />
                     <pointLight position={[10, 10, 10]} />
@@ -77,26 +92,60 @@ export default function Customizer3D(props) {
                     color={props.color}
                     roughness={.1}
                     />
+
+
                     
                 </mesh>
                 
             </Canvas>
-                <button
-                onClick={rotateCube}
-                // style={width: 300px}
-                >Rotate Y</button>
-                <button
-                onClick={rotateCube2}
-                // style={width: 300px}
-                >Rotate X</button>
-                <input 
+
+
+            <button
+                onClick={rotateY}
+            >Rotate X</button>
+            <button
+                onClick={rotateX}
+            >Rotate X</button>
+            <button
+                onClick={rotateZ}
+            >Rotate Z</button>
+
+            <input 
                 id="typeinp" 
                 type="range" 
-                min="0" max="5" 
-                // value={cubeRotation} 
-                onChange={rotateCube}
+                min="0" max="11" 
+                // value={value} 
+                // onChange={rotateX}
+
+                value={xRotation}
+                onChange={(e) => setXRotation(e.target.value)}
                 step=".1"
-                />
+            />
+
+            <input 
+                id="typeinp" 
+                type="range" 
+                min="0" max="11" 
+                // value={value} 
+                // onChange={rotateX}
+
+                value={yRotation}
+                onChange={(e) => setYRotation(e.target.value)}
+                step=".1"
+            />
+
+            <input 
+                id="typeinp" 
+                type="range" 
+                min="0" max="11" 
+                // value={value} 
+                // onChange={rotateX}
+
+                value={zRotation}
+                onChange={(e) => setZRotation(e.target.value)}
+                step=".1"
+            />
+
         </div>
     )
 }
