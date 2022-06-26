@@ -4172,22 +4172,14 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function Customizer() {
-  const {
-    0: color,
-    1: setColor
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#27a1e3");
+  // const [color, setColor] = useState("#27a1e3");
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_1__.customizerContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_1__.customizerMain
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_1__.customizerFlex
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Customizer3D__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    color: color
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_CustomizerControls__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    color: color,
-    setColor: setColor
-  }))));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_Customizer3D__WEBPACK_IMPORTED_MODULE_2__["default"], null))));
 }
 
 /***/ }),
@@ -4274,17 +4266,27 @@ function Customizer3D(props) {
     0: metalness,
     1: setMetalness
   } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.7); // 0-1
-  // Lights
+
+  const {
+    0: objectColor,
+    1: setObjectColor
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#27a1e3"); // Lights
 
   const {
     0: ambientLightIntensity,
     1: setAmbientLightIntensity
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(3);
   const {
     0: ambientLightColor,
     1: setAmbientLightColor
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#000000");
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#ffffff");
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerContainer
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerMain
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerFlex
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerCanvas
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.Canvas, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CameraController, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_5__.PerspectiveCamera, {
     makeDefault: true,
@@ -4293,7 +4295,6 @@ function Customizer3D(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("gridHelper", {
     args: [20, 30]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
-    // rotation-x={Math.PI * 0.25} rotation-y={Math.PI * 0.25}
     rotation: [xRotation, yRotation, zRotation]
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ambientLight", {
     intensity: ambientLightIntensity,
@@ -4304,10 +4305,12 @@ function Customizer3D(props) {
     args: [5, 5, 5] //SETS SIZE
 
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshStandardMaterial", {
-    color: props.color,
+    color: objectColor,
     roughness: roughness,
     metalness: metalness
-  }))), "x Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    class: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerControls
+  }, "x Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
@@ -4317,7 +4320,7 @@ function Customizer3D(props) {
     onChange: e => setXRotation(e.target.value),
     step: ".01" // smaller = smoother
 
-  }), "Y Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Y Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
@@ -4325,7 +4328,7 @@ function Customizer3D(props) {
     value: yRotation,
     onChange: e => setYRotation(e.target.value),
     step: ".01"
-  }), "Z Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Z Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
@@ -4333,7 +4336,7 @@ function Customizer3D(props) {
     value: zRotation,
     onChange: e => setZRotation(e.target.value),
     step: ".01"
-  }), "roughness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "roughness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
@@ -4341,7 +4344,7 @@ function Customizer3D(props) {
     value: roughness,
     onChange: e => setRoughness(e.target.value),
     step: ".1"
-  }), "metalness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "metalness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
@@ -4349,18 +4352,21 @@ function Customizer3D(props) {
     value: metalness,
     onChange: e => setMetalness(e.target.value),
     step: ".1"
-  }), "ambientLightIntensity", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "ambientLightIntensity", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
-    max: "25",
+    max: "10",
     value: ambientLightIntensity,
     onChange: e => setAmbientLightIntensity(e.target.value),
     step: ".1"
-  }), "ambientLightColor", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_6__.HexColorPicker, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "ambientLightColor", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_6__.HexColorPicker, {
     color: ambientLightColor,
     onChange: setAmbientLightColor
-  }));
+  }), "objectColor", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_6__.HexColorPicker, {
+    color: objectColor,
+    onChange: setObjectColor
+  })))));
 }
 
 /***/ }),
@@ -4382,14 +4388,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_colorful__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-colorful */ "./node_modules/react-colorful/dist/index.mjs");
 
 
+ // can probably delete just watch for references
 
 function CustomizerControls(props) {
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_1__.customizerControls
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_2__.HexColorPicker, {
-    color: props.color,
-    onChange: props.setColor
-  }));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_2__.HexColorPicker, null));
 }
 
 /***/ }),
