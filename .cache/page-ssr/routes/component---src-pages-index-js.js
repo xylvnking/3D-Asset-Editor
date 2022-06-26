@@ -2,6 +2,74 @@ exports.id = "component---src-pages-index-js";
 exports.ids = ["component---src-pages-index-js"];
 exports.modules = {
 
+/***/ "./node_modules/@react-three/drei/core/PerspectiveCamera.js":
+/*!******************************************************************!*\
+  !*** ./node_modules/@react-three/drei/core/PerspectiveCamera.js ***!
+  \******************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "PerspectiveCamera": () => (/* binding */ PerspectiveCamera)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-4f1a8e2f.esm.js");
+/* harmony import */ var react_merge_refs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-merge-refs */ "./node_modules/react-merge-refs/dist/react-merge-refs.esm.js");
+
+
+
+
+
+const PerspectiveCamera = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(({
+  makeDefault,
+  ...props
+}, ref) => {
+  const set = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.w)(({
+    set
+  }) => set);
+  const camera = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.w)(({
+    camera
+  }) => camera);
+  const size = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.w)(({
+    size
+  }) => size);
+  const cameraRef = react__WEBPACK_IMPORTED_MODULE_1__.useRef();
+  react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect(() => {
+    const {
+      current: cam
+    } = cameraRef;
+
+    if (cam && !props.manual) {
+      cam.aspect = size.width / size.height;
+      cam.updateProjectionMatrix();
+    }
+  }, [size, props]);
+  react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect(() => {
+    if (makeDefault && cameraRef.current) {
+      const oldCam = camera;
+      set(() => ({
+        camera: cameraRef.current
+      }));
+      return () => set(() => ({
+        camera: oldCam
+      }));
+    } // The camera should not be part of the dependency list because this components camera is a stable reference
+    // that must exchange the default, and clean up after itself on unmount.
+
+  }, [cameraRef, makeDefault, set]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("perspectiveCamera", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    ref: (0,react_merge_refs__WEBPACK_IMPORTED_MODULE_2__["default"])([cameraRef, ref])
+  }, props));
+});
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/@react-three/fiber/dist/index-4f1a8e2f.esm.js":
 /*!********************************************************************!*\
   !*** ./node_modules/@react-three/fiber/dist/index-4f1a8e2f.esm.js ***!
@@ -4107,7 +4175,7 @@ function Customizer() {
   const {
     0: color,
     1: setColor
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#aabbcc");
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#27a1e3");
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_1__.customizerContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -4141,11 +4209,27 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
 /* harmony import */ var three_examples_jsm_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three/examples/jsm/controls/OrbitControls */ "./node_modules/three/examples/jsm/controls/OrbitControls.js");
 /* harmony import */ var _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Customizer.module.css */ "./src/Components/CustomizerFolder/Customizer.module.css");
+/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/PerspectiveCamera.js");
+/* harmony import */ var react_colorful__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react-colorful */ "./node_modules/react-colorful/dist/index.mjs");
 
 
 
 
+ //this will probably go in wrapper/parent component
 
+
+/*
+
+TO DO:
+
+- set up lighting rigs
+
+- should this all be passed in as props? so that the controls component can receive/control them too?
+    - would it be better to have controls here too? just so it's one self-contained component?
+
+
+
+*/
 
 const CameraController = () => {
   const {
@@ -4154,8 +4238,8 @@ const CameraController = () => {
   } = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.w)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {
     const controls = new three_examples_jsm_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_1__.OrbitControls(camera, gl.domElement);
-    controls.minDistance = 3;
-    controls.maxDistance = 20;
+    controls.minDistance = 1;
+    controls.maxDistance = 100;
     return () => {
       controls.dispose();
     };
@@ -4168,60 +4252,114 @@ function Customizer3D(props) {
   const {
     0: xRotation,
     1: setXRotation
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0); //0-11
+
   const {
     0: zRotation,
     1: setZRotation
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0); //0-11
+
   const {
     0: yRotation,
     1: setYRotation
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0); //0-11
+  // Material Properties
+
+  const {
+    0: roughness,
+    1: setRoughness
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.2); // 0-1
+
+  const {
+    0: metalness,
+    1: setMetalness
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.7); // 0-1
+  // Lights
+
+  const {
+    0: ambientLightIntensity,
+    1: setAmbientLightIntensity
   } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
-  console.log(xRotation);
+  const {
+    0: ambientLightColor,
+    1: setAmbientLightColor
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#000000");
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerCanvas
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.Canvas, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CameraController, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("gridHelper", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.Canvas, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CameraController, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_5__.PerspectiveCamera, {
+    makeDefault: true,
+    fov: 30,
+    position: [-10, 10, 10]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("gridHelper", {
     args: [20, 30]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
     // rotation-x={Math.PI * 0.25} rotation-y={Math.PI * 0.25}
     rotation: [xRotation, yRotation, zRotation]
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ambientLight", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pointLight", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ambientLight", {
+    intensity: ambientLightIntensity,
+    color: ambientLightColor
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pointLight", {
     position: [10, 10, 10]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("boxGeometry", {
-    args: [5, 5, 5]
+    args: [5, 5, 5] //SETS SIZE
+
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshStandardMaterial", {
     color: props.color,
-    roughness: .1
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    roughness: roughness,
+    metalness: metalness
+  }))), "x Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
-    max: "11" // value={value} 
-    // onChange={rotateX}
-    // value={xRotation}
+    max: "11",
+    value: xRotation // sets the slider to the default (0) on load
     ,
     onChange: e => setXRotation(e.target.value),
-    step: ".01"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    step: ".01" // smaller = smoother
+
+  }), "Y Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
-    max: "11" // value={value} 
-    // onChange={rotateX}
-    // value={yRotation}
-    ,
+    max: "11",
+    value: yRotation,
     onChange: e => setYRotation(e.target.value),
     step: ".01"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }), "Z Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
-    max: "11" // value={value} 
-    // onChange={rotateX}
-    // value={zRotation}
-    ,
+    max: "11",
+    value: zRotation,
     onChange: e => setZRotation(e.target.value),
     step: ".01"
+  }), "roughness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    id: "typeinp",
+    type: "range",
+    min: "0",
+    max: "1",
+    value: roughness,
+    onChange: e => setRoughness(e.target.value),
+    step: ".1"
+  }), "metalness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    id: "typeinp",
+    type: "range",
+    min: "0",
+    max: "1",
+    value: metalness,
+    onChange: e => setMetalness(e.target.value),
+    step: ".1"
+  }), "ambientLightIntensity", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    id: "typeinp",
+    type: "range",
+    min: "0",
+    max: "25",
+    value: ambientLightIntensity,
+    onChange: e => setAmbientLightIntensity(e.target.value),
+    step: ".1"
+  }), "ambientLightColor", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_6__.HexColorPicker, {
+    color: ambientLightColor,
+    onChange: setAmbientLightColor
   }));
 }
 
@@ -6147,6 +6285,35 @@ exports.FetchError = FetchError;
   \***********************/
 /***/ (() => {
 
+
+
+/***/ }),
+
+/***/ "./node_modules/react-merge-refs/dist/react-merge-refs.esm.js":
+/*!********************************************************************!*\
+  !*** ./node_modules/react-merge-refs/dist/react-merge-refs.esm.js ***!
+  \********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+function mergeRefs(refs) {
+  return function (value) {
+    refs.forEach(function (ref) {
+      if (typeof ref === "function") {
+        ref(value);
+      } else if (ref != null) {
+        ref.current = value;
+      }
+    });
+  };
+}
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (mergeRefs);
+//# sourceMappingURL=react-merge-refs.esm.js.map
 
 
 /***/ }),

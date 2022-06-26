@@ -6,14 +6,14 @@ import CustomizerControls from './CustomizerControls';
 
 export default function Customizer() {
 
-  const [color, setColor] = useState("#27a1e3");
+  // const [color, setColor] = useState("#27a1e3");
 
   return (
     <div className={customizerContainer}>
         <div className={customizerMain}>
           <div className={customizerFlex}>
-          <Customizer3D color={color}/>
-          <CustomizerControls color={color} setColor={setColor}/>
+          <Customizer3D />
+          {/* <CustomizerControls /> */}
 
           </div>
         </div>
