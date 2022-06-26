@@ -91,7 +91,7 @@ export default function Customizer3D(props) {
                             </mesh>
                         </Canvas>
                     </div>
-                    <div class={customizerControls}>
+                    <div className={customizerControls}>
                         x Rotation
                         <input 
                             id="typeinp" 

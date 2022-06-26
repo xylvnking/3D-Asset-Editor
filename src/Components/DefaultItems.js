@@ -3,6 +3,8 @@ import { StaticImage } from 'gatsby-plugin-image'
 import { productCard, productCards, productCardTitle, productCardDescription, productCardsContainer } from './DefaultItems.module.css'
 import ProductCard from './ProductCard'
 
+// I'd like it if the 3D sections rotated slowly. I had more important things to work on than getting the clamp to work though.
+
 export default function DefaultItems() {
   return (
     // <div className={productCards}> 
@@ -20,24 +22,19 @@ export default function DefaultItems() {
     <div className={productCardsContainer}>
 
       <div className={productCards}>
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
-          <ProductCard />
+          <ProductCard rotationNumber2={(Math.random() * Math.random()) * .02}/>
+          <ProductCard rotationNumber2={(Math.random() * Math.random()) * .02}/>
+          <ProductCard rotationNumber2={(Math.random() * Math.random()) * .02}/>
+          <ProductCard rotationNumber2={(Math.random() * Math.random()) * .02}/>
+          <ProductCard rotationNumber2={(Math.random() * Math.random()) * .02}/>
+          <ProductCard rotationNumber2={(Math.random() * Math.random()) * .02}/>
+
+
+          
+          
+          
+      
+          
       </div>
     </div>
   )

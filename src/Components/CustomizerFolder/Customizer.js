@@ -13,7 +13,6 @@ export default function Customizer() {
         <div className={customizerMain}>
           <div className={customizerFlex}>
           <Customizer3D />
-          {/* <CustomizerControls /> */}
 
           </div>
         </div>

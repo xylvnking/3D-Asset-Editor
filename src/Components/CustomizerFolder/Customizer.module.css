@@ -1,59 +1,32 @@
 .customizerContainer {
-    /* height: 125vh; */
     font-family: 'Space Mono', monospace;
 }
 
 .customizerMain {
     background: url("../../images/DotPattern.png");
-    /* background-size: cover; */
     height: 100%;
-
-    /* display: flex;
-    justify-content: flex-start; */
 }
 
 .customizerFlex {
-    /* width: 90vw; */
     display: flex;
     justify-content: center;
-    
-
-    /* display:  inline-grid;
-    grid-template-columns: auto 1fr; */
-
     gap: 10px;
-    /* margin-top: 10rem; */
     padding: 1rem;
-    /* width: 100%; */
-
-    
 }
 
 .customizerCanvas {
-    
     min-width: 60vw; 
     height: 85vh;
     background-color: rgb(56, 56, 56);
-    
     border-style: solid;
     border-color: black;
-
 }
 
 .customizerControls {
     background-color: rgba(56, 56, 56, 0.727);
-
     color: whitesmoke;
-
+    padding: 10px;
     border-style: solid;
     border-color: black;
-    padding: 10px;
-
-    /* border-radius: 10px; */
-
     min-width: 30vw;
-    /* flex-grow: 1; */
-
-    
-
 }

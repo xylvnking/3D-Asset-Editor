@@ -15,7 +15,7 @@ export default function Hero() {
             <div className={heroContent}>
                 <h1>cyberWear jewelry</h1>
                 <p>Embrace an opulent future</p>
-                <button>Shop Now</button>
+                <button>Create Your Own</button>
                 
             </div>
         </div>
