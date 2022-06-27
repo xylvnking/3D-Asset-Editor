@@ -3489,7 +3489,15 @@ function Customizer3D(props) {
     position: [-10, 10, 10]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("gridHelper", {
     args: [20, 30]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_RingTextured__WEBPACK_IMPORTED_MODULE_3__.RingTextured, null))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
+    rotation: [xRotation, yRotation, zRotation]
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ambientLight", {
+    intensity: ambientLightIntensity,
+    color: ambientLightColor
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pointLight", {
+    intensity: 5,
+    position: [10, 10, 10]
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_RingTextured__WEBPACK_IMPORTED_MODULE_3__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerControls
   }, "x Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",

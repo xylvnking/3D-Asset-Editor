@@ -3,12 +3,14 @@ import React, { useRef, useState, useEffect, Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { customizerCanvas, customizerMain, customizerContainer, customizerFlex, customizerControls } from './Customizer.module.css'
-import { PerspectiveCamera, Ring } from '@react-three/drei'
+import { PerspectiveCamera, Ring, useHelper } from '@react-three/drei'
 
 //this will probably go in wrapper/parent component
 import { HexColorPicker } from "react-colorful";
 
 import RingTextured from './RingTextured'
+
+
 
 /*
 
@@ -73,12 +75,15 @@ export default function Customizer3D(props) {
                                 position={[-10, 10, 10]} 
                             />
                             <gridHelper args={[20,30]}/>
-                            <mesh rotation={[xRotation, yRotation, zRotation]}>
+                            <mesh 
+                            // rotation={[xRotation, yRotation, zRotation]}
+                            >
                                 <ambientLight 
                                     intensity={ambientLightIntensity}
                                     color={ambientLightColor}
                                 />
                                 <pointLight 
+                                    
                                     intensity={5}
                                     position={[10, 10, 10]} 
                                 />
@@ -92,7 +97,9 @@ export default function Customizer3D(props) {
                                 /> */}
                             </mesh>
                             <Suspense>
-                                <RingTextured />
+                                <RingTextured 
+                                    rotation={[xRotation, yRotation, zRotation]}
+                                />
                             </Suspense>
                         </Canvas>
                     </div>
@@ -104,8 +111,13 @@ export default function Customizer3D(props) {
                             min="0" max="11" 
                             value={xRotation} // sets the slider to the default (0) on load
                             onChange={(e) => setXRotation(e.target.value)}
-                            step=".01" // smaller = smoother
-                        /><br />
+                            step=".1" // smaller = smoother
+                        />
+                        <button
+                            onClick={() => 
+                            setXRotation(0)}>
+                            Reset X Rotation
+                        </button><br />
                         Y Rotation
                         <input 
                             id="typeinp" 
@@ -113,8 +125,13 @@ export default function Customizer3D(props) {
                             min="0" max="11" 
                             value={yRotation}
                             onChange={(e) => setYRotation(e.target.value)}
-                            step=".01"
-                        /><br />
+                            step=".1"
+                        />
+                        <button
+                            onClick={() => 
+                            setYRotation(0)}>
+                            Reset Y Rotation
+                        </button><br />
                         Z Rotation
                         <input 
                             id="typeinp" 
@@ -122,8 +139,13 @@ export default function Customizer3D(props) {
                             min="0" max="11" 
                             value={zRotation}
                             onChange={(e) => setZRotation(e.target.value)}
-                            step=".01"
-                        /><br />
+                            step=".1"
+                        />
+                        <button
+                            onClick={() => 
+                            setZRotation(0)}>
+                            Reset Z Rotation
+                        </button><br />
 
                         roughness
                         <input 
