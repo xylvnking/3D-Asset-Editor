@@ -11,7 +11,8 @@ import { HexColorPicker } from "react-colorful";
 // importing gltf
 import RingTextured from './RingTextured'
 
-
+// performance improves after gatsby build > gatsby serve
+// i'm sure there's lots I can do to optimize and a simpler model might help too and lighting resolution and env resolution
 
 /*
 
