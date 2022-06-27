@@ -64,9 +64,12 @@ export default function Customizer3D(props) {
     const [materialRoughness3, setMaterialRoughness3] = useState(.1)
     const [materialRoughness4, setMaterialRoughness4] = useState(.1)
     
-    const [textureToggle, setTextureToggle] = useState(true)
+    const [toggleTexture1, setToggleTexture1] = useState(true)
+    const [toggleTexture2, setToggleTexture2] = useState(true)
+    const [toggleTexture3, setToggleTexture3] = useState(true)
+    const [toggleTexture4, setToggleTexture4] = useState(true)
 
-    console.log(textureToggle)
+    
 
 
     return (
@@ -129,7 +132,10 @@ export default function Customizer3D(props) {
                                     mesh3Visibility={mesh3Toggle}
                                     mesh4Visibility={mesh4Toggle}
 
-                                    textureToggle={textureToggle}
+                                    toggleTexture1={toggleTexture1}
+                                    toggleTexture2={toggleTexture2}
+                                    toggleTexture3={toggleTexture3}
+                                    toggleTexture4={toggleTexture4}
                                     />
                                 
                                 {/* <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} /> */}
@@ -246,8 +252,8 @@ export default function Customizer3D(props) {
 
                         <button
                             onClick={() => 
-                            setTextureToggle(!textureToggle)}>
-                            Texture Toggle
+                            setToggleTexture1(!toggleTexture1)}>
+                            Texture 1 Toggle
                         </button><br />
 
                         materialColor1
@@ -261,6 +267,11 @@ export default function Customizer3D(props) {
                             onChange={(e) => setMaterialRoughness1(e.target.value)}
                             step=".1"
                         /><br />
+                        <button
+                            onClick={() => 
+                            setToggleTexture2(!toggleTexture2)}>
+                            Texture 2 Toggle
+                        </button><br />
 
                         materialColor2
                         <HexColorPicker color={materialColor2} onChange={setMaterialColor2} />
@@ -273,9 +284,15 @@ export default function Customizer3D(props) {
                             onChange={(e) => setMaterialRoughness2(e.target.value)}
                             step=".1"
                         /><br />
+                        <button
+                            onClick={() => 
+                            setToggleTexture3(!toggleTexture3)}>
+                            Texture 3 Toggle
+                        </button><br />
+
                         materialColor3
                         <HexColorPicker color={materialColor3} onChange={setMaterialColor3} />
-                        maetrialRoughness4
+                        maetrialRoughness3
                         <input 
                             id="typeinp" 
                             type="range" 
@@ -284,6 +301,12 @@ export default function Customizer3D(props) {
                             onChange={(e) => setMaterialRoughness3(e.target.value)}
                             step=".1"
                         /><br />
+                        <button
+                            onClick={() => 
+                            setToggleTexture4(!toggleTexture4)}>
+                            Texture 4 Toggle
+                        </button><br />
+
                         materialColor4
                         <HexColorPicker color={materialColor4} onChange={setMaterialColor4} />
                         maetrialRoughness4

@@ -4088,10 +4088,8 @@ function RingTextured({ ...props
     roughness: props.materialRoughness1,
     metalness: 1
   }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshBasicMaterial", {
-    attach: "Material.001",
-    color: "black",
-    opacity: 0.5,
-    transparent: true
+    attach: "materials",
+    map: materials['Material.001']
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
     geometry: nodes.Extra_Rings001.geometry,
     visible: props.mesh2Visibility
