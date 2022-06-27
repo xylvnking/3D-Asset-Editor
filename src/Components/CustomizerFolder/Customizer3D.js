@@ -4,28 +4,9 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { customizerCanvas, customizerMain, customizerContainer, customizerFlex, customizerControls } from './Customizer.module.css'
 import { PerspectiveCamera, Ring, useHelper, Environment, Stars, Sky, Trail } from '@react-three/drei'
-
-//this will probably go in wrapper/parent component
 import { HexColorPicker } from "react-colorful";
-
-// importing gltf
 import RingTextured from './RingTextured'
 
-// performance improves after gatsby build > gatsby serve
-// i'm sure there's lots I can do to optimize and a simpler model might help too and lighting resolution and env resolution
-
-/*
-
-TO DO:
-
-- set up lighting rigs
-
-- should this all be passed in as props? so that the controls component can receive/control them too?
-    - would it be better to have controls here too? just so it's one self-contained component?
-
-
-
-*/
 
 
 const CameraController = () => {
@@ -71,6 +52,17 @@ export default function Customizer3D(props) {
     const [mesh2Toggle, setMesh2Toggle] = useState(true)
     const [mesh3Toggle, setMesh3Toggle] = useState(true)
     const [mesh4Toggle, setMesh4Toggle] = useState(true)
+
+    // material colors being passed into RingTextured.js
+    const [materialColor1, setMaterialColor1] = useState("#27a1e3")
+    const [materialColor2, setMaterialColor2] = useState("#27a1e3")
+    const [materialColor3, setMaterialColor3] = useState("#27a1e3")
+    const [materialColor4, setMaterialColor4] = useState("#27a1e3")
+
+    const [materialRoughness1, setMaterialRoughness1] = useState(.1)
+    const [materialRoughness2, setMaterialRoughness2] = useState(.1)
+    const [materialRoughness3, setMaterialRoughness3] = useState(.1)
+    const [materialRoughness4, setMaterialRoughness4] = useState(.1)
     
     
 
@@ -84,13 +76,10 @@ export default function Customizer3D(props) {
                             <CameraController />
                             <PerspectiveCamera 
                                 makeDefault fov={35} 
-                                // position={[-5, 2, -5]} 
-                                position={[3.5, 3.5, -3.5]} 
-                            />
-                            
+                                position={[3.5, 3.5, -3.5]} />
                             <gridHelper 
-                            args={[20,30]}
-                            visible={gridToggle}/>
+                                args={[20,30]}
+                                visible={gridToggle}/>
                             
                             {/* <mesh 
                             rotation={[xRotation, yRotation, zRotation]}
@@ -116,21 +105,31 @@ export default function Customizer3D(props) {
                                 />
 
                             </mesh> */}
+                            <Environment preset="studio" />
                             <Suspense>
                                 
                                 <RingTextured 
                                     
                                     rotation={[xRotation, yRotation, zRotation]}
 
+                                    materialColor1={materialColor1}
+                                    materialColor2={materialColor2}
+                                    materialColor3={materialColor3}
+                                    materialColor4={materialColor4}
+
+                                    materialRoughness1={materialRoughness1}
+                                    materialRoughness2={materialRoughness2}
+                                    materialRoughness3={materialRoughness3}
+                                    materialRoughness4={materialRoughness4}
+                                    
                                     mesh1Visibility={mesh1Toggle}
                                     mesh2Visibility={mesh2Toggle}
                                     mesh3Visibility={mesh3Toggle}
                                     mesh4Visibility={mesh4Toggle}
+
+
                                     />
                                 
-                                <Environment 
-                                preset="studio"
-                                />
                                 {/* <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} /> */}
                                 {/* <Sky distance={45000} sunPosition={[0, 12, 0]} inclination={.1} azimuth={1} {...props} /> */}
                             </Suspense>
@@ -230,7 +229,7 @@ export default function Customizer3D(props) {
                             step=".1"
                         /><br />
 
-                        ambientLightIntensity
+                        {/* ambientLightIntensity
                         <input 
                             id="typeinp" 
                             type="range" 
@@ -241,10 +240,53 @@ export default function Customizer3D(props) {
                         /><br />
 
                         ambientLightColor
-                        <HexColorPicker color={ambientLightColor} onChange={setAmbientLightColor} />
+                        <HexColorPicker color={ambientLightColor} onChange={setAmbientLightColor} /> */}
 
-                        objectColor
-                        <HexColorPicker color={objectColor} onChange={setObjectColor} />
+                        materialColor1
+                        <HexColorPicker color={materialColor1} onChange={setMaterialColor1} />
+                        maetrialRoughness1
+                        <input 
+                            id="typeinp" 
+                            type="range" 
+                            min="0" max="1" 
+                            value={materialRoughness1}
+                            onChange={(e) => setMaterialRoughness1(e.target.value)}
+                            step=".1"
+                        /><br />
+
+                        materialColor2
+                        <HexColorPicker color={materialColor2} onChange={setMaterialColor2} />
+                        maetrialRoughness1
+                        <input 
+                            id="typeinp" 
+                            type="range" 
+                            min="0" max="1" 
+                            value={materialRoughness2}
+                            onChange={(e) => setMaterialRoughness2(e.target.value)}
+                            step=".1"
+                        /><br />
+                        materialColor3
+                        <HexColorPicker color={materialColor3} onChange={setMaterialColor3} />
+                        maetrialRoughness4
+                        <input 
+                            id="typeinp" 
+                            type="range" 
+                            min="0" max="1" 
+                            value={materialRoughness3}
+                            onChange={(e) => setMaterialRoughness3(e.target.value)}
+                            step=".1"
+                        /><br />
+                        materialColor4
+                        <HexColorPicker color={materialColor4} onChange={setMaterialColor4} />
+                        maetrialRoughness4
+                        <input 
+                            id="typeinp" 
+                            type="range" 
+                            min="0" max="1" 
+                            value={materialRoughness4}
+                            onChange={(e) => setMaterialRoughness4(e.target.value)}
+                            step=".1"
+                        /><br />
                     </div>
                 </div>
             </div>
