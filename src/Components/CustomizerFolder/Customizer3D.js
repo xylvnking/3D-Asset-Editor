@@ -3,7 +3,7 @@ import React, { useRef, useState, useEffect, Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { customizerCanvas, customizerMain, customizerContainer, customizerFlex, customizerControls } from './Customizer.module.css'
-import { PerspectiveCamera, Ring, useHelper, Environment, Stars, Sky } from '@react-three/drei'
+import { PerspectiveCamera, Ring, useHelper, Environment, Stars, Sky, Trail } from '@react-three/drei'
 
 //this will probably go in wrapper/parent component
 import { HexColorPicker } from "react-colorful";
@@ -82,19 +82,20 @@ export default function Customizer3D(props) {
                         <Canvas>
                             <CameraController />
                             <PerspectiveCamera 
-                                makeDefault fov={30} 
-                                position={[-10, 10, 10]} 
+                                makeDefault fov={35} 
+                                // position={[-5, 2, -5]} 
+                                position={[3.5, 3.5, -3.5]} 
                             />
                             
                             <gridHelper 
                             args={[20,30]}
                             visible={gridToggle}/>
                             
-                            <mesh 
-                            // rotation={[xRotation, yRotation, zRotation]}
+                            {/* <mesh 
+                            rotation={[xRotation, yRotation, zRotation]}
                                 
                             >
-                                {/* <ambientLight 
+                                <ambientLight 
                                     intensity={ambientLightIntensity}
                                     color={ambientLightColor}
                                 />
@@ -102,19 +103,20 @@ export default function Customizer3D(props) {
                                     
                                     intensity={5}
                                     position={[10, 10, 10]} 
-                                /> */}
-
-                                {/* <boxGeometry 
+                                />
+                                
+                                <boxGeometry 
                                 args={[5, 5, 5]} //SETS SIZE
                                 />
                                 <meshStandardMaterial 
                                     color={objectColor}
                                     roughness={roughness}
                                     metalness={metalness}
-                                /> */}
+                                />
 
-                            </mesh>
+                            </mesh> */}
                             <Suspense>
+                                
                                 <RingTextured 
                                     
                                     rotation={[xRotation, yRotation, zRotation]}
@@ -124,6 +126,7 @@ export default function Customizer3D(props) {
                                     mesh3Visibility={mesh3Toggle}
                                     mesh4Visibility={mesh4Toggle}
                                     />
+                                
                                 <Environment 
                                 preset="studio"
                                 />
@@ -140,7 +143,7 @@ export default function Customizer3D(props) {
                             min="0" max="11" 
                             value={xRotation} // sets the slider to the default (0) on load
                             onChange={(e) => setXRotation(e.target.value)}
-                            step=".1" // smaller = smoother
+                            step=".01" // smaller = smoother
                         />
                         <button
                             onClick={() => 
@@ -154,7 +157,7 @@ export default function Customizer3D(props) {
                             min="0" max="11" 
                             value={yRotation}
                             onChange={(e) => setYRotation(e.target.value)}
-                            step=".1"
+                            step=".01"
                         />
                         <button
                             onClick={() => 
@@ -168,7 +171,7 @@ export default function Customizer3D(props) {
                             min="0" max="11" 
                             value={zRotation}
                             onChange={(e) => setZRotation(e.target.value)}
-                            step=".1"
+                            step=".01"
                         />
                         <button
                             onClick={() => 
