@@ -3814,20 +3814,11 @@ function Customizer3D(props) {
     0: metalness,
     1: setMetalness
   } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.7); // 0-1
+  // const [objectColor, setObjectColor] = useState("#27a1e3")
+  // Lights
+  // const [ambientLightIntensity, setAmbientLightIntensity] = useState(3)
+  // const [ambientLightColor, setAmbientLightColor] = useState("#ffffff")
 
-  const {
-    0: objectColor,
-    1: setObjectColor
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#27a1e3"); // Lights
-
-  const {
-    0: ambientLightIntensity,
-    1: setAmbientLightIntensity
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(3);
-  const {
-    0: ambientLightColor,
-    1: setAmbientLightColor
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#ffffff");
   const {
     0: gridToggle,
     1: setGridToggle
@@ -3847,8 +3838,7 @@ function Customizer3D(props) {
   const {
     0: mesh4Toggle,
     1: setMesh4Toggle
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true); // material colors being passed into RingTextured.js
-
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   const {
     0: materialColor1,
     1: setMaterialColor1
@@ -3868,24 +3858,67 @@ function Customizer3D(props) {
   const {
     0: materialRoughness1,
     1: setMaterialRoughness1
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.1);
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.2);
   const {
     0: materialRoughness2,
     1: setMaterialRoughness2
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.1);
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.2);
   const {
     0: materialRoughness3,
     1: setMaterialRoughness3
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.1);
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.2);
   const {
     0: materialRoughness4,
     1: setMaterialRoughness4
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.1);
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.2);
   const {
-    0: textureToggle,
-    1: setTextureToggle
+    0: toggleTexture1,
+    1: setToggleTexture1
   } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
-  console.log(textureToggle);
+  const {
+    0: toggleTexture2,
+    1: setToggleTexture2
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  const {
+    0: toggleTexture3,
+    1: setToggleTexture3
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  const {
+    0: toggleTexture4,
+    1: setToggleTexture4
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  const {
+    0: toggleMesh1Visibility,
+    1: setToggleMesh1Visibility
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  const {
+    0: toggleMesh2Visibility,
+    1: setToggleMesh2Visibility
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  const {
+    0: toggleMesh3Visibility,
+    1: setToggleMesh3Visibility
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  const {
+    0: toggleMesh4Visibility,
+    1: setToggleMesh4Visibility
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  const {
+    0: material1Metalness,
+    1: setMaterial1Metalness
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.8);
+  const {
+    0: material2Metalness,
+    1: setMaterial2Metalness
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.8);
+  const {
+    0: material3Metalness,
+    1: setMaterial3Metalness
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.8);
+  const {
+    0: material4Metalness,
+    1: setMaterial4Metalness
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.8);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -3917,7 +3950,18 @@ function Customizer3D(props) {
     mesh2Visibility: mesh2Toggle,
     mesh3Visibility: mesh3Toggle,
     mesh4Visibility: mesh4Toggle,
-    textureToggle: textureToggle
+    toggleTexture1: toggleTexture1,
+    toggleTexture2: toggleTexture2,
+    toggleTexture3: toggleTexture3,
+    toggleTexture4: toggleTexture4,
+    toggleMesh1Visibility: toggleMesh1Visibility,
+    toggleMesh2Visibility: toggleMesh2Visibility,
+    toggleMesh3Visibility: toggleMesh3Visibility,
+    toggleMesh4Visibility: toggleMesh4Visibility,
+    material1Metalness: material1Metalness,
+    material2Metalness: material2Metalness,
+    material3Metalness: material3Metalness,
+    material4Metalness: material4Metalness
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerControls
   }, "x Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
@@ -3979,8 +4023,10 @@ function Customizer3D(props) {
     onChange: e => setMetalness(e.target.value),
     step: ".1"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: () => setTextureToggle(!textureToggle)
-  }, "Texture Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "materialColor1", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
+    onClick: () => setToggleMesh1Visibility(!toggleMesh1Visibility)
+  }, "Mesh 1 Visibility"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: () => setToggleTexture1(!toggleTexture1)
+  }, "Texture 1 Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "materialColor1", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
     color: materialColor1,
     onChange: setMaterialColor1
   }), "maetrialRoughness1", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
@@ -3990,11 +4036,23 @@ function Customizer3D(props) {
     max: "1",
     value: materialRoughness1,
     onChange: e => setMaterialRoughness1(e.target.value),
-    step: ".1"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "materialColor2", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
+    step: ".01"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "material1Metalness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    id: "typeinp",
+    type: "range",
+    min: "0",
+    max: "1",
+    value: material1Metalness,
+    onChange: e => setMaterial1Metalness(e.target.value),
+    step: ".01"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: () => setToggleMesh2Visibility(!toggleMesh2Visibility)
+  }, "Mesh 2 Visibility"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: () => setToggleTexture2(!toggleTexture2)
+  }, "Texture 2 Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "materialColor2", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
     color: materialColor2,
     onChange: setMaterialColor2
-  }), "maetrialRoughness1", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }), "maetrialRoughness2", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
@@ -4002,10 +4060,22 @@ function Customizer3D(props) {
     value: materialRoughness2,
     onChange: e => setMaterialRoughness2(e.target.value),
     step: ".1"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "materialColor3", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "material2Metalness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    id: "typeinp",
+    type: "range",
+    min: "0",
+    max: "1",
+    value: material2Metalness,
+    onChange: e => setMaterial2Metalness(e.target.value),
+    step: ".01"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: () => setToggleMesh3Visibility(!toggleMesh3Visibility)
+  }, "Mesh 3 Visibility"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: () => setToggleTexture3(!toggleTexture3)
+  }, "Texture 3 Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "materialColor3", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
     color: materialColor3,
     onChange: setMaterialColor3
-  }), "maetrialRoughness4", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }), "maetrialRoughness3", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
@@ -4013,7 +4083,19 @@ function Customizer3D(props) {
     value: materialRoughness3,
     onChange: e => setMaterialRoughness3(e.target.value),
     step: ".1"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "materialColor4", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "material3Metalness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    id: "typeinp",
+    type: "range",
+    min: "0",
+    max: "1",
+    value: material3Metalness,
+    onChange: e => setMaterial3Metalness(e.target.value),
+    step: ".01"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: () => setToggleMesh4Visibility(!toggleMesh4Visibility)
+  }, "Mesh 4 Visibility"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: () => setToggleTexture4(!toggleTexture4)
+  }, "Texture 4 Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "materialColor4", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
     color: materialColor4,
     onChange: setMaterialColor4
   }), "maetrialRoughness4", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
@@ -4024,6 +4106,14 @@ function Customizer3D(props) {
     value: materialRoughness4,
     onChange: e => setMaterialRoughness4(e.target.value),
     step: ".1"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "material4Metalness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    id: "typeinp",
+    type: "range",
+    min: "0",
+    max: "1",
+    value: material4Metalness,
+    onChange: e => setMaterial4Metalness(e.target.value),
+    step: ".01"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)))));
 }
 
@@ -4049,6 +4139,9 @@ Auto-generated by: https://github.com/pmndrs/gltfjsx
 
  //animating model idle
 
+ // I really wanted to use a ternary to switch between materials but I couldn't get it to work.
+// I tried swapping between meshes and also between materials on the same mesh and couldn't get either.
+// Ended up using a boolean prop to toggle visibility
 
 function RingTextured({ ...props
 }) {
@@ -4066,52 +4159,57 @@ function RingTextured({ ...props
     nodes,
     materials
   } = (0,_react_three_drei__WEBPACK_IMPORTED_MODULE_1__.useGLTF)('/RingTextured.glb');
-
-  const newMaterial = () => {
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshPhysicalMaterial", {
-      color: props.materialColor1,
-      roughness: props.materialRoughness1,
-      metalness: 1
-    });
-  };
-
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("group", Object.assign({
     ref: group
   }, props, {
     dispose: null
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
     geometry: nodes.Details001.geometry,
-    visible: props.mesh1Visibility // material={props.textureToggle && materials['Material.001']}
-
-  }, !props.textureToggle ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshPhysicalMaterial", {
+    visible: props.toggleTexture1 && props.toggleMesh1Visibility
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshPhysicalMaterial", {
     color: props.materialColor1,
     roughness: props.materialRoughness1,
-    metalness: 1
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshBasicMaterial", {
-    attach: "materials",
-    map: materials['Material.001']
+    metalness: props.material1Metalness // emissive={props.materialColor1}
+    // emissiveIntensity={1} 
+
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
+    geometry: nodes.Details001.geometry,
+    material: materials['Material.001'],
+    visible: !props.toggleTexture1 && props.toggleMesh1Visibility
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
     geometry: nodes.Extra_Rings001.geometry,
-    visible: props.mesh2Visibility
+    visible: props.toggleTexture2 && props.toggleMesh2Visibility
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshPhysicalMaterial", {
     color: props.materialColor2,
     roughness: props.materialRoughness2,
-    metalness: 1
+    metalness: props.material2Metalness
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
+    geometry: nodes.Extra_Rings001.geometry,
+    material: materials['Material.002'],
+    visible: !props.toggleTexture2 && props.toggleMesh2Visibility
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
     geometry: nodes.Main001.geometry,
-    visible: props.mesh3Visibility
+    visible: props.toggleTexture3 && props.toggleMesh3Visibility
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshPhysicalMaterial", {
     color: props.materialColor3,
     roughness: props.materialRoughness3,
-    metalness: 1
+    metalness: props.material3Metalness
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
+    geometry: nodes.Main001.geometry,
+    material: materials.Material,
+    visible: !props.toggleTexture3 && props.toggleMesh3Visibility
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
     geometry: nodes.Spike_Ring_Twist001.geometry,
-    visible: props.mesh4Visibility
+    visible: props.toggleTexture4 && props.toggleMesh4Visibility
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshPhysicalMaterial", {
     color: props.materialColor4,
     roughness: props.materialRoughness4,
-    metalness: 1
-  })));
+    metalness: props.material4Metalness
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
+    geometry: nodes.Spike_Ring_Twist001.geometry,
+    material: materials['Material.003'],
+    visible: !props.toggleTexture4 && props.toggleMesh4Visibility
+  }));
 }
 _react_three_drei__WEBPACK_IMPORTED_MODULE_1__.useGLTF.preload('/RingTextured.glb');
 

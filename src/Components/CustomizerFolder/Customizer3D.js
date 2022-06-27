@@ -39,11 +39,11 @@ export default function Customizer3D(props) {
     // Material Properties
     const [roughness, setRoughness] = useState(.2) // 0-1
     const [metalness, setMetalness] = useState(.7) // 0-1
-    const [objectColor, setObjectColor] = useState("#27a1e3")
+    // const [objectColor, setObjectColor] = useState("#27a1e3")
 
     // Lights
-    const [ambientLightIntensity, setAmbientLightIntensity] = useState(3)
-    const [ambientLightColor, setAmbientLightColor] = useState("#ffffff")
+    // const [ambientLightIntensity, setAmbientLightIntensity] = useState(3)
+    // const [ambientLightColor, setAmbientLightColor] = useState("#ffffff")
 
 
     const [gridToggle, setGridToggle] = useState(false)
@@ -53,23 +53,31 @@ export default function Customizer3D(props) {
     const [mesh3Toggle, setMesh3Toggle] = useState(true)
     const [mesh4Toggle, setMesh4Toggle] = useState(true)
 
-    // material colors being passed into RingTextured.js
+    
     const [materialColor1, setMaterialColor1] = useState("#27a1e3")
     const [materialColor2, setMaterialColor2] = useState("#27a1e3")
     const [materialColor3, setMaterialColor3] = useState("#27a1e3")
     const [materialColor4, setMaterialColor4] = useState("#27a1e3")
 
-    const [materialRoughness1, setMaterialRoughness1] = useState(.1)
-    const [materialRoughness2, setMaterialRoughness2] = useState(.1)
-    const [materialRoughness3, setMaterialRoughness3] = useState(.1)
-    const [materialRoughness4, setMaterialRoughness4] = useState(.1)
+    const [materialRoughness1, setMaterialRoughness1] = useState(.2)
+    const [materialRoughness2, setMaterialRoughness2] = useState(.2)
+    const [materialRoughness3, setMaterialRoughness3] = useState(.2)
+    const [materialRoughness4, setMaterialRoughness4] = useState(.2)
     
     const [toggleTexture1, setToggleTexture1] = useState(true)
     const [toggleTexture2, setToggleTexture2] = useState(true)
     const [toggleTexture3, setToggleTexture3] = useState(true)
     const [toggleTexture4, setToggleTexture4] = useState(true)
 
-    
+    const [toggleMesh1Visibility, setToggleMesh1Visibility] = useState(true)
+    const [toggleMesh2Visibility, setToggleMesh2Visibility] = useState(true)
+    const [toggleMesh3Visibility, setToggleMesh3Visibility] = useState(true)
+    const [toggleMesh4Visibility, setToggleMesh4Visibility] = useState(true)
+
+    const [material1Metalness, setMaterial1Metalness] = useState(.8)
+    const [material2Metalness, setMaterial2Metalness] = useState(.8)
+    const [material3Metalness, setMaterial3Metalness] = useState(.8)
+    const [material4Metalness, setMaterial4Metalness] = useState(.8)
 
 
     return (
@@ -136,6 +144,16 @@ export default function Customizer3D(props) {
                                     toggleTexture2={toggleTexture2}
                                     toggleTexture3={toggleTexture3}
                                     toggleTexture4={toggleTexture4}
+
+                                    toggleMesh1Visibility={toggleMesh1Visibility}
+                                    toggleMesh2Visibility={toggleMesh2Visibility}
+                                    toggleMesh3Visibility={toggleMesh3Visibility}
+                                    toggleMesh4Visibility={toggleMesh4Visibility}
+
+                                    material1Metalness={material1Metalness}
+                                    material2Metalness={material2Metalness}
+                                    material3Metalness={material3Metalness}
+                                    material4Metalness={material4Metalness}
                                     />
                                 
                                 {/* <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} /> */}
@@ -249,13 +267,17 @@ export default function Customizer3D(props) {
 
                         ambientLightColor
                         <HexColorPicker color={ambientLightColor} onChange={setAmbientLightColor} /> */}
-
+                        
+                        <button
+                            onClick={() => 
+                            setToggleMesh1Visibility(!toggleMesh1Visibility)}>
+                            Mesh 1 Visibility
+                        </button><br />
                         <button
                             onClick={() => 
                             setToggleTexture1(!toggleTexture1)}>
                             Texture 1 Toggle
                         </button><br />
-
                         materialColor1
                         <HexColorPicker color={materialColor1} onChange={setMaterialColor1} />
                         maetrialRoughness1
@@ -265,17 +287,36 @@ export default function Customizer3D(props) {
                             min="0" max="1" 
                             value={materialRoughness1}
                             onChange={(e) => setMaterialRoughness1(e.target.value)}
-                            step=".1"
+                            step=".01"
                         /><br />
+                        material1Metalness
+                        <input 
+                            id="typeinp" 
+                            type="range" 
+                            min="0" max="1" 
+                            value={material1Metalness}
+                            onChange={(e) => setMaterial1Metalness(e.target.value)}
+                            step=".01"
+                        /><br />
+
+
+
+
+
+
+                        <button
+                            onClick={() => 
+                            setToggleMesh2Visibility(!toggleMesh2Visibility)}>
+                            Mesh 2 Visibility
+                        </button><br />
                         <button
                             onClick={() => 
                             setToggleTexture2(!toggleTexture2)}>
                             Texture 2 Toggle
                         </button><br />
-
                         materialColor2
                         <HexColorPicker color={materialColor2} onChange={setMaterialColor2} />
-                        maetrialRoughness1
+                        maetrialRoughness2
                         <input 
                             id="typeinp" 
                             type="range" 
@@ -284,12 +325,30 @@ export default function Customizer3D(props) {
                             onChange={(e) => setMaterialRoughness2(e.target.value)}
                             step=".1"
                         /><br />
+                        material2Metalness
+                        <input 
+                            id="typeinp" 
+                            type="range" 
+                            min="0" max="1" 
+                            value={material2Metalness}
+                            onChange={(e) => setMaterial2Metalness(e.target.value)}
+                            step=".01"
+                        /><br />
+
+
+
+
+
+                        <button
+                            onClick={() => 
+                            setToggleMesh3Visibility(!toggleMesh3Visibility)}>
+                            Mesh 3 Visibility
+                        </button><br />
                         <button
                             onClick={() => 
                             setToggleTexture3(!toggleTexture3)}>
                             Texture 3 Toggle
                         </button><br />
-
                         materialColor3
                         <HexColorPicker color={materialColor3} onChange={setMaterialColor3} />
                         maetrialRoughness3
@@ -301,12 +360,30 @@ export default function Customizer3D(props) {
                             onChange={(e) => setMaterialRoughness3(e.target.value)}
                             step=".1"
                         /><br />
+                        material3Metalness
+                        <input 
+                            id="typeinp" 
+                            type="range" 
+                            min="0" max="1" 
+                            value={material3Metalness}
+                            onChange={(e) => setMaterial3Metalness(e.target.value)}
+                            step=".01"
+                        /><br />
+
+
+
+
+
+                        <button
+                            onClick={() => 
+                            setToggleMesh4Visibility(!toggleMesh4Visibility)}>
+                            Mesh 4 Visibility
+                        </button><br />
                         <button
                             onClick={() => 
                             setToggleTexture4(!toggleTexture4)}>
                             Texture 4 Toggle
                         </button><br />
-
                         materialColor4
                         <HexColorPicker color={materialColor4} onChange={setMaterialColor4} />
                         maetrialRoughness4
@@ -317,6 +394,15 @@ export default function Customizer3D(props) {
                             value={materialRoughness4}
                             onChange={(e) => setMaterialRoughness4(e.target.value)}
                             step=".1"
+                        /><br />
+                        material4Metalness
+                        <input 
+                            id="typeinp" 
+                            type="range" 
+                            min="0" max="1" 
+                            value={material4Metalness}
+                            onChange={(e) => setMaterial4Metalness(e.target.value)}
+                            step=".01"
                         /><br />
                     </div>
                 </div>

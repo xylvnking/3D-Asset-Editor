@@ -32,55 +32,67 @@ export default function RingTextured({ ...props }) {
 
   return (
     <group ref={group} {...props} dispose={null}>
- 
-      {/* <mesh geometry={nodes.Details001.geometry} material={materials['Material.001']} visible={props.mesh3Visibility}/> */}
-      
+
+      {/* MESH 1 */}
       <mesh 
-        geometry={nodes.Details001.geometry} visible={props.toggleTexture1}>
+        geometry={nodes.Details001.geometry} 
+        visible={props.toggleTexture1 && props.toggleMesh1Visibility}>
         <meshPhysicalMaterial 
           color={props.materialColor1}
-          roughness={10}
-          metalness={.2} />
+          roughness={props.materialRoughness1}
+          metalness={props.material1Metalness}
+          // emissive={props.materialColor1} //would love to get this working but i don't think it will
+          // emissiveMap={}
+          // emissiveIntensity={1} 
+          />
       </mesh> 
-
-      <mesh geometry={nodes.Details001.geometry} material={materials['Material.001']} visible={!props.toggleTexture1}/>
-
-
-
-      
-      
-      {/* <mesh geometry={nodes.Extra_Rings001.geometry} material={materials['Material.002']} visible={props.mesh2Visibility}/> */}
       <mesh 
-      geometry={nodes.Extra_Rings001.geometry}
-      visible={props.mesh2Visibility}
-      >
-        <meshPhysicalMaterial 
-        color={props.materialColor2}
-        roughness={props.materialRoughness2}
-        metalness={1} />
-      </mesh>
-
-      {/* <mesh geometry={nodes.Main001.geometry} material={materials.Material} visible={props.mesh1Visibility}/> */}
-      <mesh 
-      geometry={nodes.Main001.geometry}
-      visible={props.mesh3Visibility}
-      >
-        <meshPhysicalMaterial 
-        color={props.materialColor3}
-        roughness={props.materialRoughness3}
-        metalness={1} />
-      </mesh>
+        geometry={nodes.Details001.geometry} 
+        material={materials['Material.001']} 
+        visible={!props.toggleTexture1 && props.toggleMesh1Visibility}/>
       
-      {/* <mesh geometry={nodes.Spike_Ring_Twist001.geometry} material={materials['Material.003']} visible={props.mesh4Visibility}/> */}
+      {/* MESH 2 */}
+      <mesh 
+        geometry={nodes.Extra_Rings001.geometry} 
+        visible={props.toggleTexture2 && props.toggleMesh2Visibility}>
+        <meshPhysicalMaterial 
+          color={props.materialColor2}
+          roughness={props.materialRoughness2}
+          metalness={props.material2Metalness} />
+      </mesh>
+      <mesh 
+        geometry={nodes.Extra_Rings001.geometry} 
+        material={materials['Material.002']} 
+        visible={!props.toggleTexture2 && props.toggleMesh2Visibility}/>
+
+      {/* MESH 3 */}
+      <mesh 
+        geometry={nodes.Main001.geometry} 
+        visible={props.toggleTexture3 && props.toggleMesh3Visibility}>
+        <meshPhysicalMaterial 
+          color={props.materialColor3}
+          roughness={props.materialRoughness3}
+          metalness={props.material3Metalness} />
+      </mesh>
+      <mesh 
+        geometry={nodes.Main001.geometry} 
+        material={materials.Material} 
+        visible={!props.toggleTexture3 && props.toggleMesh3Visibility}/>
+      {/* weird that the 'main' one uses material.Material as opposed to materials['Material.00#'] */}
+      
+      {/* MESH 4 */}
       <mesh 
       geometry={nodes.Spike_Ring_Twist001.geometry}
-      visible={props.mesh4Visibility}
-      >
-        <meshPhysicalMaterial 
+      visible={props.toggleTexture4 && props.toggleMesh4Visibility}>
+      <meshPhysicalMaterial 
         color={props.materialColor4}
         roughness={props.materialRoughness4}
-        metalness={1} />
+        metalness={props.material4Metalness} />
       </mesh>
+      <mesh 
+        geometry={nodes.Spike_Ring_Twist001.geometry} 
+        material={materials['Material.003']} 
+        visible={!props.toggleTexture4 && props.toggleMesh4Visibility}/>
     </group>
   )
 }

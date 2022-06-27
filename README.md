@@ -124,3 +124,7 @@ export default function Customizer3D() {
     )
 ```
 
+
+# React Three Fiber Notes
+
+[really cool emissive example with unreal pass threejs](https://threejs.org/examples/webgl_postprocessing_unreal_bloom.html)

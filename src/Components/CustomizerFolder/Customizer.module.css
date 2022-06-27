@@ -20,6 +20,8 @@
     background-color: rgb(0, 0, 0);
     border-style: solid;
     border-color: black;
+    position: sticky;
+    top: 80px;
 }
 
 .customizerControls {
@@ -30,3 +32,4 @@
     border-color: black;
     min-width: 30vw;
 }
+
