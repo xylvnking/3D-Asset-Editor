@@ -3,11 +3,12 @@ import React, { useRef, useState, useEffect, Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { customizerCanvas, customizerMain, customizerContainer, customizerFlex, customizerControls } from './Customizer.module.css'
-import { PerspectiveCamera, Ring, useHelper } from '@react-three/drei'
+import { PerspectiveCamera, Ring, useHelper, Environment, Stars, Sky } from '@react-three/drei'
 
 //this will probably go in wrapper/parent component
 import { HexColorPicker } from "react-colorful";
 
+// importing gltf
 import RingTextured from './RingTextured'
 
 
@@ -63,6 +64,16 @@ export default function Customizer3D(props) {
     const [ambientLightColor, setAmbientLightColor] = useState("#ffffff")
 
 
+    const [gridToggle, setGridToggle] = useState(false)
+
+    const [mesh1Toggle, setMesh1Toggle] = useState(true)
+    const [mesh2Toggle, setMesh2Toggle] = useState(true)
+    const [mesh3Toggle, setMesh3Toggle] = useState(true)
+    const [mesh4Toggle, setMesh4Toggle] = useState(true)
+    
+    
+
+
     return (
         <div className={customizerContainer}>
             <div className={customizerMain}>
@@ -74,11 +85,16 @@ export default function Customizer3D(props) {
                                 makeDefault fov={30} 
                                 position={[-10, 10, 10]} 
                             />
-                            <gridHelper args={[20,30]}/>
+                            
+                            <gridHelper 
+                            args={[20,30]}
+                            visible={gridToggle}/>
+                            
                             <mesh 
                             // rotation={[xRotation, yRotation, zRotation]}
+                                
                             >
-                                <ambientLight 
+                                {/* <ambientLight 
                                     intensity={ambientLightIntensity}
                                     color={ambientLightColor}
                                 />
@@ -86,7 +102,8 @@ export default function Customizer3D(props) {
                                     
                                     intensity={5}
                                     position={[10, 10, 10]} 
-                                />
+                                /> */}
+
                                 {/* <boxGeometry 
                                 args={[5, 5, 5]} //SETS SIZE
                                 />
@@ -95,11 +112,23 @@ export default function Customizer3D(props) {
                                     roughness={roughness}
                                     metalness={metalness}
                                 /> */}
+
                             </mesh>
                             <Suspense>
                                 <RingTextured 
+                                    
                                     rotation={[xRotation, yRotation, zRotation]}
+
+                                    mesh1Visibility={mesh1Toggle}
+                                    mesh2Visibility={mesh2Toggle}
+                                    mesh3Visibility={mesh3Toggle}
+                                    mesh4Visibility={mesh4Toggle}
+                                    />
+                                <Environment 
+                                preset="studio"
                                 />
+                                {/* <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} /> */}
+                                {/* <Sky distance={45000} sunPosition={[0, 12, 0]} inclination={.1} azimuth={1} {...props} /> */}
                             </Suspense>
                         </Canvas>
                     </div>
@@ -145,6 +174,36 @@ export default function Customizer3D(props) {
                             onClick={() => 
                             setZRotation(0)}>
                             Reset Z Rotation
+                        </button><br />
+
+                        <button
+                            onClick={() => 
+                            setGridToggle(!gridToggle)}>
+                            Grid Toggle
+                        </button><br />
+
+                        <button
+                            onClick={() => 
+                            setMesh1Toggle(!mesh1Toggle)}>
+                            Mesh1 Toggle
+                        </button><br />
+
+                        <button
+                            onClick={() => 
+                            setMesh2Toggle(!mesh2Toggle)}>
+                            Mesh2 Toggle
+                        </button><br />
+
+                        <button
+                            onClick={() => 
+                            setMesh3Toggle(!mesh3Toggle)}>
+                            Mesh3 Toggle
+                        </button><br />
+
+                        <button
+                            onClick={() => 
+                            setMesh4Toggle(!mesh4Toggle)}>
+                            Mesh4 Toggle
                         </button><br />
 
                         roughness

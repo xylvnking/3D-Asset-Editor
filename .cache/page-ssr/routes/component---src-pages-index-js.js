@@ -2,6 +2,234 @@ exports.id = "component---src-pages-index-js";
 exports.ids = ["component---src-pages-index-js"];
 exports.modules = {
 
+/***/ "./node_modules/@react-three/drei/core/Environment.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@react-three/drei/core/Environment.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Environment": () => (/* binding */ Environment),
+/* harmony export */   "EnvironmentCube": () => (/* binding */ EnvironmentCube),
+/* harmony export */   "EnvironmentMap": () => (/* binding */ EnvironmentMap),
+/* harmony export */   "EnvironmentPortal": () => (/* binding */ EnvironmentPortal),
+/* harmony export */   "useEnvironment": () => (/* binding */ useEnvironment)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-4f1a8e2f.esm.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
+/* harmony import */ var three_stdlib__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! three-stdlib */ "./node_modules/three-stdlib/loaders/RGBELoader.js");
+/* harmony import */ var _helpers_environment_assets_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../helpers/environment-assets.js */ "./node_modules/@react-three/drei/helpers/environment-assets.js");
+/* harmony import */ var _helpers_glsl_GroundProjection_vert_glsl_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../helpers/glsl/GroundProjection.vert.glsl.js */ "./node_modules/@react-three/drei/helpers/glsl/GroundProjection.vert.glsl.js");
+/* harmony import */ var _helpers_glsl_GroundProjection_frag_glsl_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../helpers/glsl/GroundProjection.frag.glsl.js */ "./node_modules/@react-three/drei/helpers/glsl/GroundProjection.frag.glsl.js");
+/* harmony import */ var _shapes_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./shapes.js */ "./node_modules/@react-three/drei/core/shapes.js");
+
+
+
+
+
+
+
+
+
+
+const CUBEMAP_ROOT = 'https://market-assets.fra1.cdn.digitaloceanspaces.com/market-assets/hdris/';
+
+const isCubeTexture = def => def && def.isCubeTexture;
+
+const isRef = obj => obj.current && obj.current.isScene;
+
+const resolveScene = scene => isRef(scene) ? scene.current : scene;
+
+function EnvironmentMap({
+  scene,
+  background = false,
+  map
+}) {
+  const defaultScene = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.w)(state => state.scene);
+  react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect(() => {
+    if (map) {
+      const target = resolveScene(scene || defaultScene);
+      const oldbg = target.background;
+      const oldenv = target.environment;
+      if (background !== 'only') target.environment = map;
+      if (background) target.background = map;
+      return () => {
+        if (background !== 'only') target.environment = oldenv;
+        if (background) target.background = oldbg;
+      };
+    }
+  }, [defaultScene, scene, map, background]);
+  return null;
+}
+function useEnvironment({
+  files = ['/px.png', '/nx.png', '/py.png', '/ny.png', '/pz.png', '/nz.png'],
+  path = '',
+  preset = undefined,
+  extensions
+}) {
+  if (preset) {
+    if (!(preset in _helpers_environment_assets_js__WEBPACK_IMPORTED_MODULE_3__.presetsObj)) throw new Error('Preset must be one of: ' + Object.keys(_helpers_environment_assets_js__WEBPACK_IMPORTED_MODULE_3__.presetsObj).join(', '));
+    files = _helpers_environment_assets_js__WEBPACK_IMPORTED_MODULE_3__.presetsObj[preset];
+    path = CUBEMAP_ROOT;
+  }
+
+  const isCubeMap = Array.isArray(files);
+  const loader = isCubeMap ? three__WEBPACK_IMPORTED_MODULE_4__.CubeTextureLoader : three_stdlib__WEBPACK_IMPORTED_MODULE_5__.RGBELoader;
+  const loaderResult = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.z)( // @ts-expect-error
+  loader, isCubeMap ? [files] : files, loader => {
+    loader.setPath(path);
+    if (extensions) extensions(loader);
+  });
+  const texture = isCubeMap ? // @ts-ignore
+  loaderResult[0] : loaderResult;
+  texture.mapping = isCubeMap ? three__WEBPACK_IMPORTED_MODULE_4__.CubeReflectionMapping : three__WEBPACK_IMPORTED_MODULE_4__.EquirectangularReflectionMapping;
+  return texture;
+}
+function EnvironmentCube({
+  background = false,
+  scene,
+  ...rest
+}) {
+  const texture = useEnvironment(rest);
+  const defaultScene = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.w)(state => state.scene);
+  react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect(() => {
+    const target = resolveScene(scene || defaultScene);
+    const oldbg = target.background;
+    const oldenv = target.environment;
+    if (background !== 'only') target.environment = texture;
+    if (background) target.background = texture;
+    return () => {
+      if (background !== 'only') target.environment = oldenv;
+      if (background) target.background = oldbg;
+    };
+  }, [texture, background, scene, defaultScene]);
+  return null;
+}
+function EnvironmentPortal({
+  children,
+  near = 1,
+  far = 1000,
+  resolution = 256,
+  frames = 1,
+  map,
+  background = false,
+  scene,
+  files,
+  path,
+  preset = undefined,
+  extensions
+}) {
+  const gl = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.w)(state => state.gl);
+  const defaultScene = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.w)(state => state.scene);
+  const camera = react__WEBPACK_IMPORTED_MODULE_1__.useRef(null);
+  const [virtualScene] = react__WEBPACK_IMPORTED_MODULE_1__.useState(() => new three__WEBPACK_IMPORTED_MODULE_4__.Scene());
+  const fbo = react__WEBPACK_IMPORTED_MODULE_1__.useMemo(() => {
+    const fbo = new three__WEBPACK_IMPORTED_MODULE_4__.WebGLCubeRenderTarget(resolution);
+    fbo.texture.type = three__WEBPACK_IMPORTED_MODULE_4__.HalfFloatType;
+    return fbo;
+  }, [resolution]);
+  react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect(() => {
+    if (frames === 1) camera.current.update(gl, virtualScene);
+    const target = resolveScene(scene || defaultScene);
+    const oldbg = target.background;
+    const oldenv = target.environment;
+    if (background !== 'only') target.environment = fbo.texture;
+    if (background) target.background = fbo.texture;
+    return () => {
+      if (background !== 'only') target.environment = oldenv;
+      if (background) target.background = oldbg;
+    };
+  }, [children, virtualScene, fbo.texture, scene, defaultScene, background, frames, gl]);
+  let count = 1;
+  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.x)(() => {
+    if (frames === Infinity || count < frames) {
+      camera.current.update(gl, virtualScene);
+      count++;
+    }
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.g)( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, children, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("cubeCamera", {
+    ref: camera,
+    args: [near, far, fbo]
+  }), files || preset ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(EnvironmentCube, {
+    background: true,
+    files: files,
+    preset: preset,
+    path: path,
+    extensions: extensions
+  }) : map ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(EnvironmentMap, {
+    background: true,
+    map: map,
+    extensions: extensions
+  }) : null), virtualScene));
+}
+
+function EnvironmentGround(props) {
+  var _props$ground, _props$ground2, _scale, _props$ground3;
+
+  const textureDefault = useEnvironment(props);
+  const texture = props.map || textureDefault;
+  const isCubeMap = isCubeTexture(texture);
+  const defines = react__WEBPACK_IMPORTED_MODULE_1__.useMemo(() => {
+    var _ref, _texture$image$;
+
+    const w = (_ref = isCubeMap ? (_texture$image$ = texture.image[0]) == null ? void 0 : _texture$image$.width : texture.image.width) !== null && _ref !== void 0 ? _ref : 1024;
+    const cubeSize = w / 4;
+
+    const _lodMax = Math.floor(Math.log2(cubeSize));
+
+    const _cubeSize = Math.pow(2, _lodMax);
+
+    const width = 3 * Math.max(_cubeSize, 16 * 7);
+    const height = 4 * _cubeSize;
+    return [isCubeMap ? `#define ENVMAP_TYPE_CUBE` : '', `#define CUBEUV_TEXEL_WIDTH ${1.0 / width}`, `#define CUBEUV_TEXEL_HEIGHT ${1.0 / height}`, `#define CUBEUV_MAX_MIP ${_lodMax}.0`, ``];
+  }, []);
+  const fragment = react__WEBPACK_IMPORTED_MODULE_1__.useMemo(() => defines.join('\n') + _helpers_glsl_GroundProjection_frag_glsl_js__WEBPACK_IMPORTED_MODULE_6__["default"], [defines]);
+  const uniforms = react__WEBPACK_IMPORTED_MODULE_1__.useMemo(() => ({
+    cubemap: {
+      value: null
+    },
+    height: {
+      value: 15
+    },
+    radius: {
+      value: 60
+    }
+  }), []);
+  const mat = react__WEBPACK_IMPORTED_MODULE_1__.useRef(null);
+  const height = (_props$ground = props.ground) == null ? void 0 : _props$ground.height;
+  const radius = (_props$ground2 = props.ground) == null ? void 0 : _props$ground2.radius;
+  const scale = (_scale = (_props$ground3 = props.ground) == null ? void 0 : _props$ground3.scale) !== null && _scale !== void 0 ? _scale : 1000;
+  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(() => void (height && (mat.current.uniforms.height.value = height)), [height]);
+  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(() => void (radius && (mat.current.uniforms.radius.value = radius)), [radius]);
+  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(() => void (mat.current.uniforms.cubemap.value = texture), [texture]);
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(EnvironmentMap, (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
+    map: texture
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(_shapes_js__WEBPACK_IMPORTED_MODULE_7__.Icosahedron, {
+    scale: scale,
+    args: [1, 16]
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("shaderMaterial", {
+    ref: mat,
+    side: three__WEBPACK_IMPORTED_MODULE_4__.BackSide,
+    vertexShader: _helpers_glsl_GroundProjection_vert_glsl_js__WEBPACK_IMPORTED_MODULE_8__["default"],
+    fragmentShader: fragment,
+    uniforms: uniforms
+  })));
+}
+
+function Environment(props) {
+  return props.ground ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(EnvironmentGround, props) : props.map ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(EnvironmentMap, props) : props.children ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(EnvironmentPortal, props) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(EnvironmentCube, props);
+}
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/@react-three/drei/core/PerspectiveCamera.js":
 /*!******************************************************************!*\
   !*** ./node_modules/@react-three/drei/core/PerspectiveCamera.js ***!
@@ -70,6 +298,78 @@ const PerspectiveCamera = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwar
 
 /***/ }),
 
+/***/ "./node_modules/@react-three/drei/core/shapes.js":
+/*!*******************************************************!*\
+  !*** ./node_modules/@react-three/drei/core/shapes.js ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Box": () => (/* binding */ Box),
+/* harmony export */   "Capsule": () => (/* binding */ Capsule),
+/* harmony export */   "Circle": () => (/* binding */ Circle),
+/* harmony export */   "Cone": () => (/* binding */ Cone),
+/* harmony export */   "Cylinder": () => (/* binding */ Cylinder),
+/* harmony export */   "Dodecahedron": () => (/* binding */ Dodecahedron),
+/* harmony export */   "Extrude": () => (/* binding */ Extrude),
+/* harmony export */   "Icosahedron": () => (/* binding */ Icosahedron),
+/* harmony export */   "Lathe": () => (/* binding */ Lathe),
+/* harmony export */   "Octahedron": () => (/* binding */ Octahedron),
+/* harmony export */   "Plane": () => (/* binding */ Plane),
+/* harmony export */   "Polyhedron": () => (/* binding */ Polyhedron),
+/* harmony export */   "Ring": () => (/* binding */ Ring),
+/* harmony export */   "Sphere": () => (/* binding */ Sphere),
+/* harmony export */   "Tetrahedron": () => (/* binding */ Tetrahedron),
+/* harmony export */   "Torus": () => (/* binding */ Torus),
+/* harmony export */   "TorusKnot": () => (/* binding */ TorusKnot),
+/* harmony export */   "Tube": () => (/* binding */ Tube)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+
+
+
+function create(type) {
+  const El = type + 'BufferGeometry';
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(({
+    args,
+    children,
+    ...props
+  }, ref) => /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("mesh", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({
+    ref: ref
+  }, props), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement(El, {
+    attach: "geometry",
+    args: args
+  }), children));
+}
+
+const Box = create('box');
+const Circle = create('circle');
+const Cone = create('cone');
+const Cylinder = create('cylinder');
+const Sphere = create('sphere');
+const Plane = create('plane');
+const Tube = create('tube');
+const Torus = create('torus');
+const TorusKnot = create('torusKnot');
+const Tetrahedron = create('tetrahedron');
+const Ring = create('ring');
+const Polyhedron = create('polyhedron');
+const Icosahedron = create('icosahedron');
+const Octahedron = create('octahedron');
+const Dodecahedron = create('dodecahedron');
+const Extrude = create('extrude');
+const Lathe = create('lathe');
+const Capsule = create('capsule');
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/@react-three/drei/core/useGLTF.js":
 /*!********************************************************!*\
   !*** ./node_modules/@react-three/drei/core/useGLTF.js ***!
@@ -120,6 +420,71 @@ function useGLTF(path, useDraco = true, useMeshOpt = true, extendLoader) {
 useGLTF.preload = (path, useDraco = true, useMeshOpt = true, extendLoader) => _react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.z.preload(three_stdlib__WEBPACK_IMPORTED_MODULE_3__.GLTFLoader, path, extensions(useDraco, useMeshOpt, extendLoader));
 
 useGLTF.clear = input => _react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.z.clear(three_stdlib__WEBPACK_IMPORTED_MODULE_3__.GLTFLoader, input);
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@react-three/drei/helpers/environment-assets.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/@react-three/drei/helpers/environment-assets.js ***!
+  \**********************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "presetsObj": () => (/* binding */ presetsObj)
+/* harmony export */ });
+const presetsObj = {
+  sunset: 'venice/venice_sunset_1k.hdr',
+  dawn: 'kiara/kiara_1_dawn_1k.hdr',
+  night: 'dikhololo/dikhololo_night_1k.hdr',
+  warehouse: 'empty-wharehouse/empty_warehouse_01_1k.hdr',
+  forest: 'forrest-slope/forest_slope_1k.hdr',
+  apartment: 'lebombo/lebombo_1k.hdr',
+  studio: 'studio-small-3/studio_small_03_1k.hdr',
+  city: 'potsdamer-platz/potsdamer_platz_1k.hdr',
+  park: 'rooitou/rooitou_park_1k.hdr',
+  lobby: 'st-fagans/st_fagans_interior_1k.hdr'
+};
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@react-three/drei/helpers/glsl/GroundProjection.frag.glsl.js":
+/*!***********************************************************************************!*\
+  !*** ./node_modules/@react-three/drei/helpers/glsl/GroundProjection.frag.glsl.js ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ fragmentShader)
+/* harmony export */ });
+var fragmentShader = "#define GLSLIFY 1\n#define ENVMAP_TYPE_CUBE_UV\nvarying vec3 vWorldPosition;uniform float radius;uniform float height;\n#ifdef ENVMAP_TYPE_CUBE\nuniform samplerCube cubemap;\n#else\nuniform sampler2D cubemap;\n#endif\nfloat diskIntersect(in vec3 ro,in vec3 rd,vec3 c,vec3 n,float r){vec3 o=ro-c;float t=-dot(n,o)/dot(rd,n);vec3 q=o+rd*t;return(dot(q,q)<r*r)? t : 1e6;}float sphereIntersect(in vec3 ro,in vec3 rd,in vec3 ce,float ra){vec3 oc=ro-ce;float b=dot(oc,rd);float c=dot(oc,oc)-ra*ra;float h=b*b-c;if(h<0.0)-1.0;h=sqrt(h);return-b+h;}vec3 project(){vec3 p=normalize(vWorldPosition);vec3 camPos=cameraPosition;camPos.y-=height;float intersection=sphereIntersect(camPos,p,vec3(0.),radius);if(intersection>0.){vec3 h=vec3(0.0,-height,0.0);float intersection2=diskIntersect(camPos,p,h,vec3(0.0,-1.0,0.0),radius);p=(camPos+min(intersection,intersection2)*p)/radius;}else{p=vec3(0.0,1.0,0.0);}return p;}\n#include <common>\n#include <cube_uv_reflection_fragment>\nvoid main(){vec3 projectedWorldPosition=project();\n#ifdef ENVMAP_TYPE_CUBE\nvec3 outcolor=textureCube(cubemap,projectedWorldPosition).rgb;\n#else\nvec3 direction=normalize(projectedWorldPosition);vec2 uv=equirectUv(direction);vec3 outcolor=texture2D(cubemap,uv).rgb;\n#endif\ngl_FragColor=vec4(outcolor,1.0);\n#include <tonemapping_fragment>\n#include <encodings_fragment>\n}"; // eslint-disable-line
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@react-three/drei/helpers/glsl/GroundProjection.vert.glsl.js":
+/*!***********************************************************************************!*\
+  !*** ./node_modules/@react-three/drei/helpers/glsl/GroundProjection.vert.glsl.js ***!
+  \***********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (/* binding */ vertexShader)
+/* harmony export */ });
+var vertexShader = "#define GLSLIFY 1\nvarying vec3 vWorldPosition;void main(){vec4 worldPosition=modelMatrix*vec4(position,1.0);vWorldPosition=worldPosition.xyz;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}"; // eslint-disable-line
 
 
 
@@ -3395,7 +3760,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var three_examples_jsm_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three/examples/jsm/controls/OrbitControls */ "./node_modules/three/examples/jsm/controls/OrbitControls.js");
 /* harmony import */ var _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Customizer.module.css */ "./src/Components/CustomizerFolder/Customizer.module.css");
 /* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/PerspectiveCamera.js");
-/* harmony import */ var react_colorful__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-colorful */ "./node_modules/react-colorful/dist/index.mjs");
+/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/Environment.js");
+/* harmony import */ var react_colorful__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-colorful */ "./node_modules/react-colorful/dist/index.mjs");
 /* harmony import */ var _RingTextured__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RingTextured */ "./src/Components/CustomizerFolder/RingTextured.js");
 
 
@@ -3403,6 +3769,7 @@ __webpack_require__.r(__webpack_exports__);
 
  //this will probably go in wrapper/parent component
 
+ // importing gltf
 
 
 /*
@@ -3489,15 +3856,17 @@ function Customizer3D(props) {
     position: [-10, 10, 10]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("gridHelper", {
     args: [20, 30]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
-    rotation: [xRotation, yRotation, zRotation]
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ambientLight", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ambientLight", {
     intensity: ambientLightIntensity,
     color: ambientLightColor
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pointLight", {
     intensity: 5,
     position: [10, 10, 10]
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_RingTextured__WEBPACK_IMPORTED_MODULE_3__["default"], null)))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_RingTextured__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    rotation: [xRotation, yRotation, zRotation]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_7__.Environment, {
+    preset: "city"
+  })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerControls
   }, "x Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
@@ -3507,25 +3876,31 @@ function Customizer3D(props) {
     value: xRotation // sets the slider to the default (0) on load
     ,
     onChange: e => setXRotation(e.target.value),
-    step: ".01" // smaller = smoother
+    step: ".1" // smaller = smoother
 
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Y Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: () => setXRotation(0)
+  }, "Reset X Rotation"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Y Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
     max: "11",
     value: yRotation,
     onChange: e => setYRotation(e.target.value),
-    step: ".01"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Z Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    step: ".1"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: () => setYRotation(0)
+  }, "Reset Y Rotation"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Z Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
     max: "11",
     value: zRotation,
     onChange: e => setZRotation(e.target.value),
-    step: ".01"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "roughness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    step: ".1"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: () => setZRotation(0)
+  }, "Reset Z Rotation"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "roughness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
@@ -3549,10 +3924,10 @@ function Customizer3D(props) {
     value: ambientLightIntensity,
     onChange: e => setAmbientLightIntensity(e.target.value),
     step: ".1"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "ambientLightColor", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_7__.HexColorPicker, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "ambientLightColor", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
     color: ambientLightColor,
     onChange: setAmbientLightColor
-  }), "objectColor", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_7__.HexColorPicker, {
+  }), "objectColor", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
     color: objectColor,
     onChange: setObjectColor
   })))));
@@ -3600,9 +3975,12 @@ function RingTextured({ ...props
     geometry: nodes.Main001.geometry,
     material: materials.Material
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
-    geometry: nodes.Spike_Ring_Twist001.geometry,
-    material: materials['Material.003']
-  }));
+    geometry: nodes.Spike_Ring_Twist001.geometry
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshPhysicalMaterial", {
+    color: "blue",
+    roughness: .1,
+    metalness: 1
+  })));
 }
 _react_three_drei__WEBPACK_IMPORTED_MODULE_1__.useGLTF.preload('/RingTextured.glb');
 
@@ -31602,6 +31980,411 @@ function toTrianglesDrawMode(geometry, drawMode) {
   const newGeometry = geometry.clone();
   newGeometry.setIndex(newIndices);
   return newGeometry;
+}
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/three-stdlib/loaders/RGBELoader.js":
+/*!*********************************************************!*\
+  !*** ./node_modules/three-stdlib/loaders/RGBELoader.js ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "RGBELoader": () => (/* binding */ RGBELoader)
+/* harmony export */ });
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
+
+
+// http://en.wikipedia.org/wiki/RGBE_image_format
+
+class RGBELoader extends three__WEBPACK_IMPORTED_MODULE_0__.DataTextureLoader {
+  constructor(manager) {
+    super(manager);
+    this.type = three__WEBPACK_IMPORTED_MODULE_0__.HalfFloatType;
+  } // adapted from http://www.graphics.cornell.edu/~bjw/rgbe.html
+
+
+  parse(buffer) {
+    const
+    /* return codes for rgbe routines */
+    //RGBE_RETURN_SUCCESS = 0,
+    RGBE_RETURN_FAILURE = -1,
+
+    /* default error routine.  change this to change error handling */
+    rgbe_read_error = 1,
+          rgbe_write_error = 2,
+          rgbe_format_error = 3,
+          rgbe_memory_error = 4,
+          rgbe_error = function (rgbe_error_code, msg) {
+      switch (rgbe_error_code) {
+        case rgbe_read_error:
+          console.error('THREE.RGBELoader Read Error: ' + (msg || ''));
+          break;
+
+        case rgbe_write_error:
+          console.error('THREE.RGBELoader Write Error: ' + (msg || ''));
+          break;
+
+        case rgbe_format_error:
+          console.error('THREE.RGBELoader Bad File Format: ' + (msg || ''));
+          break;
+
+        default:
+        case rgbe_memory_error:
+          console.error('THREE.RGBELoader: Error: ' + (msg || ''));
+      }
+
+      return RGBE_RETURN_FAILURE;
+    },
+
+    /* offsets to red, green, and blue components in a data (float) pixel */
+    //RGBE_DATA_RED = 0,
+    //RGBE_DATA_GREEN = 1,
+    //RGBE_DATA_BLUE = 2,
+
+    /* number of floats per pixel, use 4 since stored in rgba image format */
+    //RGBE_DATA_SIZE = 4,
+
+    /* flags indicating which fields in an rgbe_header_info are valid */
+    RGBE_VALID_PROGRAMTYPE = 1,
+          RGBE_VALID_FORMAT = 2,
+          RGBE_VALID_DIMENSIONS = 4,
+          NEWLINE = '\n',
+          fgets = function (buffer, lineLimit, consume) {
+      const chunkSize = 128;
+      lineLimit = !lineLimit ? 1024 : lineLimit;
+      let p = buffer.pos,
+          i = -1,
+          len = 0,
+          s = '',
+          chunk = String.fromCharCode.apply(null, new Uint16Array(buffer.subarray(p, p + chunkSize)));
+
+      while (0 > (i = chunk.indexOf(NEWLINE)) && len < lineLimit && p < buffer.byteLength) {
+        s += chunk;
+        len += chunk.length;
+        p += chunkSize;
+        chunk += String.fromCharCode.apply(null, new Uint16Array(buffer.subarray(p, p + chunkSize)));
+      }
+
+      if (-1 < i) {
+        /*for (i=l-1; i>=0; i--) {
+        byteCode = m.charCodeAt(i);
+        if (byteCode > 0x7f && byteCode <= 0x7ff) byteLen++;
+        else if (byteCode > 0x7ff && byteCode <= 0xffff) byteLen += 2;
+        if (byteCode >= 0xDC00 && byteCode <= 0xDFFF) i--; //trail surrogate
+        }*/
+        if (false !== consume) buffer.pos += len + i + 1;
+        return s + chunk.slice(0, i);
+      }
+
+      return false;
+    },
+
+    /* minimal header reading.  modify if you want to parse more information */
+    RGBE_ReadHeader = function (buffer) {
+      // regexes to parse header info fields
+      const magic_token_re = /^#\?(\S+)/,
+            gamma_re = /^\s*GAMMA\s*=\s*(\d+(\.\d+)?)\s*$/,
+            exposure_re = /^\s*EXPOSURE\s*=\s*(\d+(\.\d+)?)\s*$/,
+            format_re = /^\s*FORMAT=(\S+)\s*$/,
+            dimensions_re = /^\s*\-Y\s+(\d+)\s+\+X\s+(\d+)\s*$/,
+            // RGBE format header struct
+      header = {
+        valid: 0
+        /* indicate which fields are valid */
+        ,
+        string: ''
+        /* the actual header string */
+        ,
+        comments: ''
+        /* comments found in header */
+        ,
+        programtype: 'RGBE'
+        /* listed at beginning of file to identify it after "#?". defaults to "RGBE" */
+        ,
+        format: ''
+        /* RGBE format, default 32-bit_rle_rgbe */
+        ,
+        gamma: 1.0
+        /* image has already been gamma corrected with given gamma. defaults to 1.0 (no correction) */
+        ,
+        exposure: 1.0
+        /* a value of 1.0 in an image corresponds to <exposure> watts/steradian/m^2. defaults to 1.0 */
+        ,
+        width: 0,
+        height: 0
+        /* image dimensions, width/height */
+
+      };
+      let line, match;
+
+      if (buffer.pos >= buffer.byteLength || !(line = fgets(buffer))) {
+        return rgbe_error(rgbe_read_error, 'no header found');
+      }
+      /* if you want to require the magic token then uncomment the next line */
+
+
+      if (!(match = line.match(magic_token_re))) {
+        return rgbe_error(rgbe_format_error, 'bad initial token');
+      }
+
+      header.valid |= RGBE_VALID_PROGRAMTYPE;
+      header.programtype = match[1];
+      header.string += line + '\n';
+
+      while (true) {
+        line = fgets(buffer);
+        if (false === line) break;
+        header.string += line + '\n';
+
+        if ('#' === line.charAt(0)) {
+          header.comments += line + '\n';
+          continue; // comment line
+        }
+
+        if (match = line.match(gamma_re)) {
+          header.gamma = parseFloat(match[1]);
+        }
+
+        if (match = line.match(exposure_re)) {
+          header.exposure = parseFloat(match[1]);
+        }
+
+        if (match = line.match(format_re)) {
+          header.valid |= RGBE_VALID_FORMAT;
+          header.format = match[1]; //'32-bit_rle_rgbe';
+        }
+
+        if (match = line.match(dimensions_re)) {
+          header.valid |= RGBE_VALID_DIMENSIONS;
+          header.height = parseInt(match[1], 10);
+          header.width = parseInt(match[2], 10);
+        }
+
+        if (header.valid & RGBE_VALID_FORMAT && header.valid & RGBE_VALID_DIMENSIONS) break;
+      }
+
+      if (!(header.valid & RGBE_VALID_FORMAT)) {
+        return rgbe_error(rgbe_format_error, 'missing format specifier');
+      }
+
+      if (!(header.valid & RGBE_VALID_DIMENSIONS)) {
+        return rgbe_error(rgbe_format_error, 'missing image size specifier');
+      }
+
+      return header;
+    },
+          RGBE_ReadPixels_RLE = function (buffer, w, h) {
+      const scanline_width = w;
+
+      if ( // run length encoding is not allowed so read flat
+      scanline_width < 8 || scanline_width > 0x7fff || // this file is not run length encoded
+      2 !== buffer[0] || 2 !== buffer[1] || buffer[2] & 0x80) {
+        // return the flat buffer
+        return new Uint8Array(buffer);
+      }
+
+      if (scanline_width !== (buffer[2] << 8 | buffer[3])) {
+        return rgbe_error(rgbe_format_error, 'wrong scanline width');
+      }
+
+      const data_rgba = new Uint8Array(4 * w * h);
+
+      if (!data_rgba.length) {
+        return rgbe_error(rgbe_memory_error, 'unable to allocate buffer space');
+      }
+
+      let offset = 0,
+          pos = 0;
+      const ptr_end = 4 * scanline_width;
+      const rgbeStart = new Uint8Array(4);
+      const scanline_buffer = new Uint8Array(ptr_end);
+      let num_scanlines = h; // read in each successive scanline
+
+      while (num_scanlines > 0 && pos < buffer.byteLength) {
+        if (pos + 4 > buffer.byteLength) {
+          return rgbe_error(rgbe_read_error);
+        }
+
+        rgbeStart[0] = buffer[pos++];
+        rgbeStart[1] = buffer[pos++];
+        rgbeStart[2] = buffer[pos++];
+        rgbeStart[3] = buffer[pos++];
+
+        if (2 != rgbeStart[0] || 2 != rgbeStart[1] || (rgbeStart[2] << 8 | rgbeStart[3]) != scanline_width) {
+          return rgbe_error(rgbe_format_error, 'bad rgbe scanline format');
+        } // read each of the four channels for the scanline into the buffer
+        // first red, then green, then blue, then exponent
+
+
+        let ptr = 0,
+            count;
+
+        while (ptr < ptr_end && pos < buffer.byteLength) {
+          count = buffer[pos++];
+          const isEncodedRun = count > 128;
+          if (isEncodedRun) count -= 128;
+
+          if (0 === count || ptr + count > ptr_end) {
+            return rgbe_error(rgbe_format_error, 'bad scanline data');
+          }
+
+          if (isEncodedRun) {
+            // a (encoded) run of the same value
+            const byteValue = buffer[pos++];
+
+            for (let i = 0; i < count; i++) {
+              scanline_buffer[ptr++] = byteValue;
+            } //ptr += count;
+
+          } else {
+            // a literal-run
+            scanline_buffer.set(buffer.subarray(pos, pos + count), ptr);
+            ptr += count;
+            pos += count;
+          }
+        } // now convert data from buffer into rgba
+        // first red, then green, then blue, then exponent (alpha)
+
+
+        const l = scanline_width; //scanline_buffer.byteLength;
+
+        for (let i = 0; i < l; i++) {
+          let off = 0;
+          data_rgba[offset] = scanline_buffer[i + off];
+          off += scanline_width; //1;
+
+          data_rgba[offset + 1] = scanline_buffer[i + off];
+          off += scanline_width; //1;
+
+          data_rgba[offset + 2] = scanline_buffer[i + off];
+          off += scanline_width; //1;
+
+          data_rgba[offset + 3] = scanline_buffer[i + off];
+          offset += 4;
+        }
+
+        num_scanlines--;
+      }
+
+      return data_rgba;
+    };
+
+    const RGBEByteToRGBFloat = function (sourceArray, sourceOffset, destArray, destOffset) {
+      const e = sourceArray[sourceOffset + 3];
+      const scale = Math.pow(2.0, e - 128.0) / 255.0;
+      destArray[destOffset + 0] = sourceArray[sourceOffset + 0] * scale;
+      destArray[destOffset + 1] = sourceArray[sourceOffset + 1] * scale;
+      destArray[destOffset + 2] = sourceArray[sourceOffset + 2] * scale;
+      destArray[destOffset + 3] = 1;
+    };
+
+    const RGBEByteToRGBHalf = function (sourceArray, sourceOffset, destArray, destOffset) {
+      const e = sourceArray[sourceOffset + 3];
+      const scale = Math.pow(2.0, e - 128.0) / 255.0; // clamping to 65504, the maximum representable value in float16
+
+      destArray[destOffset + 0] = three__WEBPACK_IMPORTED_MODULE_0__.DataUtils.toHalfFloat(Math.min(sourceArray[sourceOffset + 0] * scale, 65504));
+      destArray[destOffset + 1] = three__WEBPACK_IMPORTED_MODULE_0__.DataUtils.toHalfFloat(Math.min(sourceArray[sourceOffset + 1] * scale, 65504));
+      destArray[destOffset + 2] = three__WEBPACK_IMPORTED_MODULE_0__.DataUtils.toHalfFloat(Math.min(sourceArray[sourceOffset + 2] * scale, 65504));
+      destArray[destOffset + 3] = three__WEBPACK_IMPORTED_MODULE_0__.DataUtils.toHalfFloat(1);
+    };
+
+    const byteArray = new Uint8Array(buffer);
+    byteArray.pos = 0;
+    const rgbe_header_info = RGBE_ReadHeader(byteArray);
+
+    if (RGBE_RETURN_FAILURE !== rgbe_header_info) {
+      const w = rgbe_header_info.width,
+            h = rgbe_header_info.height,
+            image_rgba_data = RGBE_ReadPixels_RLE(byteArray.subarray(byteArray.pos), w, h);
+
+      if (RGBE_RETURN_FAILURE !== image_rgba_data) {
+        let data, format, type;
+        let numElements;
+
+        switch (this.type) {
+          case three__WEBPACK_IMPORTED_MODULE_0__.FloatType:
+            numElements = image_rgba_data.length / 4;
+            const floatArray = new Float32Array(numElements * 4);
+
+            for (let j = 0; j < numElements; j++) {
+              RGBEByteToRGBFloat(image_rgba_data, j * 4, floatArray, j * 4);
+            }
+
+            data = floatArray;
+            type = three__WEBPACK_IMPORTED_MODULE_0__.FloatType;
+            break;
+
+          case three__WEBPACK_IMPORTED_MODULE_0__.HalfFloatType:
+            numElements = image_rgba_data.length / 4;
+            const halfArray = new Uint16Array(numElements * 4);
+
+            for (let j = 0; j < numElements; j++) {
+              RGBEByteToRGBHalf(image_rgba_data, j * 4, halfArray, j * 4);
+            }
+
+            data = halfArray;
+            type = three__WEBPACK_IMPORTED_MODULE_0__.HalfFloatType;
+            break;
+
+          default:
+            console.error('THREE.RGBELoader: unsupported type: ', this.type);
+            break;
+        }
+
+        return {
+          width: w,
+          height: h,
+          data: data,
+          header: rgbe_header_info.string,
+          gamma: rgbe_header_info.gamma,
+          exposure: rgbe_header_info.exposure,
+          format: format,
+          type: type
+        };
+      }
+    }
+
+    return null;
+  }
+
+  setDataType(value) {
+    this.type = value;
+    return this;
+  }
+
+  load(url, onLoad, onProgress, onError) {
+    function onLoadCallback(texture, texData) {
+      switch (texture.type) {
+        case three__WEBPACK_IMPORTED_MODULE_0__.FloatType:
+          texture.encoding = three__WEBPACK_IMPORTED_MODULE_0__.LinearEncoding;
+          texture.minFilter = three__WEBPACK_IMPORTED_MODULE_0__.LinearFilter;
+          texture.magFilter = three__WEBPACK_IMPORTED_MODULE_0__.LinearFilter;
+          texture.generateMipmaps = false;
+          texture.flipY = true;
+          break;
+
+        case three__WEBPACK_IMPORTED_MODULE_0__.HalfFloatType:
+          texture.encoding = three__WEBPACK_IMPORTED_MODULE_0__.LinearEncoding;
+          texture.minFilter = three__WEBPACK_IMPORTED_MODULE_0__.LinearFilter;
+          texture.magFilter = three__WEBPACK_IMPORTED_MODULE_0__.LinearFilter;
+          texture.generateMipmaps = false;
+          texture.flipY = true;
+          break;
+      }
+
+      if (onLoad) onLoad(texture, texData);
+    }
+
+    return super.load(url, onLoadCallback, onProgress, onError);
+  }
+
 }
 
 
