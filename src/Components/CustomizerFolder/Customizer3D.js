@@ -1,13 +1,14 @@
 
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { customizerCanvas, customizerMain, customizerContainer, customizerFlex, customizerControls } from './Customizer.module.css'
-import { PerspectiveCamera } from '@react-three/drei'
+import { PerspectiveCamera, Ring } from '@react-three/drei'
 
 //this will probably go in wrapper/parent component
 import { HexColorPicker } from "react-colorful";
 
+import RingTextured from './RingTextured'
 
 /*
 
@@ -78,17 +79,21 @@ export default function Customizer3D(props) {
                                     color={ambientLightColor}
                                 />
                                 <pointLight 
+                                    intensity={5}
                                     position={[10, 10, 10]} 
                                 />
-                                <boxGeometry 
+                                {/* <boxGeometry 
                                 args={[5, 5, 5]} //SETS SIZE
                                 />
                                 <meshStandardMaterial 
                                     color={objectColor}
                                     roughness={roughness}
                                     metalness={metalness}
-                                />
+                                /> */}
                             </mesh>
+                            <Suspense>
+                                <RingTextured />
+                            </Suspense>
                         </Canvas>
                     </div>
                     <div className={customizerControls}>
