@@ -3767,25 +3767,9 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
- //this will probably go in wrapper/parent component
-
- // importing gltf
-
- // performance improves after gatsby build > gatsby serve
-// i'm sure there's lots I can do to optimize and a simpler model might help too and lighting resolution and env resolution
-
-/*
-
-TO DO:
-
-- set up lighting rigs
-
-- should this all be passed in as props? so that the controls component can receive/control them too?
-    - would it be better to have controls here too? just so it's one self-contained component?
 
 
 
-*/
 
 const CameraController = () => {
   const {
@@ -3863,7 +3847,45 @@ function Customizer3D(props) {
   const {
     0: mesh4Toggle,
     1: setMesh4Toggle
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true); // material colors being passed into RingTextured.js
+
+  const {
+    0: materialColor1,
+    1: setMaterialColor1
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#27a1e3");
+  const {
+    0: materialColor2,
+    1: setMaterialColor2
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#27a1e3");
+  const {
+    0: materialColor3,
+    1: setMaterialColor3
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#27a1e3");
+  const {
+    0: materialColor4,
+    1: setMaterialColor4
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#27a1e3");
+  const {
+    0: materialRoughness1,
+    1: setMaterialRoughness1
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.1);
+  const {
+    0: materialRoughness2,
+    1: setMaterialRoughness2
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.1);
+  const {
+    0: materialRoughness3,
+    1: setMaterialRoughness3
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.1);
+  const {
+    0: materialRoughness4,
+    1: setMaterialRoughness4
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.1);
+  const {
+    0: textureToggle,
+    1: setTextureToggle
   } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  console.log(textureToggle);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -3874,20 +3896,28 @@ function Customizer3D(props) {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerCanvas
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_5__.Canvas, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CameraController, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_6__.PerspectiveCamera, {
     makeDefault: true,
-    fov: 35 // position={[-5, 2, -5]} 
-    ,
+    fov: 35,
     position: [3.5, 3.5, -3.5]
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("gridHelper", {
     args: [20, 30],
     visible: gridToggle
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_7__.Environment, {
+    preset: "studio"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_RingTextured__WEBPACK_IMPORTED_MODULE_3__["default"], {
     rotation: [xRotation, yRotation, zRotation],
+    materialColor1: materialColor1,
+    materialColor2: materialColor2,
+    materialColor3: materialColor3,
+    materialColor4: materialColor4,
+    materialRoughness1: materialRoughness1,
+    materialRoughness2: materialRoughness2,
+    materialRoughness3: materialRoughness3,
+    materialRoughness4: materialRoughness4,
     mesh1Visibility: mesh1Toggle,
     mesh2Visibility: mesh2Toggle,
     mesh3Visibility: mesh3Toggle,
-    mesh4Visibility: mesh4Toggle
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_7__.Environment, {
-    preset: "studio"
+    mesh4Visibility: mesh4Toggle,
+    textureToggle: textureToggle
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerControls
   }, "x Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
@@ -3948,21 +3978,53 @@ function Customizer3D(props) {
     value: metalness,
     onChange: e => setMetalness(e.target.value),
     step: ".1"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "ambientLightIntensity", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: () => setTextureToggle(!textureToggle)
+  }, "Texture Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "materialColor1", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
+    color: materialColor1,
+    onChange: setMaterialColor1
+  }), "maetrialRoughness1", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
     min: "0",
-    max: "10",
-    value: ambientLightIntensity,
-    onChange: e => setAmbientLightIntensity(e.target.value),
+    max: "1",
+    value: materialRoughness1,
+    onChange: e => setMaterialRoughness1(e.target.value),
     step: ".1"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "ambientLightColor", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
-    color: ambientLightColor,
-    onChange: setAmbientLightColor
-  }), "objectColor", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
-    color: objectColor,
-    onChange: setObjectColor
-  })))));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "materialColor2", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
+    color: materialColor2,
+    onChange: setMaterialColor2
+  }), "maetrialRoughness1", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    id: "typeinp",
+    type: "range",
+    min: "0",
+    max: "1",
+    value: materialRoughness2,
+    onChange: e => setMaterialRoughness2(e.target.value),
+    step: ".1"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "materialColor3", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
+    color: materialColor3,
+    onChange: setMaterialColor3
+  }), "maetrialRoughness4", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    id: "typeinp",
+    type: "range",
+    min: "0",
+    max: "1",
+    value: materialRoughness3,
+    onChange: e => setMaterialRoughness3(e.target.value),
+    step: ".1"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "materialColor4", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
+    color: materialColor4,
+    onChange: setMaterialColor4
+  }), "maetrialRoughness4", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    id: "typeinp",
+    type: "range",
+    min: "0",
+    max: "1",
+    value: materialRoughness4,
+    onChange: e => setMaterialRoughness4(e.target.value),
+    step: ".1"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)))));
 }
 
 /***/ }),
@@ -4004,27 +4066,54 @@ function RingTextured({ ...props
     nodes,
     materials
   } = (0,_react_three_drei__WEBPACK_IMPORTED_MODULE_1__.useGLTF)('/RingTextured.glb');
+
+  const newMaterial = () => {
+    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshPhysicalMaterial", {
+      color: props.materialColor1,
+      roughness: props.materialRoughness1,
+      metalness: 1
+    });
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("group", Object.assign({
     ref: group
   }, props, {
     dispose: null
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
     geometry: nodes.Details001.geometry,
-    material: materials['Material.001'],
-    visible: props.mesh3Visibility
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
+    visible: props.mesh1Visibility // material={props.textureToggle && materials['Material.001']}
+
+  }, !props.textureToggle ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshPhysicalMaterial", {
+    color: props.materialColor1,
+    roughness: props.materialRoughness1,
+    metalness: 1
+  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshBasicMaterial", {
+    attach: "Material.001",
+    color: "black",
+    opacity: 0.5,
+    transparent: true
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
     geometry: nodes.Extra_Rings001.geometry,
-    material: materials['Material.002'],
     visible: props.mesh2Visibility
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshPhysicalMaterial", {
+    color: props.materialColor2,
+    roughness: props.materialRoughness2,
+    metalness: 1
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
     geometry: nodes.Main001.geometry,
-    material: materials.Material,
-    visible: props.mesh1Visibility
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
+    visible: props.mesh3Visibility
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshPhysicalMaterial", {
+    color: props.materialColor3,
+    roughness: props.materialRoughness3,
+    metalness: 1
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
     geometry: nodes.Spike_Ring_Twist001.geometry,
-    material: materials['Material.003'],
     visible: props.mesh4Visibility
-  }));
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshPhysicalMaterial", {
+    color: props.materialColor4,
+    roughness: props.materialRoughness4,
+    metalness: 1
+  })));
 }
 _react_three_drei__WEBPACK_IMPORTED_MODULE_1__.useGLTF.preload('/RingTextured.glb');
 

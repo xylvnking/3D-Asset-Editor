@@ -64,7 +64,9 @@ export default function Customizer3D(props) {
     const [materialRoughness3, setMaterialRoughness3] = useState(.1)
     const [materialRoughness4, setMaterialRoughness4] = useState(.1)
     
-    
+    const [textureToggle, setTextureToggle] = useState(true)
+
+    console.log(textureToggle)
 
 
     return (
@@ -127,7 +129,7 @@ export default function Customizer3D(props) {
                                     mesh3Visibility={mesh3Toggle}
                                     mesh4Visibility={mesh4Toggle}
 
-
+                                    textureToggle={textureToggle}
                                     />
                                 
                                 {/* <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} /> */}
@@ -241,6 +243,12 @@ export default function Customizer3D(props) {
 
                         ambientLightColor
                         <HexColorPicker color={ambientLightColor} onChange={setAmbientLightColor} /> */}
+
+                        <button
+                            onClick={() => 
+                            setTextureToggle(!textureToggle)}>
+                            Texture Toggle
+                        </button><br />
 
                         materialColor1
                         <HexColorPicker color={materialColor1} onChange={setMaterialColor1} />

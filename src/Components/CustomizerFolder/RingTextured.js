@@ -25,18 +25,38 @@ export default function RingTextured({ ...props }) {
 
   const group = useRef()
   const { nodes, materials } = useGLTF('/RingTextured.glb')
+
+  
+  const newMaterial = () => { 
+    return (
+      <meshPhysicalMaterial 
+        color={props.materialColor1}
+        roughness={props.materialRoughness1}
+        metalness={1} />
+    )
+  }
   return (
     <group ref={group} {...props} dispose={null}>
  
       {/* <mesh geometry={nodes.Details001.geometry} material={materials['Material.001']} visible={props.mesh3Visibility}/> */}
       <mesh 
-      geometry={nodes.Details001.geometry}
-      visible={props.mesh1Visibility}
+        geometry={nodes.Details001.geometry}
+        visible={props.mesh1Visibility}
+        // material={props.textureToggle && materials['Material.001']}
+        
       >
+        {!props.textureToggle ?
         <meshPhysicalMaterial 
         color={props.materialColor1}
         roughness={props.materialRoughness1}
-        metalness={1} />
+        metalness={1} /> :
+        <meshBasicMaterial
+        attach='materials'
+        map={materials['Material.001']}
+
+        />
+       }
+      
       </mesh>
       
       {/* <mesh geometry={nodes.Extra_Rings001.geometry} material={materials['Material.002']} visible={props.mesh2Visibility}/> */}
