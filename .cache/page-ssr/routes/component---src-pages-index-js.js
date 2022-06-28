@@ -3533,11 +3533,13 @@ var bounce = "BrandBuilder-module--bounce--mUKzS";
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "button28": () => (/* binding */ button28),
 /* harmony export */   "customizerCanvas": () => (/* binding */ customizerCanvas),
 /* harmony export */   "customizerContainer": () => (/* binding */ customizerContainer),
 /* harmony export */   "customizerControls": () => (/* binding */ customizerControls),
 /* harmony export */   "customizerFlex": () => (/* binding */ customizerFlex),
-/* harmony export */   "customizerMain": () => (/* binding */ customizerMain)
+/* harmony export */   "customizerMain": () => (/* binding */ customizerMain),
+/* harmony export */   "range": () => (/* binding */ range)
 /* harmony export */ });
 // Exports
 var customizerContainer = "Customizer-module--customizerContainer--+lQC-";
@@ -3545,6 +3547,8 @@ var customizerMain = "Customizer-module--customizerMain--VYLaS";
 var customizerFlex = "Customizer-module--customizerFlex--doWwJ";
 var customizerCanvas = "Customizer-module--customizerCanvas--7aHgW";
 var customizerControls = "Customizer-module--customizerControls--0u8qk";
+var button28 = "Customizer-module--button28--VFgVq";
+var range = "Customizer-module--range--ZDIk2";
 
 
 /***/ }),
@@ -3973,8 +3977,10 @@ function Customizer3D(props) {
     ,
     onChange: e => setXRotation(e.target.value),
     step: ".01" // smaller = smoother
-
+    ,
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.range
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.button28,
     onClick: () => setXRotation(0)
   }, "Reset X Rotation"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Y Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
@@ -4169,7 +4175,8 @@ function RingTextured({ ...props
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshPhysicalMaterial", {
     color: props.materialColor1,
     roughness: props.materialRoughness1,
-    metalness: props.material1Metalness // emissive={props.materialColor1}
+    metalness: props.material1Metalness // emissive={props.materialColor1} //would love to get this working but i don't think it will
+    // emissiveMap={}
     // emissiveIntensity={1} 
 
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {

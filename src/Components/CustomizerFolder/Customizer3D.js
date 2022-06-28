@@ -2,7 +2,16 @@
 import React, { useRef, useState, useEffect, Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { customizerCanvas, customizerMain, customizerContainer, customizerFlex, customizerControls } from './Customizer.module.css'
+import { 
+    customizerCanvas, 
+    customizerMain, 
+    customizerContainer, 
+    customizerFlex, 
+    customizerControls, 
+    button28, 
+    range, 
+    uiRotation 
+        } from './Customizer.module.css'
 import { PerspectiveCamera, Ring, useHelper, Environment, Stars, Sky, Trail } from '@react-three/drei'
 import { HexColorPicker } from "react-colorful";
 import RingTextured from './RingTextured'
@@ -162,20 +171,27 @@ export default function Customizer3D(props) {
                         </Canvas>
                     </div>
                     <div className={customizerControls}>
-                        x Rotation
-                        <input 
-                            id="typeinp" 
-                            type="range" 
-                            min="0" max="11" 
-                            value={xRotation} // sets the slider to the default (0) on load
-                            onChange={(e) => setXRotation(e.target.value)}
-                            step=".01" // smaller = smoother
-                        />
-                        <button
-                            onClick={() => 
-                            setXRotation(0)}>
-                            Reset X Rotation
-                        </button><br />
+                        <div className={uiRotation}>
+                            {/* <br /> */}
+                            <label>
+                                X
+                            </label>
+                            <input 
+                                id="typeinp" 
+                                type="range" 
+                                min="0" max="11" 
+                                value={xRotation} // sets the slider to the default (0) on load
+                                onChange={(e) => setXRotation(e.target.value)}
+                                step=".01" // smaller = smoother
+                                className={range}
+                            />
+                            <button
+                                className={button28}
+                                onClick={() => 
+                                setXRotation(0)}>
+                                reset
+                            </button><br />
+                        </div>
                         Y Rotation
                         <input 
                             id="typeinp" 
