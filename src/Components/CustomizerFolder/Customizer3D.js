@@ -8,9 +8,13 @@ import {
     customizerContainer, 
     customizerFlex, 
     customizerControls, 
-    button28, 
+    rotationResetButton, 
     range, 
-    uiRotation 
+    uiRotation,
+    uiGlobalControls,
+    uiMeshControls,
+    uiPremadeTextureSelectors,
+    uiPremadeTextureButton
         } from './Customizer.module.css'
 import { PerspectiveCamera, Ring, useHelper, Environment, Stars, Sky, Trail } from '@react-three/drei'
 import { HexColorPicker } from "react-colorful";
@@ -51,8 +55,8 @@ export default function Customizer3D(props) {
     // const [objectColor, setObjectColor] = useState("#27a1e3")
 
     // Lights
-    // const [ambientLightIntensity, setAmbientLightIntensity] = useState(3)
-    // const [ambientLightColor, setAmbientLightColor] = useState("#ffffff")
+    const [ambientLightIntensity, setAmbientLightIntensity] = useState(3)
+    const [ambientLightColor, setAmbientLightColor] = useState("#ffffff")
 
 
     const [gridToggle, setGridToggle] = useState(false)
@@ -65,13 +69,13 @@ export default function Customizer3D(props) {
     
     const [materialColor1, setMaterialColor1] = useState("#27a1e3")
     const [materialColor2, setMaterialColor2] = useState("#27a1e3")
-    const [materialColor3, setMaterialColor3] = useState("#27a1e3")
+    const [materialColor3, setMaterialColor3] = useState("#ffffff")
     const [materialColor4, setMaterialColor4] = useState("#27a1e3")
 
-    const [materialRoughness1, setMaterialRoughness1] = useState(.2)
-    const [materialRoughness2, setMaterialRoughness2] = useState(.2)
-    const [materialRoughness3, setMaterialRoughness3] = useState(.2)
-    const [materialRoughness4, setMaterialRoughness4] = useState(.2)
+    const [materialRoughness1, setMaterialRoughness1] = useState(0)
+    const [materialRoughness2, setMaterialRoughness2] = useState(0)
+    const [materialRoughness3, setMaterialRoughness3] = useState(.4)
+    const [materialRoughness4, setMaterialRoughness4] = useState(0)
     
     const [toggleTexture1, setToggleTexture1] = useState(true)
     const [toggleTexture2, setToggleTexture2] = useState(true)
@@ -88,6 +92,9 @@ export default function Customizer3D(props) {
     const [material3Metalness, setMaterial3Metalness] = useState(.8)
     const [material4Metalness, setMaterial4Metalness] = useState(.8)
 
+    const visible = "VISIBLE"
+    const hidden = "HIDDEN"
+    
 
     return (
         <div className={customizerContainer}>
@@ -103,7 +110,7 @@ export default function Customizer3D(props) {
                                 args={[20,30]}
                                 visible={gridToggle}/>
                             
-                            {/* <mesh 
+                            <mesh 
                             rotation={[xRotation, yRotation, zRotation]}
                                 
                             >
@@ -117,16 +124,16 @@ export default function Customizer3D(props) {
                                     position={[10, 10, 10]} 
                                 />
                                 
-                                <boxGeometry 
+                                {/* <boxGeometry 
                                 args={[5, 5, 5]} //SETS SIZE
                                 />
                                 <meshStandardMaterial 
                                     color={objectColor}
                                     roughness={roughness}
                                     metalness={metalness}
-                                />
+                                /> */}
 
-                            </mesh> */}
+                            </mesh>
                             <Environment preset="studio" />
                             <Suspense>
                                 
@@ -172,7 +179,6 @@ export default function Customizer3D(props) {
                     </div>
                     <div className={customizerControls}>
                         <div className={uiRotation}>
-                            {/* <br /> */}
                             <label>
                                 X
                             </label>
@@ -186,134 +192,106 @@ export default function Customizer3D(props) {
                                 className={range}
                             />
                             <button
-                                className={button28}
+                                className={rotationResetButton}
                                 onClick={() => 
                                 setXRotation(0)}>
                                 reset
                             </button><br />
                         </div>
-                        Y Rotation
-                        <input 
-                            id="typeinp" 
-                            type="range" 
-                            min="0" max="11" 
-                            value={yRotation}
-                            onChange={(e) => setYRotation(e.target.value)}
-                            step=".01"
-                        />
-                        <button
-                            onClick={() => 
-                            setYRotation(0)}>
-                            Reset Y Rotation
-                        </button><br />
-                        Z Rotation
-                        <input 
-                            id="typeinp" 
-                            type="range" 
-                            min="0" max="11" 
-                            value={zRotation}
-                            onChange={(e) => setZRotation(e.target.value)}
-                            step=".01"
-                        />
-                        <button
-                            onClick={() => 
-                            setZRotation(0)}>
-                            Reset Z Rotation
-                        </button><br />
+                        <div className={uiRotation}>
+                            Y
+                            <input 
+                                className={range}
+                                id="typeinp" 
+                                type="range" 
+                                min="0" max="11" 
+                                value={yRotation}
+                                onChange={(e) => setYRotation(e.target.value)}
+                                step=".01"
+                            />
+                            <button
+                                className={rotationResetButton}
+                                onClick={() => 
+                                setYRotation(0)}>
+                                reset
+                            </button><br />
+                        </div>
+                        <div className={uiRotation}>
+                            Z
+                            <input 
+                                className={range}
+                                id="typeinp" 
+                                type="range" 
+                                min="0" max="11" 
+                                value={zRotation}
+                                onChange={(e) => setZRotation(e.target.value)}
+                                step=".01"
+                            />
+                            <button
+                                className={rotationResetButton}
+                                onClick={() => 
+                                setZRotation(0)}>
+                                reset
+                            </button><br />
+                        </div>
 
-                        <button
-                            onClick={() => 
-                            setGridToggle(!gridToggle)}>
-                            Grid Toggle
-                        </button><br />
-
-                        <button
-                            onClick={() => 
-                            setMesh1Toggle(!mesh1Toggle)}>
-                            Mesh1 Toggle
-                        </button><br />
-
-                        <button
-                            onClick={() => 
-                            setMesh2Toggle(!mesh2Toggle)}>
-                            Mesh2 Toggle
-                        </button><br />
-
-                        <button
-                            onClick={() => 
-                            setMesh3Toggle(!mesh3Toggle)}>
-                            Mesh3 Toggle
-                        </button><br />
-
-                        <button
-                            onClick={() => 
-                            setMesh4Toggle(!mesh4Toggle)}>
-                            Mesh4 Toggle
-                        </button><br />
-
-                        roughness
-                        <input 
-                            id="typeinp" 
-                            type="range" 
-                            min="0" max="1" 
-                            value={roughness}
-                            onChange={(e) => setRoughness(e.target.value)}
-                            step=".1"
-                        /><br />
-
-                        metalness
-                        <input 
-                            id="typeinp" 
-                            type="range" 
-                            min="0" max="1" 
-                            value={metalness} 
-                            onChange={(e) => setMetalness(e.target.value)}
-                            step=".1"
-                        /><br />
-
-                        {/* ambientLightIntensity
-                        <input 
-                            id="typeinp" 
-                            type="range" 
-                            min="0" max="10" 
-                            value={ambientLightIntensity} 
-                            onChange={(e) => setAmbientLightIntensity(e.target.value)}
-                            step=".1"
-                        /><br />
-
-                        ambientLightColor
-                        <HexColorPicker color={ambientLightColor} onChange={setAmbientLightColor} /> */}
                         
-                        <button
-                            onClick={() => 
-                            setToggleMesh1Visibility(!toggleMesh1Visibility)}>
-                            Mesh 1 Visibility
-                        </button><br />
-                        <button
-                            onClick={() => 
-                            setToggleTexture1(!toggleTexture1)}>
-                            Texture 1 Toggle
-                        </button><br />
-                        materialColor1
-                        <HexColorPicker color={materialColor1} onChange={setMaterialColor1} />
-                        maetrialRoughness1
-                        <input 
-                            id="typeinp" 
-                            type="range" 
-                            min="0" max="1" 
-                            value={materialRoughness1}
-                            onChange={(e) => setMaterialRoughness1(e.target.value)}
-                            step=".01"
-                        /><br />
-                        material1Metalness
-                        <input 
-                            id="typeinp" 
-                            type="range" 
-                            min="0" max="1" 
-                            value={material1Metalness}
-                            onChange={(e) => setMaterial1Metalness(e.target.value)}
-                            step=".01"
-                        /><br />
+                        <div className={uiMeshControls}>
+                            <div className={uiPremadeTextureSelectors}>  
+                                <button
+                                    className={uiPremadeTextureButton}
+                                    onClick={() => 
+                                    setToggleTexture1(!toggleTexture1)}>
+                                    Texture 1
+                                </button>
+                                <button
+                                    className={uiPremadeTextureButton}
+                                    onClick={() => 
+                                    setToggleTexture1(!toggleTexture1)}>
+                                    Texture 2
+                                </button>
+                                <button
+                                    className={uiPremadeTextureButton}
+                                    onClick={() => 
+                                    setToggleTexture1(!toggleTexture1)}>
+                                    Texture 3
+                                </button>
+                                <button
+                                    className={uiPremadeTextureButton}
+                                    onClick={() => 
+                                    setToggleTexture1(!toggleTexture1)}>
+                                    Texture 4
+                                </button>
+                            </div>
+                            
+                            
+                            <HexColorPicker color={materialColor1} onChange={setMaterialColor1} />
+                            maetrialRoughness1
+                            <input 
+                                id="typeinp" 
+                                type="range" 
+                                min="0" max="1" 
+                                value={materialRoughness1}
+                                onChange={(e) => setMaterialRoughness1(e.target.value)}
+                                step=".01"
+                            /><br />
+                            material1Metalness
+                            <input 
+                                id="typeinp" 
+                                type="range" 
+                                min="0" max="1" 
+                                value={material1Metalness}
+                                onChange={(e) => setMaterial1Metalness(e.target.value)}
+                                step=".01"
+                            /><br />
+                            <button
+                                className={rotationResetButton}
+                                onClick={() => 
+                                setToggleMesh1Visibility(!toggleMesh1Visibility)}>
+                                    {toggleMesh1Visibility ? <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M24 31.35q3.5 0 5.925-2.45T32.35 23q0-3.5-2.45-5.925T24 14.65q-3.5 0-5.925 2.45T15.65 23q0 3.5 2.45 5.925T24 31.35Zm0-3.55q-2 0-3.4-1.425T19.2 23q0-2 1.425-3.4T24 18.2q2 0 3.4 1.425T28.8 23q0 2-1.425 3.4T24 27.8ZM24 39q-7.55 0-13.725-4.45T1.05 23q3.05-7.1 9.225-11.55Q16.45 7 24 7t13.725 4.45Q43.9 15.9 46.95 23q-3.05 7.1-9.225 11.55Q31.55 39 24 39Z"/></svg> : <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="m40.3 45-7.65-7.55q-1.75.7-3.975 1.125Q26.45 39 24 39q-7.4 0-13.65-4.2T1.05 23q.85-2.6 2.75-5.175 1.9-2.575 4.35-4.975L2 6.85l2.4-2.5L42.55 42.5ZM24 31.35q.6 0 1.225-.15.625-.15 1.025-.3L16 20.75q-.1.5-.225 1.1-.125.6-.125 1.15 0 3.55 2.45 5.95 2.45 2.4 5.9 2.4Zm15 2.4-7.45-7.45q.4-.6.6-1.55.2-.95.2-1.75 0-3.5-2.425-5.925T24 14.65q-.85 0-1.65.175-.8.175-1.65.575l-6.4-6.45q1.7-.7 4.525-1.325T24.25 7q7.2 0 13.425 4.2Q43.9 15.4 46.95 23q-1.2 3.3-3.3 6-2.1 2.7-4.65 4.75ZM27.8 22.5l-3.65-3.6q.6-.4 1.475-.325.875.075 1.575.575.65.65.875 1.425.225.775-.275 1.925Z"/></svg>}
+                                
+                            </button><br />
+                        </div>
 
 
 
@@ -420,6 +398,26 @@ export default function Customizer3D(props) {
                             onChange={(e) => setMaterial4Metalness(e.target.value)}
                             step=".01"
                         /><br />
+                        <div className={uiGlobalControls}>
+                            <button
+                                onClick={() => 
+                                setGridToggle(!gridToggle)}>
+                                Grid Toggle
+                            </button>
+
+                            Ambient Light Intensity
+                            <input 
+                                id="typeinp" 
+                                type="range" 
+                                min="0" max="20" 
+                                value={ambientLightIntensity} 
+                                onChange={(e) => setAmbientLightIntensity(e.target.value)}
+                                step=".1"
+                            /><br />
+
+                            Ambient Light Color
+                            <HexColorPicker color={ambientLightColor} onChange={setAmbientLightColor} />
+                        </div>
                     </div>
                 </div>
             </div>
