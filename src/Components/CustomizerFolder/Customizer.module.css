@@ -64,10 +64,8 @@
 .uiMeshControls {
     border-bottom-style: solid;
     border-width: 1px;
-    /* padding: 5px; */
+    
 }
-
-
 
 .uiPremadeTextureSelectors {
     display: flex;
@@ -81,9 +79,6 @@
 }
 
 
-
-
-/* CSS */
 .uiPremadeTextureButton {
   appearance: none;
   background-color: transparent;
@@ -136,13 +131,31 @@
 }
 
 
+.uiMaterialControls {
+    border-color: black;
+    border-width: 1px;
+    border-style: solid;
+    border-bottom-style: none;
+    /* border-left-width: .5px;
+    border-right-width: .5px; */
+    display: flex;
+}
+
+.uiHexColorPicker {
+    padding: 10px;
+}
+
+.uiMaterialPropertyControls {
+    /* background-color: aqua; */
+    font-weight: 400;
+    padding: 1rem;
+}
+
+.uiVisibilityIcon {
+    align-self: flex-end;
+}
 
 
-/* 
-<!-- HTML !-->
-<button class="button-28" role="button">Button 28</button> */
-
-/* CSS */
 .rotationResetButton {
   appearance: none;
   background-color: transparent;

@@ -3533,13 +3533,17 @@ var bounce = "BrandBuilder-module--bounce--mUKzS";
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "button28": () => (/* binding */ button28),
 /* harmony export */   "customizerCanvas": () => (/* binding */ customizerCanvas),
 /* harmony export */   "customizerContainer": () => (/* binding */ customizerContainer),
 /* harmony export */   "customizerControls": () => (/* binding */ customizerControls),
 /* harmony export */   "customizerFlex": () => (/* binding */ customizerFlex),
 /* harmony export */   "customizerMain": () => (/* binding */ customizerMain),
 /* harmony export */   "range": () => (/* binding */ range),
+/* harmony export */   "rotationResetButton": () => (/* binding */ rotationResetButton),
+/* harmony export */   "uiGlobalControls": () => (/* binding */ uiGlobalControls),
+/* harmony export */   "uiMeshControls": () => (/* binding */ uiMeshControls),
+/* harmony export */   "uiPremadeTextureButton": () => (/* binding */ uiPremadeTextureButton),
+/* harmony export */   "uiPremadeTextureSelectors": () => (/* binding */ uiPremadeTextureSelectors),
 /* harmony export */   "uiRotation": () => (/* binding */ uiRotation)
 /* harmony export */ });
 // Exports
@@ -3549,7 +3553,11 @@ var customizerFlex = "Customizer-module--customizerFlex--doWwJ";
 var customizerCanvas = "Customizer-module--customizerCanvas--7aHgW";
 var customizerControls = "Customizer-module--customizerControls--0u8qk";
 var uiRotation = "Customizer-module--uiRotation--o0xDC";
-var button28 = "Customizer-module--button28--VFgVq";
+var uiGlobalControls = "Customizer-module--uiGlobalControls--DtjbG";
+var uiMeshControls = "Customizer-module--uiMeshControls--dF1Ib";
+var uiPremadeTextureSelectors = "Customizer-module--uiPremadeTextureSelectors--lhpm2";
+var uiPremadeTextureButton = "Customizer-module--uiPremadeTextureButton--L594m";
+var rotationResetButton = "Customizer-module--rotationResetButton--al43z";
 var range = "Customizer-module--range--ZDIk2";
 
 
@@ -3822,9 +3830,15 @@ function Customizer3D(props) {
   } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.7); // 0-1
   // const [objectColor, setObjectColor] = useState("#27a1e3")
   // Lights
-  // const [ambientLightIntensity, setAmbientLightIntensity] = useState(3)
-  // const [ambientLightColor, setAmbientLightColor] = useState("#ffffff")
 
+  const {
+    0: ambientLightIntensity,
+    1: setAmbientLightIntensity
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(3);
+  const {
+    0: ambientLightColor,
+    1: setAmbientLightColor
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#ffffff");
   const {
     0: gridToggle,
     1: setGridToggle
@@ -3856,7 +3870,7 @@ function Customizer3D(props) {
   const {
     0: materialColor3,
     1: setMaterialColor3
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#27a1e3");
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#ffffff");
   const {
     0: materialColor4,
     1: setMaterialColor4
@@ -3864,19 +3878,19 @@ function Customizer3D(props) {
   const {
     0: materialRoughness1,
     1: setMaterialRoughness1
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.2);
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
   const {
     0: materialRoughness2,
     1: setMaterialRoughness2
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.2);
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
   const {
     0: materialRoughness3,
     1: setMaterialRoughness3
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.2);
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.4);
   const {
     0: materialRoughness4,
     1: setMaterialRoughness4
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.2);
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
   const {
     0: toggleTexture1,
     1: setToggleTexture1
@@ -3925,6 +3939,8 @@ function Customizer3D(props) {
     0: material4Metalness,
     1: setMaterial4Metalness
   } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.8);
+  const visible = "VISIBLE";
+  const hidden = "HIDDEN";
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerContainer
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -3940,7 +3956,15 @@ function Customizer3D(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("gridHelper", {
     args: [20, 30],
     visible: gridToggle
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_7__.Environment, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
+    rotation: [xRotation, yRotation, zRotation]
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ambientLight", {
+    intensity: ambientLightIntensity,
+    color: ambientLightColor
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pointLight", {
+    intensity: 5,
+    position: [10, 10, 10]
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_7__.Environment, {
     preset: "studio"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_RingTextured__WEBPACK_IMPORTED_MODULE_3__["default"], {
     rotation: [xRotation, yRotation, zRotation],
@@ -3984,9 +4008,12 @@ function Customizer3D(props) {
     ,
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.range
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.button28,
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.rotationResetButton,
     onClick: () => setXRotation(0)
-  }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)), "Y Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiRotation
+  }, "Y", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.range,
     id: "typeinp",
     type: "range",
     min: "0",
@@ -3995,8 +4022,12 @@ function Customizer3D(props) {
     onChange: e => setYRotation(e.target.value),
     step: ".01"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.rotationResetButton,
     onClick: () => setYRotation(0)
-  }, "Reset Y Rotation"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Z Rotation", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiRotation
+  }, "Z", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.range,
     id: "typeinp",
     type: "range",
     min: "0",
@@ -4005,38 +4036,25 @@ function Customizer3D(props) {
     onChange: e => setZRotation(e.target.value),
     step: ".01"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.rotationResetButton,
     onClick: () => setZRotation(0)
-  }, "Reset Z Rotation"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: () => setGridToggle(!gridToggle)
-  }, "Grid Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: () => setMesh1Toggle(!mesh1Toggle)
-  }, "Mesh1 Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: () => setMesh2Toggle(!mesh2Toggle)
-  }, "Mesh2 Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: () => setMesh3Toggle(!mesh3Toggle)
-  }, "Mesh3 Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: () => setMesh4Toggle(!mesh4Toggle)
-  }, "Mesh4 Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "roughness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    id: "typeinp",
-    type: "range",
-    min: "0",
-    max: "1",
-    value: roughness,
-    onChange: e => setRoughness(e.target.value),
-    step: ".1"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "metalness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    id: "typeinp",
-    type: "range",
-    min: "0",
-    max: "1",
-    value: metalness,
-    onChange: e => setMetalness(e.target.value),
-    step: ".1"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: () => setToggleMesh1Visibility(!toggleMesh1Visibility)
-  }, "Mesh 1 Visibility"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshControls
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiPremadeTextureSelectors
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiPremadeTextureButton,
     onClick: () => setToggleTexture1(!toggleTexture1)
-  }, "Texture 1 Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "materialColor1", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
+  }, "Texture 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiPremadeTextureButton,
+    onClick: () => setToggleTexture1(!toggleTexture1)
+  }, "Texture 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiPremadeTextureButton,
+    onClick: () => setToggleTexture1(!toggleTexture1)
+  }, "Texture 3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiPremadeTextureButton,
+    onClick: () => setToggleTexture1(!toggleTexture1)
+  }, "Texture 4")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
     color: materialColor1,
     onChange: setMaterialColor1
   }), "maetrialRoughness1", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
@@ -4056,6 +4074,21 @@ function Customizer3D(props) {
     onChange: e => setMaterial1Metalness(e.target.value),
     step: ".01"
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.rotationResetButton,
+    onClick: () => setToggleMesh1Visibility(!toggleMesh1Visibility)
+  }, toggleMesh1Visibility ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "48",
+    width: "48"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
+    d: "M24 31.35q3.5 0 5.925-2.45T32.35 23q0-3.5-2.45-5.925T24 14.65q-3.5 0-5.925 2.45T15.65 23q0 3.5 2.45 5.925T24 31.35Zm0-3.55q-2 0-3.4-1.425T19.2 23q0-2 1.425-3.4T24 18.2q2 0 3.4 1.425T28.8 23q0 2-1.425 3.4T24 27.8ZM24 39q-7.55 0-13.725-4.45T1.05 23q3.05-7.1 9.225-11.55Q16.45 7 24 7t13.725 4.45Q43.9 15.9 46.95 23q-3.05 7.1-9.225 11.55Q31.55 39 24 39Z"
+  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "48",
+    width: "48"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
+    d: "m40.3 45-7.65-7.55q-1.75.7-3.975 1.125Q26.45 39 24 39q-7.4 0-13.65-4.2T1.05 23q.85-2.6 2.75-5.175 1.9-2.575 4.35-4.975L2 6.85l2.4-2.5L42.55 42.5ZM24 31.35q.6 0 1.225-.15.625-.15 1.025-.3L16 20.75q-.1.5-.225 1.1-.125.6-.125 1.15 0 3.55 2.45 5.95 2.45 2.4 5.9 2.4Zm15 2.4-7.45-7.45q.4-.6.6-1.55.2-.95.2-1.75 0-3.5-2.425-5.925T24 14.65q-.85 0-1.65.175-.8.175-1.65.575l-6.4-6.45q1.7-.7 4.525-1.325T24.25 7q7.2 0 13.425 4.2Q43.9 15.4 46.95 23q-1.2 3.3-3.3 6-2.1 2.7-4.65 4.75ZM27.8 22.5l-3.65-3.6q.6-.4 1.475-.325.875.075 1.575.575.65.65.875 1.425.225.775-.275 1.925Z"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: () => setToggleMesh2Visibility(!toggleMesh2Visibility)
   }, "Mesh 2 Visibility"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: () => setToggleTexture2(!toggleTexture2)
@@ -4124,7 +4157,22 @@ function Customizer3D(props) {
     value: material4Metalness,
     onChange: e => setMaterial4Metalness(e.target.value),
     step: ".01"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)))));
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiGlobalControls
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    onClick: () => setGridToggle(!gridToggle)
+  }, "Grid Toggle"), "Ambient Light Intensity", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    id: "typeinp",
+    type: "range",
+    min: "0",
+    max: "20",
+    value: ambientLightIntensity,
+    onChange: e => setAmbientLightIntensity(e.target.value),
+    step: ".1"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Ambient Light Color", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
+    color: ambientLightColor,
+    onChange: setAmbientLightColor
+  }))))));
 }
 
 /***/ }),

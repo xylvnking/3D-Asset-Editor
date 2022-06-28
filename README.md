@@ -94,6 +94,7 @@ Div is not part of the THREE namespace! Did you forget to extend?
 [xr thing](https://levar.io/home)
 [google icons png svg](https://fonts.google.com/icons?icon.query=arrow+down)
 [Insane r3f example of crytal swarm](https://codesandbox.io/s/r3f-particles-i-q4d2v?file=/src/index.js)
+[GLTF drag and drop loader by Don McCurdy](https://gltf-viewer.donmccurdy.com/)
 
 # Getting value from slider to affect R3F object rotation
 

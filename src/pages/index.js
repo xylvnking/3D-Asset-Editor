@@ -12,11 +12,12 @@ import Customizer3D from "../Components/CustomizerFolder/Customizer3D"
 const IndexPage = () => {
   return (
     <main>
-      <Nav />
+      
+      {/* <Nav />
       <Hero />
       <DefaultItems />
-      <BrandBuilder />
-      {/* <Customizer /> */}
+      <BrandBuilder /> */}
+      
       <Customizer3D />
       <footer></footer>
     </main>

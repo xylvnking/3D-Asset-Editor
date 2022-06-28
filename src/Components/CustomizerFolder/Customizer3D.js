@@ -14,7 +14,11 @@ import {
     uiGlobalControls,
     uiMeshControls,
     uiPremadeTextureSelectors,
-    uiPremadeTextureButton
+    uiPremadeTextureButton,
+    uiMaterialControls,
+    uiHexColorPicker,
+    uiMaterialPropertyControls,
+    uiVisibilityIcon
         } from './Customizer.module.css'
 import { PerspectiveCamera, Ring, useHelper, Environment, Stars, Sky, Trail } from '@react-three/drei'
 import { HexColorPicker } from "react-colorful";
@@ -172,7 +176,7 @@ export default function Customizer3D(props) {
                                     material4Metalness={material4Metalness}
                                     />
                                 
-                                {/* <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} /> */}
+                                {/* <Stars radius={5} depth={50} count={5000} factor={4} saturation={0} fade speed={1} /> */}
                                 {/* <Sky distance={45000} sunPosition={[0, 12, 0]} inclination={.1} azimuth={1} {...props} /> */}
                             </Suspense>
                         </Canvas>
@@ -264,33 +268,44 @@ export default function Customizer3D(props) {
                                 </button>
                             </div>
                             
-                            
-                            <HexColorPicker color={materialColor1} onChange={setMaterialColor1} />
-                            maetrialRoughness1
-                            <input 
-                                id="typeinp" 
-                                type="range" 
-                                min="0" max="1" 
-                                value={materialRoughness1}
-                                onChange={(e) => setMaterialRoughness1(e.target.value)}
-                                step=".01"
-                            /><br />
-                            material1Metalness
-                            <input 
-                                id="typeinp" 
-                                type="range" 
-                                min="0" max="1" 
-                                value={material1Metalness}
-                                onChange={(e) => setMaterial1Metalness(e.target.value)}
-                                step=".01"
-                            /><br />
-                            <button
-                                className={rotationResetButton}
-                                onClick={() => 
-                                setToggleMesh1Visibility(!toggleMesh1Visibility)}>
-                                    {toggleMesh1Visibility ? <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M24 31.35q3.5 0 5.925-2.45T32.35 23q0-3.5-2.45-5.925T24 14.65q-3.5 0-5.925 2.45T15.65 23q0 3.5 2.45 5.925T24 31.35Zm0-3.55q-2 0-3.4-1.425T19.2 23q0-2 1.425-3.4T24 18.2q2 0 3.4 1.425T28.8 23q0 2-1.425 3.4T24 27.8ZM24 39q-7.55 0-13.725-4.45T1.05 23q3.05-7.1 9.225-11.55Q16.45 7 24 7t13.725 4.45Q43.9 15.9 46.95 23q-3.05 7.1-9.225 11.55Q31.55 39 24 39Z"/></svg> : <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="m40.3 45-7.65-7.55q-1.75.7-3.975 1.125Q26.45 39 24 39q-7.4 0-13.65-4.2T1.05 23q.85-2.6 2.75-5.175 1.9-2.575 4.35-4.975L2 6.85l2.4-2.5L42.55 42.5ZM24 31.35q.6 0 1.225-.15.625-.15 1.025-.3L16 20.75q-.1.5-.225 1.1-.125.6-.125 1.15 0 3.55 2.45 5.95 2.45 2.4 5.9 2.4Zm15 2.4-7.45-7.45q.4-.6.6-1.55.2-.95.2-1.75 0-3.5-2.425-5.925T24 14.65q-.85 0-1.65.175-.8.175-1.65.575l-6.4-6.45q1.7-.7 4.525-1.325T24.25 7q7.2 0 13.425 4.2Q43.9 15.4 46.95 23q-1.2 3.3-3.3 6-2.1 2.7-4.65 4.75ZM27.8 22.5l-3.65-3.6q.6-.4 1.475-.325.875.075 1.575.575.65.65.875 1.425.225.775-.275 1.925Z"/></svg>}
-                                
-                            </button><br />
+                            <div className={uiMaterialControls}>
+                                <HexColorPicker 
+                                    color={materialColor1} 
+                                    onChange={setMaterialColor1} 
+                                    className={uiHexColorPicker}/>
+
+                                <div className={uiMaterialPropertyControls}>
+                                    roughness
+                                    <input 
+                                        className={range}
+                                        id="typeinp" 
+                                        type="range" 
+                                        min="0" max="1" 
+                                        value={materialRoughness1}
+                                        onChange={(e) => setMaterialRoughness1(e.target.value)}
+                                        step=".01"
+                                    /><br />
+                                    metalness
+                                    <input 
+                                        className={range}
+                                        id="typeinp" 
+                                        type="range" 
+                                        min="0" max="1" 
+                                        value={material1Metalness}
+                                        onChange={(e) => setMaterial1Metalness(e.target.value)}
+                                        step=".01"
+                                    /><br />
+                                </div>
+                                <div className={uiVisibilityIcon}>
+                                    <button
+                                        className={rotationResetButton}
+                                        onClick={() => 
+                                        setToggleMesh1Visibility(!toggleMesh1Visibility)}>
+                                            {toggleMesh1Visibility ? <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M24 31.35q3.5 0 5.925-2.45T32.35 23q0-3.5-2.45-5.925T24 14.65q-3.5 0-5.925 2.45T15.65 23q0 3.5 2.45 5.925T24 31.35Zm0-3.55q-2 0-3.4-1.425T19.2 23q0-2 1.425-3.4T24 18.2q2 0 3.4 1.425T28.8 23q0 2-1.425 3.4T24 27.8ZM24 39q-7.55 0-13.725-4.45T1.05 23q3.05-7.1 9.225-11.55Q16.45 7 24 7t13.725 4.45Q43.9 15.9 46.95 23q-3.05 7.1-9.225 11.55Q31.55 39 24 39Z"/></svg> : <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="m40.3 45-7.65-7.55q-1.75.7-3.975 1.125Q26.45 39 24 39q-7.4 0-13.65-4.2T1.05 23q.85-2.6 2.75-5.175 1.9-2.575 4.35-4.975L2 6.85l2.4-2.5L42.55 42.5ZM24 31.35q.6 0 1.225-.15.625-.15 1.025-.3L16 20.75q-.1.5-.225 1.1-.125.6-.125 1.15 0 3.55 2.45 5.95 2.45 2.4 5.9 2.4Zm15 2.4-7.45-7.45q.4-.6.6-1.55.2-.95.2-1.75 0-3.5-2.425-5.925T24 14.65q-.85 0-1.65.175-.8.175-1.65.575l-6.4-6.45q1.7-.7 4.525-1.325T24.25 7q7.2 0 13.425 4.2Q43.9 15.4 46.95 23q-1.2 3.3-3.3 6-2.1 2.7-4.65 4.75ZM27.8 22.5l-3.65-3.6q.6-.4 1.475-.325.875.075 1.575.575.65.65.875 1.425.225.775-.275 1.925Z"/></svg>}
+                                        
+                                    </button>
+                                </div>
+                            </div>
                         </div>
 
 
