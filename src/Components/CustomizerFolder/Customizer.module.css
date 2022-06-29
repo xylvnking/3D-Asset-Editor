@@ -151,9 +151,18 @@
     padding: 1rem;
 }
 
+.wireframeToggle {
+    /* appearance: none; */
+    /* color: aquamarine; */
+    /* font-style: none; */
+}
+
+
 .uiVisibilityIcon {
     align-self: flex-end;
 }
+
+
 
 
 .rotationResetButton {

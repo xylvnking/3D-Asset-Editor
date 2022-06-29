@@ -19,6 +19,7 @@ import {
     uiHexColorPicker,
     uiMaterialPropertyControls,
     uiVisibilityIcon
+    
         } from './Customizer.module.css'
 import { PerspectiveCamera, Ring, useHelper, Environment, Stars, Sky, Trail } from '@react-three/drei'
 import { HexColorPicker } from "react-colorful";
@@ -95,6 +96,11 @@ export default function Customizer3D(props) {
     const [material2Metalness, setMaterial2Metalness] = useState(.8)
     const [material3Metalness, setMaterial3Metalness] = useState(.8)
     const [material4Metalness, setMaterial4Metalness] = useState(.8)
+
+    const [wireframeToggle1, setWireFrameToggle1] = useState(false)
+    const [wireframeToggle2, setWireFrameToggle2] = useState(false)
+    const [wireframeToggle3, setWireFrameToggle3] = useState(false)
+    const [wireframeToggle4, setWireFrameToggle4] = useState(false)
 
     const visible = "VISIBLE"
     const hidden = "HIDDEN"
@@ -174,6 +180,11 @@ export default function Customizer3D(props) {
                                     material2Metalness={material2Metalness}
                                     material3Metalness={material3Metalness}
                                     material4Metalness={material4Metalness}
+
+                                    wireframeToggle1={wireframeToggle1}
+                                    wireframeToggle2={wireframeToggle2}
+                                    wireframeToggle3={wireframeToggle3}
+                                    wireframeToggle4={wireframeToggle3}
                                     />
                                 
                                 {/* <Stars radius={5} depth={50} count={5000} factor={4} saturation={0} fade speed={1} /> */}
@@ -295,8 +306,18 @@ export default function Customizer3D(props) {
                                         onChange={(e) => setMaterial1Metalness(e.target.value)}
                                         step=".01"
                                     /><br />
+                                    <label for="wireframeToggle"></label>
                                 </div>
                                 <div className={uiVisibilityIcon}>
+                                    <button 
+                                        // type="checkbox" 
+                                        className={rotationResetButton}
+                                        value={wireframeToggle1}
+                                        id="wireframeToggle"
+                                        onClick={() => 
+                                            setWireFrameToggle1(!wireframeToggle1)}>
+                                            {wireframeToggle1 ? <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M23.95 45.05q-4.3 0-8.15-1.675-3.85-1.675-6.675-4.525Q6.3 36 4.625 32.175 2.95 28.35 2.95 24q0-4.3 1.675-8.15Q6.3 12 9.125 9.15T15.8 4.6q3.85-1.7 8.15-1.7 4.35 0 8.225 1.7t6.7 4.55Q41.7 12 43.4 15.85q1.7 3.85 1.7 8.15 0 4.35-1.7 8.175Q41.7 36 38.875 38.85q-2.825 2.85-6.7 4.525Q28.3 45.05 23.95 45.05Zm9.95-25.3 3.45-1.2.85-3.2q-1.65-2.55-4.1-4.4-2.45-1.85-5.5-2.8l-3.25 2.15v3.45Zm-19.75 0 8.55-6V10.3l-3.25-2.15q-3.05.95-5.475 2.8-2.425 1.85-4.125 4.4l1.1 3.2ZM11.5 35.2l3-.35 1.95-3.25-3-9.25-3.55-1.2-2.4 1.95q0 3.5.8 6.375t3.2 5.725ZM24 40.65q1.3 0 2.625-.275T29.5 39.8l1.6-3.6-1.65-2.75H18.6L17 36.2l1.65 3.6q1.25.3 2.65.575 1.4.275 2.7.275Zm-5.2-9.95H29l2.95-8.9L24 16.05l-8.1 5.75Zm17.75 4.5q2.35-2.85 3.15-5.725.8-2.875.8-6.375l-2.35-1.65-3.55.9-2.95 9.25 1.85 3.25Z"/></svg> : <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48"><path d="M24 45.05q-4.35 0-8.2-1.625-3.85-1.625-6.725-4.5Q6.2 36.05 4.575 32.2 2.95 28.35 2.95 24t1.625-8.2q1.625-3.85 4.5-6.725Q11.95 6.2 15.8 4.55q3.85-1.65 8.15-1.65 4.4 0 8.275 1.65t6.725 4.525q2.85 2.875 4.5 6.725 1.65 3.85 1.65 8.25 0 4.3-1.65 8.15-1.65 3.85-4.525 6.725-2.875 2.875-6.725 4.5-3.85 1.625-8.2 1.625Z"/></svg>}
+                                    </button>
                                     <button
                                         className={rotationResetButton}
                                         onClick={() => 

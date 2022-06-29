@@ -41,7 +41,7 @@ export default function RingTextured({ ...props }) {
           color={props.materialColor1}
           roughness={props.materialRoughness1}
           metalness={props.material1Metalness}
-          // wireframe={true}
+          wireframe={props.wireframeToggle1}
           // flatShading={true}
           // emissive={props.materialColor1} //would love to get this working but i don't think it will
           // emissiveMap={}

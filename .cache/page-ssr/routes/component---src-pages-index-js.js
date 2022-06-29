@@ -3541,10 +3541,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "range": () => (/* binding */ range),
 /* harmony export */   "rotationResetButton": () => (/* binding */ rotationResetButton),
 /* harmony export */   "uiGlobalControls": () => (/* binding */ uiGlobalControls),
+/* harmony export */   "uiHexColorPicker": () => (/* binding */ uiHexColorPicker),
+/* harmony export */   "uiMaterialControls": () => (/* binding */ uiMaterialControls),
+/* harmony export */   "uiMaterialPropertyControls": () => (/* binding */ uiMaterialPropertyControls),
 /* harmony export */   "uiMeshControls": () => (/* binding */ uiMeshControls),
 /* harmony export */   "uiPremadeTextureButton": () => (/* binding */ uiPremadeTextureButton),
 /* harmony export */   "uiPremadeTextureSelectors": () => (/* binding */ uiPremadeTextureSelectors),
-/* harmony export */   "uiRotation": () => (/* binding */ uiRotation)
+/* harmony export */   "uiRotation": () => (/* binding */ uiRotation),
+/* harmony export */   "uiVisibilityIcon": () => (/* binding */ uiVisibilityIcon),
+/* harmony export */   "wireframeToggle": () => (/* binding */ wireframeToggle)
 /* harmony export */ });
 // Exports
 var customizerContainer = "Customizer-module--customizerContainer--+lQC-";
@@ -3557,6 +3562,11 @@ var uiGlobalControls = "Customizer-module--uiGlobalControls--DtjbG";
 var uiMeshControls = "Customizer-module--uiMeshControls--dF1Ib";
 var uiPremadeTextureSelectors = "Customizer-module--uiPremadeTextureSelectors--lhpm2";
 var uiPremadeTextureButton = "Customizer-module--uiPremadeTextureButton--L594m";
+var uiMaterialControls = "Customizer-module--uiMaterialControls--slKed";
+var uiHexColorPicker = "Customizer-module--uiHexColorPicker--YDEXk";
+var uiMaterialPropertyControls = "Customizer-module--uiMaterialPropertyControls--CzPjG";
+var wireframeToggle = "Customizer-module--wireframeToggle--bNMXR";
+var uiVisibilityIcon = "Customizer-module--uiVisibilityIcon--10j7q";
 var rotationResetButton = "Customizer-module--rotationResetButton--al43z";
 var range = "Customizer-module--range--ZDIk2";
 
@@ -3939,6 +3949,22 @@ function Customizer3D(props) {
     0: material4Metalness,
     1: setMaterial4Metalness
   } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(.8);
+  const {
+    0: wireframeToggle1,
+    1: setWireFrameToggle1
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const {
+    0: wireframeToggle2,
+    1: setWireFrameToggle2
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const {
+    0: wireframeToggle3,
+    1: setWireFrameToggle3
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const {
+    0: wireframeToggle4,
+    1: setWireFrameToggle4
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const visible = "VISIBLE";
   const hidden = "HIDDEN";
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -3991,7 +4017,11 @@ function Customizer3D(props) {
     material1Metalness: material1Metalness,
     material2Metalness: material2Metalness,
     material3Metalness: material3Metalness,
-    material4Metalness: material4Metalness
+    material4Metalness: material4Metalness,
+    wireframeToggle1: wireframeToggle1,
+    wireframeToggle2: wireframeToggle2,
+    wireframeToggle3: wireframeToggle3,
+    wireframeToggle4: wireframeToggle3
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerControls
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -4054,10 +4084,16 @@ function Customizer3D(props) {
   }, "Texture 3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiPremadeTextureButton,
     onClick: () => setToggleTexture1(!toggleTexture1)
-  }, "Texture 4")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
+  }, "Texture 4")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialControls
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
     color: materialColor1,
-    onChange: setMaterialColor1
-  }), "maetrialRoughness1", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    onChange: setMaterialColor1,
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPicker
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialPropertyControls
+  }, "roughness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.range,
     id: "typeinp",
     type: "range",
     min: "0",
@@ -4065,7 +4101,8 @@ function Customizer3D(props) {
     value: materialRoughness1,
     onChange: e => setMaterialRoughness1(e.target.value),
     step: ".01"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "material1Metalness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "metalness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.range,
     id: "typeinp",
     type: "range",
     min: "0",
@@ -4073,7 +4110,29 @@ function Customizer3D(props) {
     value: material1Metalness,
     onChange: e => setMaterial1Metalness(e.target.value),
     step: ".01"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
+    for: "wireframeToggle"
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiVisibilityIcon
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    // type="checkbox" 
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.rotationResetButton,
+    value: wireframeToggle1,
+    id: "wireframeToggle",
+    onClick: () => setWireFrameToggle1(!wireframeToggle1)
+  }, wireframeToggle1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "48",
+    width: "48"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
+    d: "M23.95 45.05q-4.3 0-8.15-1.675-3.85-1.675-6.675-4.525Q6.3 36 4.625 32.175 2.95 28.35 2.95 24q0-4.3 1.675-8.15Q6.3 12 9.125 9.15T15.8 4.6q3.85-1.7 8.15-1.7 4.35 0 8.225 1.7t6.7 4.55Q41.7 12 43.4 15.85q1.7 3.85 1.7 8.15 0 4.35-1.7 8.175Q41.7 36 38.875 38.85q-2.825 2.85-6.7 4.525Q28.3 45.05 23.95 45.05Zm9.95-25.3 3.45-1.2.85-3.2q-1.65-2.55-4.1-4.4-2.45-1.85-5.5-2.8l-3.25 2.15v3.45Zm-19.75 0 8.55-6V10.3l-3.25-2.15q-3.05.95-5.475 2.8-2.425 1.85-4.125 4.4l1.1 3.2ZM11.5 35.2l3-.35 1.95-3.25-3-9.25-3.55-1.2-2.4 1.95q0 3.5.8 6.375t3.2 5.725ZM24 40.65q1.3 0 2.625-.275T29.5 39.8l1.6-3.6-1.65-2.75H18.6L17 36.2l1.65 3.6q1.25.3 2.65.575 1.4.275 2.7.275Zm-5.2-9.95H29l2.95-8.9L24 16.05l-8.1 5.75Zm17.75 4.5q2.35-2.85 3.15-5.725.8-2.875.8-6.375l-2.35-1.65-3.55.9-2.95 9.25 1.85 3.25Z"
+  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "48",
+    width: "48"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
+    d: "M24 45.05q-4.35 0-8.2-1.625-3.85-1.625-6.725-4.5Q6.2 36.05 4.575 32.2 2.95 28.35 2.95 24t1.625-8.2q1.625-3.85 4.5-6.725Q11.95 6.2 15.8 4.55q3.85-1.65 8.15-1.65 4.4 0 8.275 1.65t6.725 4.525q2.85 2.875 4.5 6.725 1.65 3.85 1.65 8.25 0 4.3-1.65 8.15-1.65 3.85-4.525 6.725-2.875 2.875-6.725 4.5-3.85 1.625-8.2 1.625Z"
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.rotationResetButton,
     onClick: () => setToggleMesh1Visibility(!toggleMesh1Visibility)
   }, toggleMesh1Visibility ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
@@ -4088,7 +4147,7 @@ function Customizer3D(props) {
     width: "48"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
     d: "m40.3 45-7.65-7.55q-1.75.7-3.975 1.125Q26.45 39 24 39q-7.4 0-13.65-4.2T1.05 23q.85-2.6 2.75-5.175 1.9-2.575 4.35-4.975L2 6.85l2.4-2.5L42.55 42.5ZM24 31.35q.6 0 1.225-.15.625-.15 1.025-.3L16 20.75q-.1.5-.225 1.1-.125.6-.125 1.15 0 3.55 2.45 5.95 2.45 2.4 5.9 2.4Zm15 2.4-7.45-7.45q.4-.6.6-1.55.2-.95.2-1.75 0-3.5-2.425-5.925T24 14.65q-.85 0-1.65.175-.8.175-1.65.575l-6.4-6.45q1.7-.7 4.525-1.325T24.25 7q7.2 0 13.425 4.2Q43.9 15.4 46.95 23q-1.2 3.3-3.3 6-2.1 2.7-4.65 4.75ZM27.8 22.5l-3.65-3.6q.6-.4 1.475-.325.875.075 1.575.575.65.65.875 1.425.225.775-.275 1.925Z"
-  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: () => setToggleMesh2Visibility(!toggleMesh2Visibility)
   }, "Mesh 2 Visibility"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: () => setToggleTexture2(!toggleTexture2)
@@ -4227,7 +4286,9 @@ function RingTextured({ ...props
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshPhysicalMaterial", {
     color: props.materialColor1,
     roughness: props.materialRoughness1,
-    metalness: props.material1Metalness // emissive={props.materialColor1} //would love to get this working but i don't think it will
+    metalness: props.material1Metalness,
+    wireframe: props.wireframeToggle1 // flatShading={true}
+    // emissive={props.materialColor1} //would love to get this working but i don't think it will
     // emissiveMap={}
     // emissiveIntensity={1} 
 
@@ -4252,7 +4313,9 @@ function RingTextured({ ...props
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshPhysicalMaterial", {
     color: props.materialColor3,
     roughness: props.materialRoughness3,
-    metalness: props.material3Metalness
+    metalness: props.material3Metalness // flatShading={true} 
+    ,
+    wireframe: true
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
     geometry: nodes.Main001.geometry,
     material: materials.Material,
@@ -4483,7 +4546,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const IndexPage = () => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Components_Nav__WEBPACK_IMPORTED_MODULE_3__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Components_Hero__WEBPACK_IMPORTED_MODULE_1__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Components_DefaultItems__WEBPACK_IMPORTED_MODULE_4__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Components_BrandBuilder__WEBPACK_IMPORTED_MODULE_5__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Components_CustomizerFolder_Customizer3D__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("footer", null));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Components_CustomizerFolder_Customizer3D__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("footer", null));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (IndexPage);
