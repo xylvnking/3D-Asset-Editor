@@ -45,13 +45,8 @@ export default function RingTextured({ ...props }) {
           roughness={props.materialRoughness1}
           metalness={props.material1Metalness}
           wireframe={props.wireframeToggle1}
-          // flatShading={true}
-          // emissive={props.materialColor1} //would love to get this working but i don't think it will
-          // emissiveMap={}
-          // emissiveIntensity={1} 
           />
       </mesh> 
-      {/* this works but it feels really messy. maybe implement it later if you really want */}
       <mesh 
         geometry={nodes.Details001.geometry} 
         material={materials['Material.001']} 

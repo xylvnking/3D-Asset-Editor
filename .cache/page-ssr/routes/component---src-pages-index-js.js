@@ -3538,6 +3538,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "customizerControls": () => (/* binding */ customizerControls),
 /* harmony export */   "customizerFlex": () => (/* binding */ customizerFlex),
 /* harmony export */   "customizerMain": () => (/* binding */ customizerMain),
+/* harmony export */   "hide": () => (/* binding */ hide),
 /* harmony export */   "range": () => (/* binding */ range),
 /* harmony export */   "rotationResetButton": () => (/* binding */ rotationResetButton),
 /* harmony export */   "uiGlobalControls": () => (/* binding */ uiGlobalControls),
@@ -3545,11 +3546,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "uiMaterialControls": () => (/* binding */ uiMaterialControls),
 /* harmony export */   "uiMaterialPropertyControls": () => (/* binding */ uiMaterialPropertyControls),
 /* harmony export */   "uiMeshControls": () => (/* binding */ uiMeshControls),
-/* harmony export */   "uiPremadeTextureButton": () => (/* binding */ uiPremadeTextureButton),
-/* harmony export */   "uiPremadeTextureSelectors": () => (/* binding */ uiPremadeTextureSelectors),
+/* harmony export */   "uiMeshSelector": () => (/* binding */ uiMeshSelector),
+/* harmony export */   "uiMeshSelectorPressed": () => (/* binding */ uiMeshSelectorPressed),
+/* harmony export */   "uiMeshSelectors": () => (/* binding */ uiMeshSelectors),
 /* harmony export */   "uiRotation": () => (/* binding */ uiRotation),
-/* harmony export */   "uiVisibilityIcon": () => (/* binding */ uiVisibilityIcon),
-/* harmony export */   "wireframeToggle": () => (/* binding */ wireframeToggle)
+/* harmony export */   "uiVisibilityIcon": () => (/* binding */ uiVisibilityIcon)
 /* harmony export */ });
 // Exports
 var customizerContainer = "Customizer-module--customizerContainer--+lQC-";
@@ -3560,15 +3561,16 @@ var customizerControls = "Customizer-module--customizerControls--0u8qk";
 var uiRotation = "Customizer-module--uiRotation--o0xDC";
 var uiGlobalControls = "Customizer-module--uiGlobalControls--DtjbG";
 var uiMeshControls = "Customizer-module--uiMeshControls--dF1Ib";
-var uiPremadeTextureSelectors = "Customizer-module--uiPremadeTextureSelectors--lhpm2";
-var uiPremadeTextureButton = "Customizer-module--uiPremadeTextureButton--L594m";
+var uiMeshSelectors = "Customizer-module--uiMeshSelectors--Fy1Uh";
+var uiMeshSelector = "Customizer-module--uiMeshSelector--e-o8X";
+var uiMeshSelectorPressed = "Customizer-module--uiMeshSelectorPressed--8xdsz";
 var uiMaterialControls = "Customizer-module--uiMaterialControls--slKed";
 var uiHexColorPicker = "Customizer-module--uiHexColorPicker--YDEXk";
 var uiMaterialPropertyControls = "Customizer-module--uiMaterialPropertyControls--CzPjG";
-var wireframeToggle = "Customizer-module--wireframeToggle--bNMXR";
 var uiVisibilityIcon = "Customizer-module--uiVisibilityIcon--10j7q";
 var rotationResetButton = "Customizer-module--rotationResetButton--al43z";
 var range = "Customizer-module--range--ZDIk2";
+var hide = "Customizer-module--hide--cFlh7";
 
 
 /***/ }),
@@ -3965,6 +3967,10 @@ function Customizer3D(props) {
     0: wireframeToggle4,
     1: setWireFrameToggle4
   } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
+  const {
+    0: toggleMesh1Controls,
+    1: setToggleMesh1Controls
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   const visible = "VISIBLE";
   const hidden = "HIDDEN";
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -4071,27 +4077,31 @@ function Customizer3D(props) {
   }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshControls
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiPremadeTextureSelectors
+    // className={uiPremadeTextureSelectors}
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelectors
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiPremadeTextureButton,
-    onClick: () => setToggleTexture1(!toggleTexture1)
-  }, "Texture 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiPremadeTextureButton,
-    onClick: () => setToggleTexture1(!toggleTexture1)
+    // className={toggleMesh1Controls ? uiPremadeTextureButton : uiPremadeTextureButtonPressed}
+    className: toggleMesh1Controls ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelector : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelectorPressed // className={uiMeshSelector}
+    ,
+    onClick: () => setToggleMesh1Controls(!toggleMesh1Controls)
+  }, "Mesh 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: toggleTexture2 ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelector : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelectorPressed,
+    onClick: () => setToggleTexture2(!toggleTexture2)
   }, "Texture 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiPremadeTextureButton,
-    onClick: () => setToggleTexture1(!toggleTexture1)
+    className: toggleTexture3 ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelector : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelectorPressed,
+    onClick: () => setToggleTexture3(!toggleTexture3)
   }, "Texture 3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiPremadeTextureButton,
-    onClick: () => setToggleTexture1(!toggleTexture1)
+    className: toggleTexture4 ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelector : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelectorPressed,
+    onClick: () => setToggleTexture4(!toggleTexture4)
   }, "Texture 4")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialControls
+    className: toggleMesh1Controls ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialControls : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.hide
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
     color: materialColor1,
     onChange: setMaterialColor1,
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPicker
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPicker,
+    onMouseDown: () => setToggleTexture1(true)
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialPropertyControls
+    className: toggleMesh1Controls ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialPropertyControls : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.hide
   }, "roughness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.range,
     id: "typeinp",
@@ -4110,16 +4120,20 @@ function Customizer3D(props) {
     value: material1Metalness,
     onChange: e => setMaterial1Metalness(e.target.value),
     step: ".01"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("label", {
-    for: "wireframeToggle"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiVisibilityIcon
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     // type="checkbox" 
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.rotationResetButton,
-    value: wireframeToggle1,
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.rotationResetButton // value={wireframeToggle1}
+    ,
     id: "wireframeToggle",
-    onClick: () => setWireFrameToggle1(!wireframeToggle1)
+    style: {
+      padding: "0px",
+      paddingRight: "15px",
+      marginTop: ".5rem"
+    } // onClick={() => 
+    //     toggleWireframeAlsoTextureOff()}
+
   }, wireframeToggle1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     height: "48",
@@ -4134,6 +4148,11 @@ function Customizer3D(props) {
     d: "M24 45.05q-4.35 0-8.2-1.625-3.85-1.625-6.725-4.5Q6.2 36.05 4.575 32.2 2.95 28.35 2.95 24t1.625-8.2q1.625-3.85 4.5-6.725Q11.95 6.2 15.8 4.55q3.85-1.65 8.15-1.65 4.4 0 8.275 1.65t6.725 4.525q2.85 2.875 4.5 6.725 1.65 3.85 1.65 8.25 0 4.3-1.65 8.15-1.65 3.85-4.525 6.725-2.875 2.875-6.725 4.5-3.85 1.625-8.2 1.625Z"
   }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.rotationResetButton,
+    style: {
+      padding: "0px",
+      paddingRight: "15px",
+      marginTop: ".5rem"
+    },
     onClick: () => setToggleMesh1Visibility(!toggleMesh1Visibility)
   }, toggleMesh1Visibility ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
@@ -4147,7 +4166,28 @@ function Customizer3D(props) {
     width: "48"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
     d: "m40.3 45-7.65-7.55q-1.75.7-3.975 1.125Q26.45 39 24 39q-7.4 0-13.65-4.2T1.05 23q.85-2.6 2.75-5.175 1.9-2.575 4.35-4.975L2 6.85l2.4-2.5L42.55 42.5ZM24 31.35q.6 0 1.225-.15.625-.15 1.025-.3L16 20.75q-.1.5-.225 1.1-.125.6-.125 1.15 0 3.55 2.45 5.95 2.45 2.4 5.9 2.4Zm15 2.4-7.45-7.45q.4-.6.6-1.55.2-.95.2-1.75 0-3.5-2.425-5.925T24 14.65q-.85 0-1.65.175-.8.175-1.65.575l-6.4-6.45q1.7-.7 4.525-1.325T24.25 7q7.2 0 13.425 4.2Q43.9 15.4 46.95 23q-1.2 3.3-3.3 6-2.1 2.7-4.65 4.75ZM27.8 22.5l-3.65-3.6q.6-.4 1.475-.325.875.075 1.575.575.65.65.875 1.425.225.775-.275 1.925Z"
-  })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+  }))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.rotationResetButton,
+    style: {
+      padding: "0px",
+      marginTop: ".5rem"
+    } // onClick={() => 
+    // // setToggleTexture1(!toggleTexture1)}>
+    // toggleTextureAlsoWireframeOff()}
+
+  }, toggleTexture1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "48",
+    width: "48"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
+    d: "m38.55 17.25-2.5-5.65L30.2 9l5.85-2.5 2.5-5.4 2.35 5.4L46.75 9l-5.85 2.6Zm0 29.55-2.5-5.4-5.85-2.55 5.85-2.5 2.5-5.75 2.35 5.75 5.85 2.5-5.85 2.55ZM16.9 39.3l-4.95-10.5L1.2 23.95l10.75-4.85L16.9 8.6l4.95 10.5 10.65 4.85-10.65 4.85Z"
+  })) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
+    xmlns: "http://www.w3.org/2000/svg",
+    height: "48",
+    width: "48"
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
+    d: "M8.4 42.95q-1.45-.4-2.1-1.175Q5.65 41 5.2 39.6L39.65 5.1q1.15.3 2.05 1.2.9.9 1.15 2.1ZM4.95 30.3v-6.6L23.7 4.9h6.6Zm0-16.1V9.5q0-1.85 1.35-3.225T9.5 4.9h4.7ZM33.8 43.05l9.3-9.25v4.7q0 1.85-1.375 3.2T38.5 43.05Zm-16.1 0L43.1 17.7v6.6L24.3 43.05Z"
+  }))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: () => setToggleMesh2Visibility(!toggleMesh2Visibility)
   }, "Mesh 2 Visibility"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: () => setToggleTexture2(!toggleTexture2)
@@ -4275,7 +4315,8 @@ function RingTextured({ ...props
   const {
     nodes,
     materials
-  } = (0,_react_three_drei__WEBPACK_IMPORTED_MODULE_1__.useGLTF)('/RingTextured.glb');
+  } = (0,_react_three_drei__WEBPACK_IMPORTED_MODULE_1__.useGLTF)('/RingTextured.glb'); //i need a way to have the texture buttons toggle different textures on the same mesh, not toggle one premade texture for each mesh
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("group", Object.assign({
     ref: group
   }, props, {
@@ -4287,11 +4328,7 @@ function RingTextured({ ...props
     color: props.materialColor1,
     roughness: props.materialRoughness1,
     metalness: props.material1Metalness,
-    wireframe: props.wireframeToggle1 // flatShading={true}
-    // emissive={props.materialColor1} //would love to get this working but i don't think it will
-    // emissiveMap={}
-    // emissiveIntensity={1} 
-
+    wireframe: props.wireframeToggle1
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
     geometry: nodes.Details001.geometry,
     material: materials['Material.001'],
@@ -4314,8 +4351,8 @@ function RingTextured({ ...props
     color: props.materialColor3,
     roughness: props.materialRoughness3,
     metalness: props.material3Metalness // flatShading={true} 
-    ,
-    wireframe: true
+    // wireframe={true}
+
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
     geometry: nodes.Main001.geometry,
     material: materials.Material,
@@ -84557,7 +84594,6 @@ class OrbitControls extends three__WEBPACK_IMPORTED_MODULE_0__.EventDispatcher {
 
 		// Touch fingers
 		this.touches = { ONE: three__WEBPACK_IMPORTED_MODULE_0__.TOUCH.ROTATE, TWO: three__WEBPACK_IMPORTED_MODULE_0__.TOUCH.DOLLY_PAN };
-		
 
 		// for reset
 		this.target0 = this.target.clone();

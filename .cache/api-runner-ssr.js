@@ -1,10 +1,10 @@
 var plugins = [{
       name: 'gatsby-plugin-image',
-      plugin: require('/Users/dylanking6132/xylvnking/jewelry-brand-landing-page/node_modules/gatsby-plugin-image/gatsby-ssr.js'),
+      plugin: require('/Users/dylanking6132/xylvnking/pleasework/jewelry-brand-landing-page/node_modules/gatsby-plugin-image/gatsby-ssr.js'),
       options: {"plugins":[]},
     },{
       name: 'partytown',
-      plugin: require('/Users/dylanking6132/xylvnking/jewelry-brand-landing-page/node_modules/gatsby/dist/internal-plugins/partytown/gatsby-ssr.js'),
+      plugin: require('/Users/dylanking6132/xylvnking/pleasework/jewelry-brand-landing-page/node_modules/gatsby/dist/internal-plugins/partytown/gatsby-ssr.js'),
       options: {"plugins":[]},
     }]
 /* global plugins */
