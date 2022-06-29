@@ -4133,7 +4133,8 @@ function Customizer3D(props) {
       marginTop: ".5rem"
     } // onClick={() => 
     //     toggleWireframeAlsoTextureOff()}
-
+    ,
+    onClick: () => setWireFrameToggle1(!wireframeToggle1)
   }, wireframeToggle1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     height: "48",
@@ -4171,10 +4172,8 @@ function Customizer3D(props) {
     style: {
       padding: "0px",
       marginTop: ".5rem"
-    } // onClick={() => 
-    // // setToggleTexture1(!toggleTexture1)}>
-    // toggleTextureAlsoWireframeOff()}
-
+    },
+    onClick: () => setToggleTexture1(!toggleTexture1)
   }, toggleTexture1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     height: "48",

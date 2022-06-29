@@ -38,8 +38,7 @@ export default function RingTextured({ ...props }) {
       {/* MESH 1 */}
       <mesh 
         geometry={nodes.Details001.geometry} 
-        visible={props.toggleTexture1 && 
-        props.toggleMesh1Visibility}>
+        visible={props.toggleTexture1 && props.toggleMesh1Visibility}>
         <meshPhysicalMaterial 
           color={props.materialColor1}
           roughness={props.materialRoughness1}
@@ -51,8 +50,7 @@ export default function RingTextured({ ...props }) {
         geometry={nodes.Details001.geometry} 
         material={materials['Material.001']} 
         
-        visible={!props.toggleTexture1 && 
-        props.toggleMesh1Visibility}/>
+        visible={!props.toggleTexture1 && props.toggleMesh1Visibility}/>
       
       
       {/* MESH 2 */}
@@ -62,7 +60,8 @@ export default function RingTextured({ ...props }) {
         <meshPhysicalMaterial 
           color={props.materialColor2}
           roughness={props.materialRoughness2}
-          metalness={props.material2Metalness} />
+          metalness={props.material2Metalness}
+          wireframe={props.wireframeToggle2} />
       </mesh>
       <mesh 
         geometry={nodes.Extra_Rings001.geometry} 

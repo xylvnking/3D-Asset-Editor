@@ -127,5 +127,6 @@ export default function Customizer3D() {
 
 
 # React Three Fiber Notes
+[This is a sandbox for an obj/gltf/stl exporter which would be amazing to implement in conjunction with the ability to upload files. this allow the user to upload a mode, alter it with my tool, and download the new version. My tool obviously doesn't do anything fancy but if it did yanno](https://codesandbox.io/s/react-three-fiber-to-stl-or-gltf-ey0wt?from-embed=&file=/src/world/exporter/Exporter.tsx)
 
 [really cool emissive example with unreal pass threejs](https://threejs.org/examples/webgl_postprocessing_unreal_bloom.html)
