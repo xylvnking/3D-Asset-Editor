@@ -30,13 +30,16 @@ export default function RingTextured({ ...props }) {
     const { nodes, materials } = useGLTF('/RingTextured.glb')
     
 
+  //i need a way to have the texture buttons toggle different textures on the same mesh, not toggle one premade texture for each mesh
+
   return (
     <group ref={group} {...props} dispose={null}>
 
       {/* MESH 1 */}
       <mesh 
         geometry={nodes.Details001.geometry} 
-        visible={props.toggleTexture1 && props.toggleMesh1Visibility}>
+        visible={props.toggleTexture1 && 
+        props.toggleMesh1Visibility}>
         <meshPhysicalMaterial 
           color={props.materialColor1}
           roughness={props.materialRoughness1}
@@ -48,10 +51,14 @@ export default function RingTextured({ ...props }) {
           // emissiveIntensity={1} 
           />
       </mesh> 
+      {/* this works but it feels really messy. maybe implement it later if you really want */}
       <mesh 
         geometry={nodes.Details001.geometry} 
         material={materials['Material.001']} 
-        visible={!props.toggleTexture1 && props.toggleMesh1Visibility}/>
+        
+        visible={!props.toggleTexture1 && 
+        props.toggleMesh1Visibility}/>
+      
       
       {/* MESH 2 */}
       <mesh 
@@ -76,7 +83,7 @@ export default function RingTextured({ ...props }) {
           roughness={props.materialRoughness3}
           metalness={props.material3Metalness}
           // flatShading={true} 
-          wireframe={true}
+          // wireframe={true}
           />
       </mesh>
       <mesh 
