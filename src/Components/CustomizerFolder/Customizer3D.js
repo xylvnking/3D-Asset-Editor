@@ -63,8 +63,8 @@ export default function Customizer3D(props) {
     // const [objectColor, setObjectColor] = useState("#27a1e3")
 
     // Lights
-    const [ambientLightIntensity, setAmbientLightIntensity] = useState(3)
-    const [ambientLightColor, setAmbientLightColor] = useState("#ffffff")
+    const [ambientLightIntensity, setAmbientLightIntensity] = useState(0)
+    const [ambientLightColor, setAmbientLightColor] = useState("#FF9D00")
 
 
     const [gridToggle, setGridToggle] = useState(false)
@@ -75,10 +75,10 @@ export default function Customizer3D(props) {
     const [mesh4Toggle, setMesh4Toggle] = useState(true)
 
     
-    const [materialColor1, setMaterialColor1] = useState("#070058")
-    const [materialColor2, setMaterialColor2] = useState("#7F1600")
-    const [materialColor3, setMaterialColor3] = useState("#2100f2")
-    const [materialColor4, setMaterialColor4] = useState("#590098")
+    const [materialColor1, setMaterialColor1] = useState("#1d1e27")
+    const [materialColor2, setMaterialColor2] = useState("#14151c")
+    const [materialColor3, setMaterialColor3] = useState("#180e13")
+    const [materialColor4, setMaterialColor4] = useState("#27141f")
 
     const [materialRoughness1, setMaterialRoughness1] = useState(.5)
     const [materialRoughness2, setMaterialRoughness2] = useState(.5)
@@ -259,13 +259,40 @@ export default function Customizer3D(props) {
                                 reset
                             </button><br />
                         </div>
+                        <button
+                            className={rotationResetButton}
+                            onClick={() => 
+                            setGridToggle(!gridToggle)}>
+                            Grid Toggle
+                        </button>
+                        <div className={uiMaterialControls}>
+                        {/* <div > */}
+
+                        {/* Ambient Light Color */}
+                            <HexColorPicker 
+                            color={ambientLightColor} 
+                            onChange={setAmbientLightColor} 
+                            className={uiHexColorPicker}
+                            // style={{height: "100px"}}
+                            
+                            />
+                        {/* Ambient Light Intensity */}
+                            <input 
+                                id="typeinp" 
+                                type="range" 
+                                min="0" max="35" 
+                                value={ambientLightIntensity} 
+                                onChange={(e) => setAmbientLightIntensity(e.target.value)}
+                                step=".1"
+                                className={range}
+                                // style={{backgroundColor: ambientLightColor}}
+                                style={{background: ambientLightColor, width: "100%"}}
+                            />
+                        </div>
 
                         
                         <div className={uiMeshControls}>
-                            <div 
-                            // className={uiPremadeTextureSelectors}
-                            className={uiMeshSelectors}
-                            >  
+                            <div className={uiMeshSelectors}>  
                                 <button
                                     // className={toggleMesh1Controls ? uiPremadeTextureButton : uiPremadeTextureButtonPressed}
                                     className={toggleMesh1Controls ? uiMeshSelectorPressed : uiMeshSelector}
@@ -444,7 +471,9 @@ export default function Customizer3D(props) {
                                     </div>
                                 </div>
                             </div>
+
                             {/* MESH 3 CONTROLS */}
+
                             <div 
                             className={toggleMesh3Controls ? uiMaterialControls : hide}
                             style={{borderColor: materialColor3}}>
@@ -512,7 +541,9 @@ export default function Customizer3D(props) {
                                     </div>
                                 </div>
                             </div>
+
                             {/* MESH 4 CONTROLS */}
+
                             <div 
                             className={toggleMesh4Controls ? uiMaterialControls : hide}
                             style={{borderColor: materialColor4}}>
@@ -589,24 +620,11 @@ export default function Customizer3D(props) {
 
                         
                         <div className={uiGlobalControls}>
-                            <button
-                                onClick={() => 
-                                setGridToggle(!gridToggle)}>
-                                Grid Toggle
-                            </button>
+                            
 
-                            Ambient Light Intensity
-                            <input 
-                                id="typeinp" 
-                                type="range" 
-                                min="0" max="20" 
-                                value={ambientLightIntensity} 
-                                onChange={(e) => setAmbientLightIntensity(e.target.value)}
-                                step=".1"
-                            /><br />
+                            
 
-                            Ambient Light Color
-                            <HexColorPicker color={ambientLightColor} onChange={setAmbientLightColor} />
+                            
                         </div>
                     </div>
                 </div>
