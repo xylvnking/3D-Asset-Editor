@@ -3846,11 +3846,11 @@ function Customizer3D(props) {
   const {
     0: ambientLightIntensity,
     1: setAmbientLightIntensity
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(3);
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0);
   const {
     0: ambientLightColor,
     1: setAmbientLightColor
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#ffffff");
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#FF9D00");
   const {
     0: gridToggle,
     1: setGridToggle
@@ -3874,19 +3874,19 @@ function Customizer3D(props) {
   const {
     0: materialColor1,
     1: setMaterialColor1
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#070058");
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#1d1e27");
   const {
     0: materialColor2,
     1: setMaterialColor2
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#7F1600");
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#14151c");
   const {
     0: materialColor3,
     1: setMaterialColor3
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#2100f2");
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#180e13");
   const {
     0: materialColor4,
     1: setMaterialColor4
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#590098");
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#27141f");
   const {
     0: materialRoughness1,
     1: setMaterialRoughness1
@@ -4086,10 +4086,33 @@ function Customizer3D(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.rotationResetButton,
     onClick: () => setZRotation(0)
-  }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+  }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.rotationResetButton,
+    onClick: () => setGridToggle(!gridToggle)
+  }, "Grid Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialControls
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
+    color: ambientLightColor,
+    onChange: setAmbientLightColor,
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPicker // style={{height: "100px"}}
+
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
+    id: "typeinp",
+    type: "range",
+    min: "0",
+    max: "35",
+    value: ambientLightIntensity,
+    onChange: e => setAmbientLightIntensity(e.target.value),
+    step: ".1",
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.range // style={{backgroundColor: ambientLightColor}}
+    ,
+    style: {
+      background: ambientLightColor,
+      width: "100%"
+    }
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshControls
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    // className={uiPremadeTextureSelectors}
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelectors
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     // className={toggleMesh1Controls ? uiPremadeTextureButton : uiPremadeTextureButtonPressed}
@@ -4491,20 +4514,7 @@ function Customizer3D(props) {
     d: "M8.4 42.95q-1.45-.4-2.1-1.175Q5.65 41 5.2 39.6L39.65 5.1q1.15.3 2.05 1.2.9.9 1.15 2.1ZM4.95 30.3v-6.6L23.7 4.9h6.6Zm0-16.1V9.5q0-1.85 1.35-3.225T9.5 4.9h4.7ZM33.8 43.05l9.3-9.25v4.7q0 1.85-1.375 3.2T38.5 43.05Zm-16.1 0L43.1 17.7v6.6L24.3 43.05Z"
   }))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiGlobalControls
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    onClick: () => setGridToggle(!gridToggle)
-  }, "Grid Toggle"), "Ambient Light Intensity", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
-    id: "typeinp",
-    type: "range",
-    min: "0",
-    max: "20",
-    value: ambientLightIntensity,
-    onChange: e => setAmbientLightIntensity(e.target.value),
-    step: ".1"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "Ambient Light Color", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
-    color: ambientLightColor,
-    onChange: setAmbientLightColor
-  }))))));
+  })))));
 }
 
 /***/ }),
