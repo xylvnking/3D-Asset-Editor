@@ -1,57 +1,22 @@
-.customizerContainer {
-  font-family: 'Space Mono', monospace;
-}
-
-.customizerMain {
-  background: url("../../images/DotPattern.png");
-  height: 100%;
-}
-
 .customizerFlex {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  padding: 1rem;
-}
+  font-family: 'Space Mono', monospace;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  height: 100vh;
+  
+  
 
-@media screen and (max-width: 575px) {
-  .customizerFlex {
-    flex-direction: column;
-  }
 }
 
 .customizerCanvas {
-  min-width: 60vw; 
-  height: 85vh;
-  /* background-color: rgb(0, 0, 0); */
-  background-color: rgb(84, 84, 84);
-  border-style: solid;
-  border-color: black;
-  position: sticky;
-  top: 80px;
-}
+  background-color: rgb(23, 23, 23);
+  /* height: 100vh; */
 
-@media screen and (max-width: 575px) {
-  .customizerCanvas {
-    /* min-width: 30vw;  */
-    min-width: 100%;
-    top: 0px;
-    height: 50vh;
-    position: relative;
-  }
 }
 
 .customizerControls {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
-  /* padding: 10px; */
-
-  /* border-style: solid;
-  border-color: black; */
-  
-  min-width: 30vw;
-
-
   font-size: 1rem;
   font-weight: 700;
   line-height: normal; 
@@ -61,10 +26,6 @@
   display: flex;
   align-items: center;
   gap: 1rem;
-  border: #000000;
-  border-style: solid;
-  border-bottom-style: none;
-  border-width: 1px;
   padding: 5px;
 }
 
@@ -79,10 +40,7 @@
 }
 
 .uiMeshControls {
-  border-bottom-style: solid;
-  
-  border-width: 1px;
-  
+
 }
 
 .uiMeshSelectors {
@@ -177,11 +135,11 @@ transform: translateY(0);
 
 
 .uiMaterialControls {
-  border-color: black;
+  /* border-color: black; */
 
-  border-width: 5px;
+  /* border-width: 5px; */
 
-  border-style: solid;
+  /* border-style: solid; */
   /* border-bottom-style: none; */
   /* border-left-width: .5px;
   border-right-width: .5px; */

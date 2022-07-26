@@ -73,7 +73,6 @@ export default function Customizer3D(props) {
     const [mesh2Toggle, setMesh2Toggle] = useState(true)
     const [mesh3Toggle, setMesh3Toggle] = useState(true)
     const [mesh4Toggle, setMesh4Toggle] = useState(true)
-
     
     const [materialColor1, setMaterialColor1] = useState("#1d1e27")
     const [materialColor2, setMaterialColor2] = useState("#14151c")
@@ -117,11 +116,11 @@ export default function Customizer3D(props) {
     
 
     return (
-        <div className={customizerContainer}>
-            <div className={customizerMain}>
+        
+            
                 <div className={customizerFlex}>
                     <div className={customizerCanvas}>
-                        <Canvas>
+                        {/* <Canvas>
                             <CameraController />
                             <PerspectiveCamera 
                                 makeDefault fov={35} 
@@ -134,6 +133,7 @@ export default function Customizer3D(props) {
                             rotation={[xRotation, yRotation, zRotation]}
                                 
                             >
+                                
                                 <ambientLight 
                                     intensity={ambientLightIntensity}
                                     color={ambientLightColor}
@@ -143,15 +143,6 @@ export default function Customizer3D(props) {
                                     intensity={5}
                                     position={[10, 10, 10]} 
                                 />
-                                
-                                {/* <boxGeometry 
-                                args={[5, 5, 5]} //SETS SIZE
-                                />
-                                <meshStandardMaterial 
-                                    color={objectColor}
-                                    roughness={roughness}
-                                    metalness={metalness}
-                                /> */}
 
                             </mesh>
                             <Environment preset="studio" />
@@ -197,10 +188,10 @@ export default function Customizer3D(props) {
                                     wireframeToggle4={wireframeToggle3}
                                     />
                                 
-                                {/* <Stars radius={5} depth={50} count={5000} factor={4} saturation={0} fade speed={1} /> */}
-                                {/* <Sky distance={45000} sunPosition={[0, 12, 0]} inclination={.1} azimuth={1} {...props} /> */}
+                                <Stars radius={5} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+                                
                             </Suspense>
-                        </Canvas>
+                        </Canvas> */}
                     </div>
                     <div className={customizerControls}>
                         <div className={uiRotation}>
@@ -628,8 +619,8 @@ export default function Customizer3D(props) {
                         </div>
                     </div>
                 </div>
-            </div>
+            
 
-        </div>
+        
     )
 }
