@@ -2,11 +2,13 @@
 import React, { useRef, useState, useEffect, Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { HexColorPicker } from "react-colorful";
 import { 
+    uiAmbientLightControls,
     customizerCanvas, 
     customizerMain, 
     customizerContainer, 
-    customizerFlex, 
+    customizerGrid, 
     customizerControls, 
     rotationResetButton, 
     range, 
@@ -20,11 +22,13 @@ import {
     uiMaterialPropertyControls,
     uiVisibilityIcon,
     uiMeshSelectorPressed,
-    hide
+    hide,
+    uiHexColorPickerAmbientLight,
+    
     
         } from './Customizer.module.css'
 import { PerspectiveCamera, Ring, useHelper, Environment, Stars, Sky, Trail } from '@react-three/drei'
-import { HexColorPicker } from "react-colorful";
+
 import RingTextured from './RingTextured'
 
 
@@ -64,7 +68,7 @@ export default function Customizer3D(props) {
 
     // Lights
     const [ambientLightIntensity, setAmbientLightIntensity] = useState(0)
-    const [ambientLightColor, setAmbientLightColor] = useState("#FF9D00")
+    const [ambientLightColor, setAmbientLightColor] = useState("#9000ff")
 
 
     const [gridToggle, setGridToggle] = useState(false)
@@ -74,10 +78,10 @@ export default function Customizer3D(props) {
     const [mesh3Toggle, setMesh3Toggle] = useState(true)
     const [mesh4Toggle, setMesh4Toggle] = useState(true)
     
-    const [materialColor1, setMaterialColor1] = useState("#1d1e27")
-    const [materialColor2, setMaterialColor2] = useState("#14151c")
-    const [materialColor3, setMaterialColor3] = useState("#180e13")
-    const [materialColor4, setMaterialColor4] = useState("#27141f")
+    const [materialColor1, setMaterialColor1] = useState("#00A3FF")
+    const [materialColor2, setMaterialColor2] = useState("#bababa")
+    const [materialColor3, setMaterialColor3] = useState("#00A3FF")
+    const [materialColor4, setMaterialColor4] = useState("#bababa")
 
     const [materialRoughness1, setMaterialRoughness1] = useState(.5)
     const [materialRoughness2, setMaterialRoughness2] = useState(.5)
@@ -109,18 +113,15 @@ export default function Customizer3D(props) {
     const [toggleMesh3Controls, setToggleMesh3Controls] = useState(true)
     const [toggleMesh4Controls, setToggleMesh4Controls] = useState(true)
 
-    // const visible = "VISIBLE"
-    // const hidden = "HIDDEN"
-
-    
+    const [meshSelected, setMeshSelected] = React.useState(1)
     
 
     return (
-        
+         
             
-                <div className={customizerFlex}>
+                <div className={customizerGrid}>
                     <div className={customizerCanvas}>
-                        {/* <Canvas>
+                        <Canvas>
                             <CameraController />
                             <PerspectiveCamera 
                                 makeDefault fov={35} 
@@ -191,10 +192,10 @@ export default function Customizer3D(props) {
                                 <Stars radius={5} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
                                 
                             </Suspense>
-                        </Canvas> */}
+                        </Canvas>
                     </div>
                     <div className={customizerControls}>
-                        <div className={uiRotation}>
+                        <div className={uiRotation}>    
                             <label>
                                 X
                             </label>
@@ -250,21 +251,21 @@ export default function Customizer3D(props) {
                                 reset
                             </button><br />
                         </div>
-                        <button
+                        {/* <button
                             className={rotationResetButton}
                             onClick={() => 
                             setGridToggle(!gridToggle)}>
                             Grid Toggle
-                        </button>
-                        <div className={uiMaterialControls}>
+                        </button> */}
+                        <div className={uiAmbientLightControls}>
                         {/* <div > */}
 
                         {/* Ambient Light Color */}
                             <HexColorPicker 
                             color={ambientLightColor} 
                             onChange={setAmbientLightColor} 
-                            className={uiHexColorPicker}
-                            // style={{height: "100px"}}
+                            className={uiHexColorPickerAmbientLight}
+                            style={{height: '100px', width: '90%', paddingTop: '15px'}}
                             
                             />
                         {/* Ambient Light Intensity */}
@@ -277,7 +278,7 @@ export default function Customizer3D(props) {
                                 step=".1"
                                 className={range}
                                 // style={{backgroundColor: ambientLightColor}}
-                                style={{background: ambientLightColor, width: "100%"}}
+                                style={{background: ambientLightColor, width: "90%"}}
                             />
                         </div>
 
@@ -286,36 +287,40 @@ export default function Customizer3D(props) {
                             <div className={uiMeshSelectors}>  
                                 <button
                                     // className={toggleMesh1Controls ? uiPremadeTextureButton : uiPremadeTextureButtonPressed}
-                                    className={toggleMesh1Controls ? uiMeshSelectorPressed : uiMeshSelector}
+                                    className={uiMeshSelector}
                                     style={{backgroundColor: materialColor1}}
                                     // className={uiMeshSelector}
                                     onClick={() => 
-                                    setToggleMesh1Controls(!toggleMesh1Controls)}>
+                                    // setToggleMesh1Controls(!toggleMesh1Controls)}>
+                                    setMeshSelected(1)}>
                                     Mesh 1
                                 </button>
                                 <button
-                                    className={toggleMesh2Controls ? uiMeshSelectorPressed : uiMeshSelector}
+                                    className={uiMeshSelector}
                                     style={{backgroundColor: materialColor2}}
 
                                     onClick={() => 
-                                    setToggleMesh2Controls(!toggleMesh2Controls)}>
+                                    // setToggleMesh2Controls(!toggleMesh2Controls)}>
+                                    setMeshSelected(2)}>
                                     Mesh 2
                                 </button>
                                 <button
-                                    className={toggleMesh3Controls ? uiMeshSelectorPressed : uiMeshSelector}
+                                    className={uiMeshSelector}
                                     style={{backgroundColor: materialColor3}}
 
                                     onClick={() => 
-                                    setToggleMesh3Controls(!toggleMesh3Controls)}>
+                                    // setToggleMesh3Controls(!toggleMesh3Controls)}>
+                                    setMeshSelected(3)}>
                                     Mesh 3
                                 </button>
                                 
                                 <button
-                                    className={toggleMesh4Controls ? uiMeshSelectorPressed : uiMeshSelector}
+                                    className={uiMeshSelector}
                                     style={{backgroundColor: materialColor4}}
 
                                     onClick={() => 
-                                    setToggleMesh4Controls(!toggleMesh4Controls)}>
+                                    // setToggleMesh4Controls(!toggleMesh4Controls)}>
+                                    setMeshSelected(4)}>
                                     Mesh 4
                                 </button>
                                 
@@ -323,19 +328,21 @@ export default function Customizer3D(props) {
                             </div>
 
                             {/* MESH 1 CONTROLS */}
-
+                            {(meshSelected == 1) &&
+                            
                             <div 
-                            className={toggleMesh1Controls ? uiMaterialControls : hide}
+                            className={uiMaterialControls}
                             style={{borderColor: materialColor1}}>
                                 <HexColorPicker 
                                     color={materialColor1} 
                                     onChange={setMaterialColor1} 
                                     className={uiHexColorPicker}
                                     onMouseDown={() => setToggleTexture1(true)}
+                                    style={{width:'85%', padding: '15px 20px 0px 20px'}}
                                     
                                     />
 
-                                <div className={toggleMesh1Controls ? uiMaterialPropertyControls : hide}>
+                                <div className={uiMaterialPropertyControls}>
                                     roughness
                                     <input 
                                         className={range}
@@ -392,21 +399,24 @@ export default function Customizer3D(props) {
                                     </div>
                                 </div>
                             </div>
+                            }
+                            
 
                             {/* MESH 2 CONTROLS */}
-
+                            {(meshSelected == 2) &&
+                            
                             <div 
-                            className={toggleMesh2Controls ? uiMaterialControls : hide}
+                            className={uiMaterialControls}
                             style={{borderColor: materialColor2}}>
                                 <HexColorPicker 
-                                    color={materialColor2} 
+                                    color={materialColor2}  
                                     onChange={setMaterialColor2} 
                                     className={uiHexColorPicker}
                                     onMouseDown={() => setToggleTexture2(true)}
                                     
                                     />
 
-                                <div className={toggleMesh2Controls ? uiMaterialPropertyControls : hide}>
+                                <div className={uiMaterialPropertyControls}>
                                     roughness
                                     <input 
                                         className={range}
@@ -462,11 +472,13 @@ export default function Customizer3D(props) {
                                     </div>
                                 </div>
                             </div>
+                            }
 
                             {/* MESH 3 CONTROLS */}
+                            {(meshSelected == 3) &&
 
                             <div 
-                            className={toggleMesh3Controls ? uiMaterialControls : hide}
+                            className={uiMaterialControls}
                             style={{borderColor: materialColor3}}>
                                 <HexColorPicker 
                                     color={materialColor3} 
@@ -476,7 +488,7 @@ export default function Customizer3D(props) {
                                     
                                     />
 
-                                <div className={toggleMesh3Controls ? uiMaterialPropertyControls : hide}>
+                                <div className={uiMaterialPropertyControls}>
                                     roughness
                                     <input 
                                         className={range}
@@ -532,11 +544,12 @@ export default function Customizer3D(props) {
                                     </div>
                                 </div>
                             </div>
+                            }
 
                             {/* MESH 4 CONTROLS */}
-
+                            {(meshSelected == 4) &&
                             <div 
-                            className={toggleMesh4Controls ? uiMaterialControls : hide}
+                            className={uiMaterialControls}
                             style={{borderColor: materialColor4}}>
                                 <HexColorPicker 
                                     color={materialColor4} 
@@ -546,7 +559,7 @@ export default function Customizer3D(props) {
                                     
                                     />
 
-                                <div className={toggleMesh4Controls ? uiMaterialPropertyControls : hide}>
+                                <div className={uiMaterialPropertyControls}>
                                     roughness
                                     <input 
                                         className={range}
@@ -602,20 +615,7 @@ export default function Customizer3D(props) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-
-
-
-
-
-
-                        
-                        <div className={uiGlobalControls}>
-                            
-
-                            
-
-                            
+                            }
                         </div>
                     </div>
                 </div>

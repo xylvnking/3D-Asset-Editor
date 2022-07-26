@@ -298,6 +298,132 @@ const PerspectiveCamera = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwar
 
 /***/ }),
 
+/***/ "./node_modules/@react-three/drei/core/Stars.js":
+/*!******************************************************!*\
+  !*** ./node_modules/@react-three/drei/core/Stars.js ***!
+  \******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Stars": () => (/* binding */ Stars)
+/* harmony export */ });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-4f1a8e2f.esm.js");
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
+
+
+
+
+class StarfieldMaterial extends three__WEBPACK_IMPORTED_MODULE_1__.ShaderMaterial {
+  constructor() {
+    super({
+      uniforms: {
+        time: {
+          value: 0.0
+        },
+        fade: {
+          value: 1.0
+        }
+      },
+      vertexShader:
+      /* glsl */
+      `
+      uniform float time;
+      attribute float size;
+      varying vec3 vColor;
+      void main() {
+        vColor = color;
+        vec4 mvPosition = modelViewMatrix * vec4(position, 0.5);
+        gl_PointSize = size * (30.0 / -mvPosition.z) * (3.0 + sin(mvPosition.x + 2.0 * time + 100.0));
+        gl_Position = projectionMatrix * mvPosition;
+      }`,
+      fragmentShader:
+      /* glsl */
+      `
+      uniform sampler2D pointTexture;
+      uniform float fade;
+      varying vec3 vColor;
+      void main() {
+        float opacity = 1.0;
+        if (fade == 1.0) {
+          float d = distance(gl_PointCoord, vec2(0.5, 0.5));
+          opacity = 1.0 / (1.0 + exp(16.0 * (d - 0.25)));
+        }
+        gl_FragColor = vec4(vColor, opacity);
+
+        #include <tonemapping_fragment>
+	      #include <encodings_fragment>
+      }`
+    });
+  }
+
+}
+
+const genStar = r => {
+  return new three__WEBPACK_IMPORTED_MODULE_1__.Vector3().setFromSpherical(new three__WEBPACK_IMPORTED_MODULE_1__.Spherical(r, Math.acos(1 - Math.random() * 2), Math.random() * 2 * Math.PI));
+};
+
+const Stars = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.forwardRef(({
+  radius = 100,
+  depth = 50,
+  count = 5000,
+  saturation = 0,
+  factor = 4,
+  fade = false,
+  speed = 1
+}, ref) => {
+  const material = react__WEBPACK_IMPORTED_MODULE_0__.useRef();
+  const [position, color, size] = react__WEBPACK_IMPORTED_MODULE_0__.useMemo(() => {
+    const positions = [];
+    const colors = [];
+    const sizes = Array.from({
+      length: count
+    }, () => (0.5 + 0.5 * Math.random()) * factor);
+    const color = new three__WEBPACK_IMPORTED_MODULE_1__.Color();
+    let r = radius + depth;
+    const increment = depth / count;
+
+    for (let i = 0; i < count; i++) {
+      r -= increment * Math.random();
+      positions.push(...genStar(r).toArray());
+      color.setHSL(i / count, saturation, 0.9);
+      colors.push(color.r, color.g, color.b);
+    }
+
+    return [new Float32Array(positions), new Float32Array(colors), new Float32Array(sizes)];
+  }, [count, depth, factor, radius, saturation]);
+  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.x)(state => material.current && (material.current.uniforms.time.value = state.clock.getElapsedTime() * speed));
+  const [starfieldMaterial] = react__WEBPACK_IMPORTED_MODULE_0__.useState(() => new StarfieldMaterial());
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("points", {
+    ref: ref
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("bufferGeometry", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("bufferAttribute", {
+    attach: "attributes-position",
+    args: [position, 3]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("bufferAttribute", {
+    attach: "attributes-color",
+    args: [color, 3]
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("bufferAttribute", {
+    attach: "attributes-size",
+    args: [size, 1]
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("primitive", {
+    ref: material,
+    object: starfieldMaterial,
+    attach: "material",
+    blending: three__WEBPACK_IMPORTED_MODULE_1__.AdditiveBlending,
+    "uniforms-fade-value": fade,
+    transparent: true,
+    vertexColors: true
+  }));
+});
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/@react-three/drei/core/shapes.js":
 /*!*******************************************************!*\
   !*** ./node_modules/@react-three/drei/core/shapes.js ***!
@@ -3499,31 +3625,6 @@ if (false) {} else {
 
 /***/ }),
 
-/***/ "./src/Components/BrandBuilder.module.css":
-/*!************************************************!*\
-  !*** ./src/Components/BrandBuilder.module.css ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "bounce": () => (/* binding */ bounce),
-/* harmony export */   "brandBuilderImageBackground": () => (/* binding */ brandBuilderImageBackground),
-/* harmony export */   "brandBuilderMain": () => (/* binding */ brandBuilderMain),
-/* harmony export */   "brandBuilderType": () => (/* binding */ brandBuilderType),
-/* harmony export */   "svgg": () => (/* binding */ svgg)
-/* harmony export */ });
-// Exports
-var brandBuilderMain = "BrandBuilder-module--brandBuilderMain--HIzPv";
-var brandBuilderImageBackground = "BrandBuilder-module--brandBuilderImageBackground--iVB7I";
-var brandBuilderType = "BrandBuilder-module--brandBuilderType--4EMuo";
-var svgg = "BrandBuilder-module--svgg--sELzC";
-var bounce = "BrandBuilder-module--bounce--mUKzS";
-
-
-/***/ }),
-
 /***/ "./src/Components/CustomizerFolder/Customizer.module.css":
 /*!***************************************************************!*\
   !*** ./src/Components/CustomizerFolder/Customizer.module.css ***!
@@ -3534,112 +3635,39 @@ var bounce = "BrandBuilder-module--bounce--mUKzS";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "customizerCanvas": () => (/* binding */ customizerCanvas),
-/* harmony export */   "customizerContainer": () => (/* binding */ customizerContainer),
 /* harmony export */   "customizerControls": () => (/* binding */ customizerControls),
-/* harmony export */   "customizerFlex": () => (/* binding */ customizerFlex),
-/* harmony export */   "customizerMain": () => (/* binding */ customizerMain),
+/* harmony export */   "customizerGrid": () => (/* binding */ customizerGrid),
 /* harmony export */   "hide": () => (/* binding */ hide),
 /* harmony export */   "range": () => (/* binding */ range),
 /* harmony export */   "rotationResetButton": () => (/* binding */ rotationResetButton),
-/* harmony export */   "uiGlobalControls": () => (/* binding */ uiGlobalControls),
+/* harmony export */   "uiAmbientLightControls": () => (/* binding */ uiAmbientLightControls),
 /* harmony export */   "uiHexColorPicker": () => (/* binding */ uiHexColorPicker),
+/* harmony export */   "uiHexColorPickerAmbientLight": () => (/* binding */ uiHexColorPickerAmbientLight),
 /* harmony export */   "uiMaterialControls": () => (/* binding */ uiMaterialControls),
 /* harmony export */   "uiMaterialPropertyControls": () => (/* binding */ uiMaterialPropertyControls),
 /* harmony export */   "uiMeshControls": () => (/* binding */ uiMeshControls),
 /* harmony export */   "uiMeshSelector": () => (/* binding */ uiMeshSelector),
-/* harmony export */   "uiMeshSelectorPressed": () => (/* binding */ uiMeshSelectorPressed),
 /* harmony export */   "uiMeshSelectors": () => (/* binding */ uiMeshSelectors),
 /* harmony export */   "uiRotation": () => (/* binding */ uiRotation),
 /* harmony export */   "uiVisibilityIcon": () => (/* binding */ uiVisibilityIcon)
 /* harmony export */ });
 // Exports
-var customizerContainer = "Customizer-module--customizerContainer--+lQC-";
-var customizerMain = "Customizer-module--customizerMain--VYLaS";
-var customizerFlex = "Customizer-module--customizerFlex--doWwJ";
+var customizerGrid = "Customizer-module--customizerGrid--BjKCw";
 var customizerCanvas = "Customizer-module--customizerCanvas--7aHgW";
 var customizerControls = "Customizer-module--customizerControls--0u8qk";
 var uiRotation = "Customizer-module--uiRotation--o0xDC";
-var uiGlobalControls = "Customizer-module--uiGlobalControls--DtjbG";
 var uiMeshControls = "Customizer-module--uiMeshControls--dF1Ib";
 var uiMeshSelectors = "Customizer-module--uiMeshSelectors--Fy1Uh";
 var uiMeshSelector = "Customizer-module--uiMeshSelector--e-o8X";
-var uiMeshSelectorPressed = "Customizer-module--uiMeshSelectorPressed--8xdsz";
 var uiMaterialControls = "Customizer-module--uiMaterialControls--slKed";
+var uiAmbientLightControls = "Customizer-module--uiAmbientLightControls--q-pf1";
+var uiHexColorPickerAmbientLight = "Customizer-module--uiHexColorPickerAmbientLight--+aLkW";
 var uiHexColorPicker = "Customizer-module--uiHexColorPicker--YDEXk";
 var uiMaterialPropertyControls = "Customizer-module--uiMaterialPropertyControls--CzPjG";
 var uiVisibilityIcon = "Customizer-module--uiVisibilityIcon--10j7q";
 var rotationResetButton = "Customizer-module--rotationResetButton--al43z";
 var range = "Customizer-module--range--ZDIk2";
 var hide = "Customizer-module--hide--cFlh7";
-
-
-/***/ }),
-
-/***/ "./src/Components/DefaultItems.module.css":
-/*!************************************************!*\
-  !*** ./src/Components/DefaultItems.module.css ***!
-  \************************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "productCard": () => (/* binding */ productCard),
-/* harmony export */   "productCardDescription": () => (/* binding */ productCardDescription),
-/* harmony export */   "productCardTitle": () => (/* binding */ productCardTitle),
-/* harmony export */   "productCards": () => (/* binding */ productCards),
-/* harmony export */   "productCardsContainer": () => (/* binding */ productCardsContainer)
-/* harmony export */ });
-// Exports
-var productCardsContainer = "DefaultItems-module--productCardsContainer--+mzUx";
-var productCards = "DefaultItems-module--productCards--wmVvX";
-var productCard = "DefaultItems-module--productCard--WMbRd";
-var productCardTitle = "DefaultItems-module--productCardTitle--yluVd";
-var productCardDescription = "DefaultItems-module--productCardDescription--pzIIO";
-
-
-/***/ }),
-
-/***/ "./src/Components/Hero.module.css":
-/*!****************************************!*\
-  !*** ./src/Components/Hero.module.css ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "bigType": () => (/* binding */ bigType),
-/* harmony export */   "bigType2": () => (/* binding */ bigType2),
-/* harmony export */   "heroContent": () => (/* binding */ heroContent),
-/* harmony export */   "heroImage": () => (/* binding */ heroImage),
-/* harmony export */   "heroMain": () => (/* binding */ heroMain)
-/* harmony export */ });
-// Exports
-var heroMain = "Hero-module--heroMain--Tj68J";
-var heroImage = "Hero-module--heroImage--o9XM-";
-var heroContent = "Hero-module--heroContent--nsVlj";
-var bigType = "Hero-module--bigType--2mmiQ";
-var bigType2 = "Hero-module--bigType2--f9Tn4";
-
-
-/***/ }),
-
-/***/ "./src/Components/Nav.module.css":
-/*!***************************************!*\
-  !*** ./src/Components/Nav.module.css ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "navIcon": () => (/* binding */ navIcon),
-/* harmony export */   "navstyles": () => (/* binding */ navstyles)
-/* harmony export */ });
-// Exports
-var navstyles = "Nav-module--navstyles--6+g8k";
-var navIcon = "Nav-module--navIcon--knfXq";
 
 
 /***/ }),
@@ -3724,50 +3752,6 @@ module.exports = debounce;
 
 /***/ }),
 
-/***/ "./src/Components/BrandBuilder.js":
-/*!****************************************!*\
-  !*** ./src/Components/BrandBuilder.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ BrandBuilder)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _BrandBuilder_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BrandBuilder.module.css */ "./src/Components/BrandBuilder.module.css");
-
-
-function BrandBuilder() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _BrandBuilder_module_css__WEBPACK_IMPORTED_MODULE_1__.brandBuilderMain
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _BrandBuilder_module_css__WEBPACK_IMPORTED_MODULE_1__.brandBuilderImageBackground
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _BrandBuilder_module_css__WEBPACK_IMPORTED_MODULE_1__.brandBuilderType
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
-    className: _BrandBuilder_module_css__WEBPACK_IMPORTED_MODULE_1__.svgg,
-    viewBox: "0 0 50 50",
-    xmlns: "http://www.w3.org/2000/svg",
-    height: "348",
-    width: "348"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
-    d: "M24 38 12.9 26.85 14.5 25.25 24 34.9 33.55 25.25 35.1 26.85ZM24 23.9 12.9 12.8 14.5 11.25 24 20.85 33.55 11.25 35.1 12.8Z"
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", null, "CREATE", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), "YOUR OWN"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
-    className: _BrandBuilder_module_css__WEBPACK_IMPORTED_MODULE_1__.svgg,
-    viewBox: "0 0 50 50",
-    xmlns: "http://www.w3.org/2000/svg",
-    height: "348",
-    width: "348"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
-    d: "M24 38 12.9 26.85 14.5 25.25 24 34.9 33.55 25.25 35.1 26.85ZM24 23.9 12.9 12.8 14.5 11.25 24 20.85 33.55 11.25 35.1 12.8Z"
-  })))));
-}
-
-/***/ }),
-
 /***/ "./src/Components/CustomizerFolder/Customizer3D.js":
 /*!*********************************************************!*\
   !*** ./src/Components/CustomizerFolder/Customizer3D.js ***!
@@ -3784,10 +3768,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-4f1a8e2f.esm.js");
 /* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
 /* harmony import */ var three_examples_jsm_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three/examples/jsm/controls/OrbitControls */ "./node_modules/three/examples/jsm/controls/OrbitControls.js");
+/* harmony import */ var react_colorful__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-colorful */ "./node_modules/react-colorful/dist/index.mjs");
 /* harmony import */ var _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Customizer.module.css */ "./src/Components/CustomizerFolder/Customizer.module.css");
 /* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/PerspectiveCamera.js");
 /* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/Environment.js");
-/* harmony import */ var react_colorful__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-colorful */ "./node_modules/react-colorful/dist/index.mjs");
+/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/Stars.js");
 /* harmony import */ var _RingTextured__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RingTextured */ "./src/Components/CustomizerFolder/RingTextured.js");
 
 
@@ -3850,7 +3835,7 @@ function Customizer3D(props) {
   const {
     0: ambientLightColor,
     1: setAmbientLightColor
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#FF9D00");
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#9000ff");
   const {
     0: gridToggle,
     1: setGridToggle
@@ -3874,19 +3859,19 @@ function Customizer3D(props) {
   const {
     0: materialColor1,
     1: setMaterialColor1
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#1d1e27");
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#00A3FF");
   const {
     0: materialColor2,
     1: setMaterialColor2
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#14151c");
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#bababa");
   const {
     0: materialColor3,
     1: setMaterialColor3
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#180e13");
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#00A3FF");
   const {
     0: materialColor4,
     1: setMaterialColor4
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#27141f");
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)("#bababa");
   const {
     0: materialRoughness1,
     1: setMaterialRoughness1
@@ -3982,15 +3967,10 @@ function Customizer3D(props) {
   const {
     0: toggleMesh4Controls,
     1: setToggleMesh4Controls
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true); // const visible = "VISIBLE"
-  // const hidden = "HIDDEN"
-
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  const [meshSelected, setMeshSelected] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(1);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerContainer
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerMain
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerFlex
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerGrid
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerCanvas
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_5__.Canvas, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CameraController, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_6__.PerspectiveCamera, {
@@ -4040,6 +4020,14 @@ function Customizer3D(props) {
     wireframeToggle2: wireframeToggle2,
     wireframeToggle3: wireframeToggle3,
     wireframeToggle4: wireframeToggle3
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_8__.Stars, {
+    radius: 5,
+    depth: 50,
+    count: 5000,
+    factor: 4,
+    saturation: 0,
+    fade: true,
+    speed: 1
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerControls
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -4086,16 +4074,17 @@ function Customizer3D(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.rotationResetButton,
     onClick: () => setZRotation(0)
-  }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.rotationResetButton,
-    onClick: () => setGridToggle(!gridToggle)
-  }, "Grid Toggle"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialControls
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
+  }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiAmbientLightControls
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_9__.HexColorPicker, {
     color: ambientLightColor,
     onChange: setAmbientLightColor,
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPicker // style={{height: "100px"}}
-
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPickerAmbientLight,
+    style: {
+      height: '100px',
+      width: '90%',
+      paddingTop: '15px'
+    }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
     type: "range",
@@ -4108,7 +4097,7 @@ function Customizer3D(props) {
     ,
     style: {
       background: ambientLightColor,
-      width: "100%"
+      width: "90%"
     }
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshControls
@@ -4116,42 +4105,50 @@ function Customizer3D(props) {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelectors
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     // className={toggleMesh1Controls ? uiPremadeTextureButton : uiPremadeTextureButtonPressed}
-    className: toggleMesh1Controls ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelectorPressed : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelector,
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelector,
     style: {
       backgroundColor: materialColor1
     } // className={uiMeshSelector}
     ,
-    onClick: () => setToggleMesh1Controls(!toggleMesh1Controls)
+    onClick: () => // setToggleMesh1Controls(!toggleMesh1Controls)}>
+    setMeshSelected(1)
   }, "Mesh 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: toggleMesh2Controls ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelectorPressed : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelector,
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelector,
     style: {
       backgroundColor: materialColor2
     },
-    onClick: () => setToggleMesh2Controls(!toggleMesh2Controls)
+    onClick: () => // setToggleMesh2Controls(!toggleMesh2Controls)}>
+    setMeshSelected(2)
   }, "Mesh 2"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: toggleMesh3Controls ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelectorPressed : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelector,
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelector,
     style: {
       backgroundColor: materialColor3
     },
-    onClick: () => setToggleMesh3Controls(!toggleMesh3Controls)
+    onClick: () => // setToggleMesh3Controls(!toggleMesh3Controls)}>
+    setMeshSelected(3)
   }, "Mesh 3"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: toggleMesh4Controls ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelectorPressed : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelector,
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMeshSelector,
     style: {
       backgroundColor: materialColor4
     },
-    onClick: () => setToggleMesh4Controls(!toggleMesh4Controls)
-  }, "Mesh 4")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: toggleMesh1Controls ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialControls : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.hide,
+    onClick: () => // setToggleMesh4Controls(!toggleMesh4Controls)}>
+    setMeshSelected(4)
+  }, "Mesh 4")), meshSelected == 1 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialControls,
     style: {
       borderColor: materialColor1
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_9__.HexColorPicker, {
     color: materialColor1,
     onChange: setMaterialColor1,
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPicker,
-    onMouseDown: () => setToggleTexture1(true)
+    onMouseDown: () => setToggleTexture1(true),
+    style: {
+      width: '85%',
+      padding: '15px 20px 0px 20px'
+    }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: toggleMesh1Controls ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialPropertyControls : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.hide
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialPropertyControls
   }, "roughness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.range,
     id: "typeinp",
@@ -4236,18 +4233,18 @@ function Customizer3D(props) {
     width: "48"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
     d: "M8.4 42.95q-1.45-.4-2.1-1.175Q5.65 41 5.2 39.6L39.65 5.1q1.15.3 2.05 1.2.9.9 1.15 2.1ZM4.95 30.3v-6.6L23.7 4.9h6.6Zm0-16.1V9.5q0-1.85 1.35-3.225T9.5 4.9h4.7ZM33.8 43.05l9.3-9.25v4.7q0 1.85-1.375 3.2T38.5 43.05Zm-16.1 0L43.1 17.7v6.6L24.3 43.05Z"
-  })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: toggleMesh2Controls ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialControls : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.hide,
+  })))))), meshSelected == 2 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialControls,
     style: {
       borderColor: materialColor2
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_9__.HexColorPicker, {
     color: materialColor2,
     onChange: setMaterialColor2,
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPicker,
     onMouseDown: () => setToggleTexture2(true)
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: toggleMesh2Controls ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialPropertyControls : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.hide
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialPropertyControls
   }, "roughness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.range,
     id: "typeinp",
@@ -4328,18 +4325,18 @@ function Customizer3D(props) {
     width: "48"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
     d: "M8.4 42.95q-1.45-.4-2.1-1.175Q5.65 41 5.2 39.6L39.65 5.1q1.15.3 2.05 1.2.9.9 1.15 2.1ZM4.95 30.3v-6.6L23.7 4.9h6.6Zm0-16.1V9.5q0-1.85 1.35-3.225T9.5 4.9h4.7ZM33.8 43.05l9.3-9.25v4.7q0 1.85-1.375 3.2T38.5 43.05Zm-16.1 0L43.1 17.7v6.6L24.3 43.05Z"
-  })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: toggleMesh3Controls ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialControls : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.hide,
+  })))))), meshSelected == 3 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialControls,
     style: {
       borderColor: materialColor3
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_9__.HexColorPicker, {
     color: materialColor3,
     onChange: setMaterialColor3,
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPicker,
     onMouseDown: () => setToggleTexture3(true)
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: toggleMesh3Controls ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialPropertyControls : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.hide
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialPropertyControls
   }, "roughness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.range,
     id: "typeinp",
@@ -4420,18 +4417,18 @@ function Customizer3D(props) {
     width: "48"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
     d: "M8.4 42.95q-1.45-.4-2.1-1.175Q5.65 41 5.2 39.6L39.65 5.1q1.15.3 2.05 1.2.9.9 1.15 2.1ZM4.95 30.3v-6.6L23.7 4.9h6.6Zm0-16.1V9.5q0-1.85 1.35-3.225T9.5 4.9h4.7ZM33.8 43.05l9.3-9.25v4.7q0 1.85-1.375 3.2T38.5 43.05Zm-16.1 0L43.1 17.7v6.6L24.3 43.05Z"
-  })))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: toggleMesh4Controls ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialControls : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.hide,
+  })))))), meshSelected == 4 && /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialControls,
     style: {
       borderColor: materialColor4
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_8__.HexColorPicker, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_9__.HexColorPicker, {
     color: materialColor4,
     onChange: setMaterialColor4,
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPicker,
     onMouseDown: () => setToggleTexture4(true)
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: toggleMesh4Controls ? _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialPropertyControls : _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.hide
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialPropertyControls
   }, "roughness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.range,
     id: "typeinp",
@@ -4512,9 +4509,7 @@ function Customizer3D(props) {
     width: "48"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
     d: "M8.4 42.95q-1.45-.4-2.1-1.175Q5.65 41 5.2 39.6L39.65 5.1q1.15.3 2.05 1.2.9.9 1.15 2.1ZM4.95 30.3v-6.6L23.7 4.9h6.6Zm0-16.1V9.5q0-1.85 1.35-3.225T9.5 4.9h4.7ZM33.8 43.05l9.3-9.25v4.7q0 1.85-1.375 3.2T38.5 43.05Zm-16.1 0L43.1 17.7v6.6L24.3 43.05Z"
-  }))))))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiGlobalControls
-  })))));
+  })))))))));
 }
 
 /***/ }),
@@ -4618,185 +4613,6 @@ _react_three_drei__WEBPACK_IMPORTED_MODULE_1__.useGLTF.preload('/RingTextured.gl
 
 /***/ }),
 
-/***/ "./src/Components/DefaultItems.js":
-/*!****************************************!*\
-  !*** ./src/Components/DefaultItems.js ***!
-  \****************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ DefaultItems)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _DefaultItems_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DefaultItems.module.css */ "./src/Components/DefaultItems.module.css");
-/* harmony import */ var _ProductCard__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ProductCard */ "./src/Components/ProductCard.js");
-
-
-
- // I'd like it if the 3D sections rotated slowly. I had more important things to work on than getting the clamp to work though.
-
-function DefaultItems() {
-  return (
-    /*#__PURE__*/
-    // <div className={productCards}> 
-    //     <div className={productCard}>
-    //         <h1 className={productCardTitle}>cyberWear Ring 1</h1>
-    //         <StaticImage 
-    //             src="../images/Ring1.jpg"
-    //             alt="A cyberpunk ring"
-    //             placeholder="blurred"
-    //         />
-    //         <p className={productCardDescription}>Cronut affogato hella heirloom snackwave seitan thundercats chicharrones salvia offal forage church-key. Coloring book DSA jianbing green juice brunch street art four loko.</p>
-    //     </div>
-    // </div>
-    react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: _DefaultItems_module_css__WEBPACK_IMPORTED_MODULE_1__.productCardsContainer
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-      className: _DefaultItems_module_css__WEBPACK_IMPORTED_MODULE_1__.productCards
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ProductCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      rotationNumber2: Math.random() * Math.random() * .02
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ProductCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      rotationNumber2: Math.random() * Math.random() * .02
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ProductCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      rotationNumber2: Math.random() * Math.random() * .02
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ProductCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      rotationNumber2: Math.random() * Math.random() * .02
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ProductCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      rotationNumber2: Math.random() * Math.random() * .02
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_ProductCard__WEBPACK_IMPORTED_MODULE_2__["default"], {
-      rotationNumber2: Math.random() * Math.random() * .02
-    })))
-  );
-}
-
-/***/ }),
-
-/***/ "./src/Components/Hero.js":
-/*!********************************!*\
-  !*** ./src/Components/Hero.js ***!
-  \********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Hero)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Hero_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Hero.module.css */ "./src/Components/Hero.module.css");
-
-
-function Hero() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _Hero_module_css__WEBPACK_IMPORTED_MODULE_1__.heroMain
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _Hero_module_css__WEBPACK_IMPORTED_MODULE_1__.heroImage
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-    className: _Hero_module_css__WEBPACK_IMPORTED_MODULE_1__.bigType
-  }, "///////"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h2", {
-    className: _Hero_module_css__WEBPACK_IMPORTED_MODULE_1__.bigType2
-  }, "///////"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _Hero_module_css__WEBPACK_IMPORTED_MODULE_1__.heroContent
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "cyberWear jewelry"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Embrace an opulent future"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", null, "Create Your Own"))));
-}
-
-/***/ }),
-
-/***/ "./src/Components/Nav.js":
-/*!*******************************!*\
-  !*** ./src/Components/Nav.js ***!
-  \*******************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ Nav)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Nav_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Nav.module.css */ "./src/Components/Nav.module.css");
-
-
-function Nav() {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _Nav_module_css__WEBPACK_IMPORTED_MODULE_1__.navstyles
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("ul", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Home"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "About"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Reviews"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("li", null, "Connect"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
-    className: _Nav_module_css__WEBPACK_IMPORTED_MODULE_1__.navIcon,
-    xmlns: "http://www.w3.org/2000/svg",
-    height: "48",
-    width: "48"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("path", {
-    d: "M6 36V33H42V36ZM6 25.5V22.5H42V25.5ZM6 15V12H42V15Z"
-  }))));
-}
-
-/***/ }),
-
-/***/ "./src/Components/ProductCard.js":
-/*!***************************************!*\
-  !*** ./src/Components/ProductCard.js ***!
-  \***************************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "default": () => (/* binding */ ProductCard)
-/* harmony export */ });
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _DefaultItems_module_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DefaultItems.module.css */ "./src/Components/DefaultItems.module.css");
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-4f1a8e2f.esm.js");
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
-
-
- // import { Canvas, useFrame } from "react-three-fiber";
-
-
-function ProductCard(props) {
-  const Box = () => {
-    const boxRef = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
-    (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.x)(() => {
-      // boxRef.current.rotation.y += 0.01;
-      boxRef.current.rotation.y += props.rotationNumber2;
-      boxRef.current.rotation.x += props.rotationNumber2;
-      boxRef.current.rotation.z += props.rotationNumber2;
-    });
-    console.log(props.rotationNumber2);
-    return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
-      ref: boxRef,
-      "rotation-x": Math.PI * 0.25,
-      "rotation-y": Math.PI * 0.25
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("torusBufferGeometry", {
-      args: [2, .5, 5, 30]
-    }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshStandardMaterial", {
-      color: "red"
-    }));
-  };
-
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: _DefaultItems_module_css__WEBPACK_IMPORTED_MODULE_1__.productCard
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", {
-    className: _DefaultItems_module_css__WEBPACK_IMPORTED_MODULE_1__.productCardTitle
-  }, "cyberWear Ring 1"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_3__.Canvas, {
-    style: {
-      height: 400,
-      width: 400
-    }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pointLight", {
-    position: [5, 5, 5]
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Box, null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", {
-    className: _DefaultItems_module_css__WEBPACK_IMPORTED_MODULE_1__.productCardDescription
-  }, "Cronut affogato hella heirloom snackwave seitan thundercats chicharrones salvia offal forage church-key. Coloring book DSA jianbing green juice brunch street art four loko."));
-}
-
-/***/ }),
-
 /***/ "./src/pages/index.js":
 /*!****************************!*\
   !*** ./src/pages/index.js ***!
@@ -4810,24 +4626,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _Components_Hero__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Components/Hero */ "./src/Components/Hero.js");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../style.css */ "./src/style.css");
-/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _Components_Nav__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Components/Nav */ "./src/Components/Nav.js");
-/* harmony import */ var _Components_DefaultItems__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../Components/DefaultItems */ "./src/Components/DefaultItems.js");
-/* harmony import */ var _Components_BrandBuilder__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../Components/BrandBuilder */ "./src/Components/BrandBuilder.js");
-/* harmony import */ var _Components_CustomizerFolder_Customizer3D__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../Components/CustomizerFolder/Customizer3D */ "./src/Components/CustomizerFolder/Customizer3D.js");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../style.css */ "./src/style.css");
+/* harmony import */ var _style_css__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_style_css__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _Components_CustomizerFolder_Customizer3D__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Components/CustomizerFolder/Customizer3D */ "./src/Components/CustomizerFolder/Customizer3D.js");
 
-
-
-
-
- // import Customizer from "../Components/CustomizerFolder/Customizer"
 
 
 
 const IndexPage = () => {
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Components_CustomizerFolder_Customizer3D__WEBPACK_IMPORTED_MODULE_6__["default"], null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("footer", null));
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement("main", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_Components_CustomizerFolder_Customizer3D__WEBPACK_IMPORTED_MODULE_2__["default"], null));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (IndexPage);

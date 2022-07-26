@@ -1,8 +1,11 @@
-.customizerFlex {
+.customizerGrid {
   font-family: 'Space Mono', monospace;
   display: grid;
   grid-template-columns: 1fr 1fr;
+  width: 100vw;
   height: 100vh;
+  /* justify-items: center; */
+  /* background-color: aquamarine; */
   
   
 
@@ -10,7 +13,13 @@
 
 .customizerCanvas {
   background-color: rgb(23, 23, 23);
+  /* border-radius: 50px; */
   /* height: 100vh; */
+  /* margin-top: 25px; */
+  /* width: 100%; */
+  /* height: 100vh; */
+  /* height: 200px; */
+  min-width: 475px;
 
 }
 
@@ -20,6 +29,16 @@
   font-size: 1rem;
   font-weight: 700;
   line-height: normal; 
+  min-width: 475px;
+
+  /* display: flex;
+  flex-direction: column; */
+  
+  display: grid;
+  
+  /* flex-direction: column; */
+  
+  /* width: 450px; */
 }
 
 .uiRotation {
@@ -27,16 +46,8 @@
   align-items: center;
   gap: 1rem;
   padding: 5px;
-}
-
-.uiGlobalControls {
-  /* display: flex;
-  align-items: center; */
-  /* gap: 1rem; */
-  border: #000000;
-  border-bottom-style: solid;
-  border-width: 1px;
-  padding: 5px;
+  margin: auto;
+  width: 90%;
 }
 
 .uiMeshControls {
@@ -44,22 +55,22 @@
 }
 
 .uiMeshSelectors {
-  display: flex;
-  justify-content: space-evenly;
-  border-color: black;
-  border-width: 1px;
-  border-style: solid;
-  border-bottom-style: none;
-  border-left-width: .5px;
-  border-right-width: .5px;
+  
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+  padding: 25px;
+  
 }
 
 
 .uiMeshSelector {
 appearance: none;
-background-color: transparent;
-border-color: black;
-border-width: .5px;
+background-color: black;
+/* border-color: black; */
+border-radius: 10px;
+
+border-width: 0px;
 border-bottom-style: none;
 border-top-style: none;
 box-sizing: border-box;
@@ -87,64 +98,32 @@ width: 100%;
 will-change: transform;
 }
 
-.uiMeshSelectorPressed {
-  appearance: none;
-  background-color: transparent;
-  border-color: black;
-  border-width: .5px;
-  border-bottom-style: none;
-  border-top-style: none;
-  box-sizing: border-box;
-  color: #ffffff;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: normal;
-
-  padding-top: 16px;
-  padding-bottom: 16px;
-  /* padding: 16px 24px; */
-
-
-  text-align: center;
-  text-decoration: none;
-  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
-  user-select: none;
-  -webkit-user-select: none;
-  width: 100%;
-  will-change: transform;
-  background-color: rgb(0, 0, 0);
-}
-
-.uiMeshSelector:disabled {
-pointer-events: none;
-}
-
-.uiMeshSelector:hover {
-/* color: #fff; */
-/* background-color: #1A1A1A; */
-box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
-transform: translateY(-2px);
-}
-
-.uiMeshSelector:checked {
-box-shadow: none;
-transform: translateY(0);
-}
 
 
 .uiMaterialControls {
-  /* border-color: black; */
-
-  /* border-width: 5px; */
-
-  /* border-style: solid; */
-  /* border-bottom-style: none; */
-  /* border-left-width: .5px;
-  border-right-width: .5px; */
   display: flex;
-  /* height: 100%; */
+  flex-direction: row;
+  margin: auto;
+  width: 80%;
+}
+
+.uiAmbientLightControls {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  /* margin-top:5px; */
+  
+  
+  width: 90%;
+  /* padding: 10px 0px 10px 0px */
+
+  /* background-color: aqua; */
+}
+.uiHexColorPickerAmbientLight {
+  height: 100px;
+  width: 100%;
+  
   
 }
 
@@ -153,6 +132,7 @@ transform: translateY(0);
   height: 10rem;
   width: 50%;
 }
+
 
 .uiMaterialPropertyControls {
   /* background-color: aqua; */
@@ -252,4 +232,101 @@ transform: translateY(0);
   display: none;
   /* background-color: blueviolet; */
 
+}
+
+
+@media (max-width: 950px) {
+  .uiMeshSelectors {
+  
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    /* max-width: 90%; */
+    gap: 0px;
+    padding: 0px;
+    
+  }
+  .uiMeshSelector {
+    border-radius: 0px;
+  }
+  /* .customizerGrid {
+    font-family: 'Space Mono', monospace;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 1fr;
+  } */
+  .customizerGrid {
+    font-family: 'Space Mono', monospace;
+    /* display: flex;
+    flex-direction: column; */
+    
+
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 40vh 1fr;
+    /* justify-content: center; */
+    align-items: center;
+    width: 100vw;
+    height: 100%;
+    /* align-items: center; */
+    /* background-color: rgb(255, 255, 255); */
+    
+    
+  
+  }
+
+  .uiMaterialControls {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    margin: auto;
+    width: 92%;
+  }
+
+  .uiAmbientLightControls {
+    padding: 0px;
+    margin: 0px;
+    height: 0px;
+    visibility: hidden;
+  }
+  .uiHexColorPicker {
+    height: 10rem;
+    width: 50%;
+  }
+
+  .customizerControls {
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: normal; 
+    min-width: 0px;
+    /* min-height: 450px; */
+    /* width: 90%; */
+    /* padding: 10px 10px 0px 10px; */
+  }
+  .range {
+    margin: 10px 0px 10px 0px;
+  }
+
+  .uiRotation {
+    padding: 0px;
+    margin: 0px;
+    height: 0px;
+    visibility: hidden;
+  }
+
+  .uiMaterialPropertyControls {
+    /* background-color: aqua; */
+    font-weight: 400;
+    padding: 1rem;
+    line-height: 10px;
+    width: 80%;
+  }
+
+  .customizerCanvas {
+    background-color: rgb(23, 23, 23);
+    height: 100%;
+    /* max-height: 50vh; */
+    min-width: 0px;
+  
+  }
 }
