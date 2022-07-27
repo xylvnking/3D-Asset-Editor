@@ -3645,7 +3645,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "uiHexColorPickerAmbientLight": () => (/* binding */ uiHexColorPickerAmbientLight),
 /* harmony export */   "uiMaterialControls": () => (/* binding */ uiMaterialControls),
 /* harmony export */   "uiMaterialPropertyControls": () => (/* binding */ uiMaterialPropertyControls),
-/* harmony export */   "uiMeshControls": () => (/* binding */ uiMeshControls),
 /* harmony export */   "uiMeshSelector": () => (/* binding */ uiMeshSelector),
 /* harmony export */   "uiMeshSelectors": () => (/* binding */ uiMeshSelectors),
 /* harmony export */   "uiRotation": () => (/* binding */ uiRotation),
@@ -3656,7 +3655,6 @@ var customizerGrid = "Customizer-module--customizerGrid--BjKCw";
 var customizerCanvas = "Customizer-module--customizerCanvas--7aHgW";
 var customizerControls = "Customizer-module--customizerControls--0u8qk";
 var uiRotation = "Customizer-module--uiRotation--o0xDC";
-var uiMeshControls = "Customizer-module--uiMeshControls--dF1Ib";
 var uiMeshSelectors = "Customizer-module--uiMeshSelectors--Fy1Uh";
 var uiMeshSelector = "Customizer-module--uiMeshSelector--e-o8X";
 var uiMaterialControls = "Customizer-module--uiMaterialControls--slKed";
@@ -3891,19 +3889,19 @@ function Customizer3D(props) {
   const {
     0: toggleTexture1,
     1: setToggleTexture1
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const {
     0: toggleTexture2,
     1: setToggleTexture2
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const {
     0: toggleTexture3,
     1: setToggleTexture3
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const {
     0: toggleTexture4,
     1: setToggleTexture4
-  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
+  } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false);
   const {
     0: toggleMesh1Visibility,
     1: setToggleMesh1Visibility
@@ -3968,7 +3966,7 @@ function Customizer3D(props) {
     0: toggleMesh4Controls,
     1: setToggleMesh4Controls
   } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
-  const [meshSelected, setMeshSelected] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(1);
+  const [meshSelected, setMeshSelected] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(3);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerGrid
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -4076,14 +4074,14 @@ function Customizer3D(props) {
     onClick: () => setZRotation(0)
   }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiAmbientLightControls
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_9__.HexColorPicker, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "ambient light color & intensity"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_9__.HexColorPicker, {
     color: ambientLightColor,
     onChange: setAmbientLightColor,
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPickerAmbientLight,
     style: {
       height: '100px',
       width: '90%',
-      paddingTop: '15px'
+      paddingTop: '0px'
     }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
     id: "typeinp",
@@ -4242,7 +4240,11 @@ function Customizer3D(props) {
     color: materialColor2,
     onChange: setMaterialColor2,
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPicker,
-    onMouseDown: () => setToggleTexture2(true)
+    onMouseDown: () => setToggleTexture2(true),
+    style: {
+      width: '85%',
+      padding: '15px 20px 0px 20px'
+    }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialPropertyControls
   }, "roughness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
@@ -4334,7 +4336,11 @@ function Customizer3D(props) {
     color: materialColor3,
     onChange: setMaterialColor3,
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPicker,
-    onMouseDown: () => setToggleTexture3(true)
+    onMouseDown: () => setToggleTexture3(true),
+    style: {
+      width: '85%',
+      padding: '15px 20px 0px 20px'
+    }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialPropertyControls
   }, "roughness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
@@ -4426,7 +4432,11 @@ function Customizer3D(props) {
     color: materialColor4,
     onChange: setMaterialColor4,
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPicker,
-    onMouseDown: () => setToggleTexture4(true)
+    onMouseDown: () => setToggleTexture4(true),
+    style: {
+      width: '85%',
+      padding: '15px 20px 0px 20px'
+    }
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiMaterialPropertyControls
   }, "roughness", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("input", {
@@ -4589,7 +4599,8 @@ function RingTextured({ ...props
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshPhysicalMaterial", {
     color: props.materialColor3,
     roughness: props.materialRoughness3,
-    metalness: props.material3Metalness // flatShading={true} 
+    metalness: props.material3Metalness,
+    wireframe: props.wireframeToggle3 // flatShading={true} 
     // wireframe={true}
 
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
@@ -4602,7 +4613,8 @@ function RingTextured({ ...props
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("meshPhysicalMaterial", {
     color: props.materialColor4,
     roughness: props.materialRoughness4,
-    metalness: props.material4Metalness
+    metalness: props.material4Metalness,
+    wireframe: props.wireframeToggle4
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("mesh", {
     geometry: nodes.Spike_Ring_Twist001.geometry,
     material: materials['Material.003'],

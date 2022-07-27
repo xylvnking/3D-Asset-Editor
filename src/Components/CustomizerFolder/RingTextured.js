@@ -76,6 +76,7 @@ export default function RingTextured({ ...props }) {
           color={props.materialColor3}
           roughness={props.materialRoughness3}
           metalness={props.material3Metalness}
+          wireframe={props.wireframeToggle3}
           // flatShading={true} 
           // wireframe={true}
           />
@@ -93,7 +94,8 @@ export default function RingTextured({ ...props }) {
       <meshPhysicalMaterial 
         color={props.materialColor4}
         roughness={props.materialRoughness4}
-        metalness={props.material4Metalness} />
+        metalness={props.material4Metalness} 
+        wireframe={props.wireframeToggle4}/>
       </mesh>
       <mesh 
         geometry={nodes.Spike_Ring_Twist001.geometry} 

@@ -4,23 +4,11 @@
   grid-template-columns: 1fr 1fr;
   width: 100vw;
   height: 100vh;
-  /* justify-items: center; */
-  /* background-color: aquamarine; */
-  
-  
-
 }
 
 .customizerCanvas {
   background-color: rgb(23, 23, 23);
-  /* border-radius: 50px; */
-  /* height: 100vh; */
-  /* margin-top: 25px; */
-  /* width: 100%; */
-  /* height: 100vh; */
-  /* height: 200px; */
   min-width: 475px;
-
 }
 
 .customizerControls {
@@ -30,15 +18,7 @@
   font-weight: 700;
   line-height: normal; 
   min-width: 475px;
-
-  /* display: flex;
-  flex-direction: column; */
-  
   display: grid;
-  
-  /* flex-direction: column; */
-  
-  /* width: 450px; */
 }
 
 .uiRotation {
@@ -50,26 +30,17 @@
   width: 90%;
 }
 
-.uiMeshControls {
-
-}
-
 .uiMeshSelectors {
-  
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 10px;
   padding: 25px;
-  
 }
-
 
 .uiMeshSelector {
 appearance: none;
 background-color: black;
-/* border-color: black; */
 border-radius: 10px;
-
 border-width: 0px;
 border-bottom-style: none;
 border-top-style: none;
@@ -80,15 +51,8 @@ display: inline-block;
 font-size: 16px;
 font-weight: 600;
 line-height: normal;
-
-
-
-/* padding: 16px 24px; */
 padding-top: 16px;
 padding-bottom: 16px;
-
-
-
 text-align: center;
 text-decoration: none;
 transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
@@ -97,8 +61,6 @@ user-select: none;
 width: 100%;
 will-change: transform;
 }
-
-
 
 .uiMaterialControls {
   display: flex;
@@ -112,19 +74,12 @@ will-change: transform;
   flex-direction: column;
   align-items: center;
   margin: auto;
-  /* margin-top:5px; */
-  
-  
   width: 90%;
-  /* padding: 10px 0px 10px 0px */
-
-  /* background-color: aqua; */
 }
+
 .uiHexColorPickerAmbientLight {
   height: 100px;
   width: 100%;
-  
-  
 }
 
 .uiHexColorPicker {
@@ -133,77 +88,57 @@ will-change: transform;
   width: 50%;
 }
 
-
 .uiMaterialPropertyControls {
-  /* background-color: aqua; */
   font-weight: 400;
   padding: 1rem;
 }
 
-
 .uiVisibilityIcon {
-  /* align-self: flex-end; */
   display: flex;
   align-items: center;
   justify-content: flex-start;
 }
 
-
-
-
 .rotationResetButton {
-appearance: none;
-background-color: transparent;
-border: 2px solid #1A1A1A;
-border-radius: 15px;
-/* box-sizing: border-box; */
-border-style: none;
-color: #000000;
-cursor: pointer;
-/* display: inline-block; */
-/* font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol"; */
-font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-font-size: 1rem;
-font-weight: 600;
-line-height: normal;
-margin: 0;
-min-height: 30px;
-min-width: 0;
-outline: none;
-/* padding: 8px 12px; */
-text-align: center;
-text-decoration: none;
-transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
-user-select: none;
--webkit-user-select: none;
-touch-action: manipulation;
-/* width: 100%; */
-will-change: transform;
-
-display: flex;
-align-items: center;
-justify-content: center;
-
-
-
+  appearance: none;
+  background-color: transparent;
+  border: 2px solid #1A1A1A;
+  border-radius: 15px;
+  border-style: none;
+  color: #000000;
+  cursor: pointer;
+  font-family: Roobert,-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 30px;
+  min-width: 0;
+  outline: none;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(.23, 1, 0.32, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .rotationResetButton:disabled {
-pointer-events: none;
+  pointer-events: none;
 }
 
 .rotationResetButton:hover {
-/* color: #fff; */
-/* background-color: #1A1A1A; */
-
-transform: translateY(-2px);
+  transform: translateY(-2px);
 }
 
 .rotationResetButton:active {
 box-shadow: none;
 transform: translateY(0);
 }
-
 
 .range {
   width: 100%;
@@ -213,8 +148,6 @@ transform: translateY(0);
   outline: none;
   border-radius: 15px;
   overflow: hidden;
-  /* box-shadow: inset 0 0 5px rgba(0, 0, 0, 1); */
-  
 }
 .range::-webkit-slider-thumb {
   -webkit-appearance: none;
@@ -227,57 +160,34 @@ transform: translateY(0);
   box-shadow: -407px 0 0 400px #111;
 }
 
-
 .hide {
   display: none;
-  /* background-color: blueviolet; */
-
 }
-
 
 @media (max-width: 950px) {
   .uiMeshSelectors {
-  
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    /* max-width: 90%; */
     gap: 0px;
     padding: 0px;
-    
   }
   .uiMeshSelector {
     border-radius: 0px;
   }
-  /* .customizerGrid {
-    font-family: 'Space Mono', monospace;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 1fr 1fr;
-  } */
+  
   .customizerGrid {
     font-family: 'Space Mono', monospace;
-    /* display: flex;
-    flex-direction: column; */
-    
-
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 40vh 1fr;
-    /* justify-content: center; */
     align-items: center;
     width: 100vw;
     height: 100%;
-    /* align-items: center; */
-    /* background-color: rgb(255, 255, 255); */
-    
-    
-  
   }
 
   .uiMaterialControls {
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
     margin: auto;
     width: 92%;
@@ -299,23 +209,17 @@ transform: translateY(0);
     font-weight: 700;
     line-height: normal; 
     min-width: 0px;
-    /* min-height: 450px; */
-    /* width: 90%; */
-    /* padding: 10px 10px 0px 10px; */
   }
   .range {
     margin: 10px 0px 10px 0px;
   }
-
   .uiRotation {
     padding: 0px;
     margin: 0px;
     height: 0px;
     visibility: hidden;
   }
-
   .uiMaterialPropertyControls {
-    /* background-color: aqua; */
     font-weight: 400;
     padding: 1rem;
     line-height: 10px;
@@ -325,8 +229,6 @@ transform: translateY(0);
   .customizerCanvas {
     background-color: rgb(23, 23, 23);
     height: 100%;
-    /* max-height: 50vh; */
     min-width: 0px;
-  
   }
 }
