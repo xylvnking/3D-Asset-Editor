@@ -1,6 +1,8 @@
 
 import React, { useRef, useState, useEffect, Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
+
+
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import { HexColorPicker } from "react-colorful";
 import { 
@@ -27,7 +29,7 @@ import {
     
     
         } from './Customizer.module.css'
-import { PerspectiveCamera, Ring, useHelper, Environment, Stars, Sky, Trail } from '@react-three/drei'
+import { PerspectiveCamera, Ring, useHelper, Environment, Stars, Sky, Trail , Html, useProgress } from '@react-three/drei'
 
 import RingTextured from './RingTextured'
 
@@ -50,6 +52,15 @@ const CameraController = () => {
     );
     return null;
   };
+
+
+  function Loader() {
+    const { progress } = useProgress()
+    return <Html 
+    center
+    style={{color: 'white', fontSize: '100px', maxWidth: '100vw'}}
+    >{progress} % loaded</Html>
+  }
 
 
 export default function Customizer3D(props) {
@@ -166,8 +177,9 @@ export default function Customizer3D(props) {
                                 />
 
                             </mesh>
+                            <Suspense fallback={<Loader />}>
                             <Environment preset="studio" />
-                            <Suspense>
+                            <Stars radius={5} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
                                 
                                 <RingTextured 
                                     
@@ -209,7 +221,7 @@ export default function Customizer3D(props) {
                                     wireframeToggle4={wireframeToggle4}
                                     />
                                 
-                                <Stars radius={5} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+                                
                                 
                             </Suspense>
                         </Canvas>

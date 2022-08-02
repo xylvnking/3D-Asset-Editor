@@ -16,13 +16,13 @@ export default function RingTextured({ ...props }) {
   
   //this animates the model to float around a bit but might be too performance heavy
   // this also disables(overides?) the slider position controls
-  // useFrame((state) => {
-    //   const t = state.clock.getElapsedTime()
-    //   group.current.rotation.z = -0.2 - (1 + Math.sin(t / 1.5)) / 20
-    //   group.current.rotation.x = Math.cos(t / 4) / 8
-    //   group.current.rotation.y = Math.sin(t / 4) / 8
-    //   group.current.position.y = (1 + Math.sin(t / 1.5)) / 10
-    // })
+  useFrame((state) => {
+      const t = state.clock.getElapsedTime()
+      group.current.rotation.z = -0.2 - (1 + Math.sin(t / 1.5)) / 20
+      group.current.rotation.x = Math.cos(t / 4) / 8
+      group.current.rotation.y = Math.sin(t / 4) / 8
+      group.current.position.y = (1 + Math.sin(t / 1.5)) / 10
+    })
     
     
     

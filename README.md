@@ -1,132 +1,34 @@
-# Jewelry Brand Landing Page
+# 3D asset editor and material creator 
 
-## Technologies used:
-- Gatsby
-- Three.js
-- React Three Fiber
-- React Three Drei
-- CSS modules
-- [react-colorful](https://github.com/omgovich/react-colorful)
+React | Three.js | Gatsby
 
-# Really nice fonts used:
-[Space Mono](https://fonts.google.com/specimen/Space+Mono?preview.text=Embrace%20an%20opulent%20future.&preview.text_type=custom#standard-styles)
-```shell
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono&display=swap');
-font-family: 'Space Mono', monospace;
-</style>
-```
+[Visit the live site](www.thiswillbearealwebsite.com)
 
-[Cinzel](https://fonts.google.com/specimen/Cinzel?preview.text=Embrace%20an%20opulent%20future.&preview.text_type=custom)
+![](/src/images/3dscreenshot1.png)
 
-# Static Image
-when using gatsby static image and css modules, doing the after selector thing gotta be a certain way
+# About
 
-```shell
-.productCard { # container
-    background-color: aqua;
-    width: 400px;
-    height: 400px; 
-}
+As a hobbyist 3D artist, I immediately knew I had to learn Three.js and include it in my projects whenever appropriate. I knew how intensive 3D rendering could be, so I chose to do a small project which focused more on data and ui than on something more 3D intensive like an rpg game or ar experience.
 
-.productCard Img { #this is how you reference <StaticImage />
-    width: 100px;
-}
-```
+This program allows you to manipulate a 3D model I made of a ring. I made it using Blender and included a default realistic texture I made for it using Adobe Substance Painter. I converted the asset to JSX and after some fiddling was able to get it looking great within a Three.js canvas.
 
-# css modules
-When you're using a css module, if you just try to use a default selector like h1 {} you'll end up affecting all the h1
-
-You want to use classes and specify that way
-
-# background images
-
-To make background images resize properly (especially when zooming out far to emulate ultrawide) use the following technique
-
-```shell
-.container {
-    # height: 100vh; # 
-    
-}
-
-.sectionWithImage {
-    background: url("../image.jpg") no-repeat center center;
-    background-size: cover; # this makes sure that it always covers - the image doesn't resize with the page
-    height: 100%;
-    
-}
-```
-
-# accesing file directories
-
-in order to access the images folder from Customizer.js the following is required:
-```
-src
-│      
-│
-└───Components
-│   │   
-│   │
-│   └───CustomizerFolder
-│       │   Customizer.module.css
-|       |   background: url("../../images/DotPattern.png");
-│   
-└───images
-    │   DotPattern.png
-```
+You can rotate the object, the camera, select the ambient light color & intensity, and for each of the 4 meshes you're able to show their wireframes, hide them, display the default texture, or create your own by using react-colourful's picker and sliders for roughness and metalness.
 
 
-# asset links
-[Dot Pattern](https://www.toptal.com/designers/subtlepatterns/dot-grid-pattern/)
-[Topography Pattern](https://www.toptal.com/designers/subtlepatterns/topography/)
-[css box shadows](https://getcssscan.com/css-box-shadow-examples)
 
-# error messages learned
-```shell
-# this happened because I imported a color picker and tried to use it inside of my React Three Fiber <Canvas />
-Div is not part of the THREE namespace! Did you forget to extend?
-```
+# Learned how to:
 
-# misc resources/links
-[react-three-fiber by example]("https://onion2k.github.io/r3f-by-example/)
-[Unsplash Free Photos](https://unsplash.com/)
-[Intro to react three fiber](https://youtu.be/DPl34H2ISsk)
-[xr thing](https://levar.io/home)
-[google icons png svg](https://fonts.google.com/icons?icon.query=arrow+down)
-[Insane r3f example of crytal swarm](https://codesandbox.io/s/r3f-particles-i-q4d2v?file=/src/index.js)
-[GLTF drag and drop loader by Don McCurdy](https://gltf-viewer.donmccurdy.com/)
-
-# Getting value from slider to affect R3F object rotation
-
-```shell
-# define state for each axis
-
-export default function Customizer3D() {
-
-    # define state for each axis
-    const [xRotation, setXRotation] = useState(0)
-
-    return (
-        <div>
-            <Canvas>
-                <mesh rotation={[xRotation, yRotation, zRotation]}> 
-                    # <geometry, light, material etc />
-                </mesh>
-            </Canvas>
-            <input 
-                id="typeinp" 
-                type="range" 
-                min="0" max="11" # for whatever reason, this is the value that allows for a "full rotation"
-                value={xRotation} # sets the slider to xRotation state default value (0) on load
-                onChange={(e) => setXRotation(e.target.value)} # using slider value to drive xRotation
-                step=".01" # smaller = smoother
-            />
-        </div>
-    )
-```
+- Convert models created in Blender into valid JSX allowing them to be used like react components using React Three Fiber
+- Control the rotation of the object and camera orbit
+- Manage performance costs of certain features and decide what needs to be included vs what can
+- Add background stars with drei to give the scene some non-performance-intensive depth
+- Use react-colourful to get and set hex colour data
+- Control an objects material using state being set from a complex ui
+- Work with CSS modules
 
 
-# React Three Fiber Notes
-[This is a sandbox for an obj/gltf/stl exporter which would be amazing to implement in conjunction with the ability to upload files. this allow the user to upload a mode, alter it with my tool, and download the new version. My tool obviously doesn't do anything fancy but if it did yanno](https://codesandbox.io/s/react-three-fiber-to-stl-or-gltf-ey0wt?from-embed=&file=/src/world/exporter/Exporter.tsx)
+# Next steps:
 
-[really cool emissive example with unreal pass threejs](https://threejs.org/examples/webgl_postprocessing_unreal_bloom.html)
+- Allowing users to upload their own models would take this to the next level. Right now all it can do is show models that I convert and include within the source files myself, which has very limited utility. It was my first Three.js project, so I kept the scope small.
+
+- During the process of building this I was doing some 3D work for an advertising company and it would have been extremely handy to let them position and render the model to show me exactly what angles and framing they wanted, so that I could go back into Blender and do that in full quality. Enabling users to download a png of the canvas would be great.

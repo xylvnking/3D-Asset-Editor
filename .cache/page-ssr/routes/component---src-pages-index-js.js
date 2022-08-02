@@ -3967,6 +3967,31 @@ function Customizer3D(props) {
     1: setToggleMesh4Controls
   } = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true);
   const [meshSelected, setMeshSelected] = react__WEBPACK_IMPORTED_MODULE_0___default().useState(3);
+
+  const turnOnWireFrameAndTurnOffTexture = () => {
+    console.log('why');
+
+    if (meshSelected == 1) {
+      setToggleTexture1(true);
+      setWireFrameToggle1(!wireframeToggle1);
+    }
+
+    if (meshSelected == 2) {
+      setToggleTexture2(true);
+      setWireFrameToggle2(!wireframeToggle2);
+    }
+
+    if (meshSelected == 3) {
+      setToggleTexture3(true);
+      setWireFrameToggle3(!wireframeToggle3);
+    }
+
+    if (meshSelected == 4) {
+      setToggleTexture4(true);
+      setWireFrameToggle4(!wireframeToggle4);
+    }
+  };
+
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerGrid
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -3988,6 +4013,14 @@ function Customizer3D(props) {
     position: [10, 10, 10]
   })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_7__.Environment, {
     preset: "studio"
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_8__.Stars, {
+    radius: 5,
+    depth: 50,
+    count: 5000,
+    factor: 4,
+    saturation: 0,
+    fade: true,
+    speed: 1
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_RingTextured__WEBPACK_IMPORTED_MODULE_3__["default"], {
     rotation: [xRotation, yRotation, zRotation],
     materialColor1: materialColor1,
@@ -4017,15 +4050,7 @@ function Customizer3D(props) {
     wireframeToggle1: wireframeToggle1,
     wireframeToggle2: wireframeToggle2,
     wireframeToggle3: wireframeToggle3,
-    wireframeToggle4: wireframeToggle3
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_8__.Stars, {
-    radius: 5,
-    depth: 50,
-    count: 5000,
-    factor: 4,
-    saturation: 0,
-    fade: true,
-    speed: 1
+    wireframeToggle4: wireframeToggle4
   })))), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerControls
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
@@ -4179,7 +4204,8 @@ function Customizer3D(props) {
     } // onClick={() => 
     //     toggleWireframeAlsoTextureOff()}
     ,
-    onClick: () => setWireFrameToggle1(!wireframeToggle1)
+    onClick: () => // setWireFrameToggle1(!wireframeToggle1)}
+    turnOnWireFrameAndTurnOffTexture(1)
   }, wireframeToggle1 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     height: "48",
@@ -4275,7 +4301,8 @@ function Customizer3D(props) {
       paddingRight: "15px",
       marginTop: ".5rem"
     },
-    onClick: () => setWireFrameToggle2(!wireframeToggle2)
+    onClick: () => // setWireFrameToggle2(!wireframeToggle2)}
+    turnOnWireFrameAndTurnOffTexture()
   }, wireframeToggle2 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     height: "48",
@@ -4371,7 +4398,8 @@ function Customizer3D(props) {
       paddingRight: "15px",
       marginTop: ".5rem"
     },
-    onClick: () => setWireFrameToggle3(!wireframeToggle3)
+    onClick: () => // setWireFrameToggle3(!wireframeToggle3)}
+    turnOnWireFrameAndTurnOffTexture()
   }, wireframeToggle3 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     height: "48",
@@ -4460,14 +4488,19 @@ function Customizer3D(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiVisibilityIcon
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
-    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.rotationResetButton,
+    // type="checkbox" 
+    className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.rotationResetButton // value={wireframeToggle1}
+    ,
     id: "wireframeToggle",
     style: {
       padding: "0px",
       paddingRight: "15px",
       marginTop: ".5rem"
-    },
-    onClick: () => setWireFrameToggle4(!wireframeToggle4)
+    } // onClick={() => 
+    //     toggleWireframeAlsoTextureOff()}
+    ,
+    onClick: () => // setWireFrameToggle4(!wireframeToggle4)}
+    turnOnWireFrameAndTurnOffTexture()
   }, wireframeToggle4 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("svg", {
     xmlns: "http://www.w3.org/2000/svg",
     height: "48",
@@ -4537,7 +4570,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/useGLTF.js");
+/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/useGLTF.js");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-4f1a8e2f.esm.js");
 /*
 Auto-generated by: https://github.com/pmndrs/gltfjsx
 */
@@ -4552,18 +4586,18 @@ function RingTextured({ ...props
 }) {
   //this animates the model to float around a bit but might be too performance heavy
   // this also disables(overides?) the slider position controls
-  // useFrame((state) => {
-  //   const t = state.clock.getElapsedTime()
-  //   group.current.rotation.z = -0.2 - (1 + Math.sin(t / 1.5)) / 20
-  //   group.current.rotation.x = Math.cos(t / 4) / 8
-  //   group.current.rotation.y = Math.sin(t / 4) / 8
-  //   group.current.position.y = (1 + Math.sin(t / 1.5)) / 10
-  // })
+  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_1__.x)(state => {
+    const t = state.clock.getElapsedTime();
+    group.current.rotation.z = -0.2 - (1 + Math.sin(t / 1.5)) / 20;
+    group.current.rotation.x = Math.cos(t / 4) / 8;
+    group.current.rotation.y = Math.sin(t / 4) / 8;
+    group.current.position.y = (1 + Math.sin(t / 1.5)) / 10;
+  });
   const group = (0,react__WEBPACK_IMPORTED_MODULE_0__.useRef)();
   const {
     nodes,
     materials
-  } = (0,_react_three_drei__WEBPACK_IMPORTED_MODULE_1__.useGLTF)('/RingTextured.glb'); //i need a way to have the texture buttons toggle different textures on the same mesh, not toggle one premade texture for each mesh
+  } = (0,_react_three_drei__WEBPACK_IMPORTED_MODULE_2__.useGLTF)('/RingTextured.glb'); //i need a way to have the texture buttons toggle different textures on the same mesh, not toggle one premade texture for each mesh
 
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("group", Object.assign({
     ref: group
@@ -4621,7 +4655,7 @@ function RingTextured({ ...props
     visible: !props.toggleTexture4 && props.toggleMesh4Visibility
   }));
 }
-_react_three_drei__WEBPACK_IMPORTED_MODULE_1__.useGLTF.preload('/RingTextured.glb');
+_react_three_drei__WEBPACK_IMPORTED_MODULE_2__.useGLTF.preload('/RingTextured.glb');
 
 /***/ }),
 
