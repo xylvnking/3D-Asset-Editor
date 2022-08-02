@@ -4,7 +4,7 @@ React | Three.js | Gatsby
 
 [Visit the live site](www.thiswillbearealwebsite.com)
 
-![](/src/images/3dscreenshot1.png)
+![](/src/images/3DSS2.png)
 
 # About
 
