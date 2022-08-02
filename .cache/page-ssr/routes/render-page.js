@@ -6728,6 +6728,17 @@ if (false) {} else {
 
 /***/ }),
 
+/***/ "react-dom/client":
+/*!*************************************************************************************************************!*\
+  !*** external "/Users/dylanking6132/xylvnking/jewelry-brand-landing-page/node_modules/react-dom/client.js" ***!
+  \*************************************************************************************************************/
+/***/ ((module) => {
+
+"use strict";
+module.exports = require("/Users/dylanking6132/xylvnking/jewelry-brand-landing-page/node_modules/react-dom/client.js");
+
+/***/ }),
+
 /***/ "react-dom/server":
 /*!*************************************************************************************************************!*\
   !*** external "/Users/dylanking6132/xylvnking/jewelry-brand-landing-page/node_modules/react-dom/server.js" ***!

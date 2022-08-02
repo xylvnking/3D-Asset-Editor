@@ -552,6 +552,73 @@ useGLTF.clear = input => _react_three_fiber__WEBPACK_IMPORTED_MODULE_2__.z.clear
 
 /***/ }),
 
+/***/ "./node_modules/@react-three/drei/core/useProgress.js":
+/*!************************************************************!*\
+  !*** ./node_modules/@react-three/drei/core/useProgress.js ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "useProgress": () => (/* binding */ useProgress)
+/* harmony export */ });
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
+/* harmony import */ var zustand__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! zustand */ "./node_modules/zustand/esm/index.js");
+
+
+
+let saveLastTotalLoaded = 0;
+const useProgress = (0,zustand__WEBPACK_IMPORTED_MODULE_0__["default"])(set => {
+  three__WEBPACK_IMPORTED_MODULE_1__.DefaultLoadingManager.onStart = (item, loaded, total) => {
+    set({
+      active: true,
+      item,
+      loaded,
+      total,
+      progress: (loaded - saveLastTotalLoaded) / (total - saveLastTotalLoaded) * 100
+    });
+  };
+
+  three__WEBPACK_IMPORTED_MODULE_1__.DefaultLoadingManager.onLoad = () => {
+    set({
+      active: false
+    });
+  };
+
+  three__WEBPACK_IMPORTED_MODULE_1__.DefaultLoadingManager.onError = item => set(state => ({
+    errors: [...state.errors, item]
+  }));
+
+  three__WEBPACK_IMPORTED_MODULE_1__.DefaultLoadingManager.onProgress = (item, loaded, total) => {
+    if (loaded === total) {
+      saveLastTotalLoaded = total;
+    }
+
+    set({
+      active: true,
+      item,
+      loaded,
+      total,
+      progress: (loaded - saveLastTotalLoaded) / (total - saveLastTotalLoaded) * 100 || 100
+    });
+  };
+
+  return {
+    errors: [],
+    active: false,
+    progress: 0,
+    item: '',
+    loaded: 0,
+    total: 0
+  };
+});
+
+
+
+
+/***/ }),
+
 /***/ "./node_modules/@react-three/drei/helpers/environment-assets.js":
 /*!**********************************************************************!*\
   !*** ./node_modules/@react-three/drei/helpers/environment-assets.js ***!
@@ -611,6 +678,323 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (/* binding */ vertexShader)
 /* harmony export */ });
 var vertexShader = "#define GLSLIFY 1\nvarying vec3 vWorldPosition;void main(){vec4 worldPosition=modelMatrix*vec4(position,1.0);vWorldPosition=worldPosition.xyz;gl_Position=projectionMatrix*modelViewMatrix*vec4(position,1.0);}"; // eslint-disable-line
+
+
+
+
+/***/ }),
+
+/***/ "./node_modules/@react-three/drei/web/Html.js":
+/*!****************************************************!*\
+  !*** ./node_modules/@react-three/drei/web/Html.js ***!
+  \****************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Html": () => (/* binding */ Html)
+/* harmony export */ });
+/* harmony import */ var _babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/helpers/esm/extends */ "./node_modules/@babel/runtime/helpers/esm/extends.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-dom/client */ "react-dom/client");
+/* harmony import */ var react_dom_client__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_dom_client__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var three__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-4f1a8e2f.esm.js");
+
+
+
+
+
+
+const v1 = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
+const v2 = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
+const v3 = new three__WEBPACK_IMPORTED_MODULE_3__.Vector3();
+
+function defaultCalculatePosition(el, camera, size) {
+  const objectPos = v1.setFromMatrixPosition(el.matrixWorld);
+  objectPos.project(camera);
+  const widthHalf = size.width / 2;
+  const heightHalf = size.height / 2;
+  return [objectPos.x * widthHalf + widthHalf, -(objectPos.y * heightHalf) + heightHalf];
+}
+
+function isObjectBehindCamera(el, camera) {
+  const objectPos = v1.setFromMatrixPosition(el.matrixWorld);
+  const cameraPos = v2.setFromMatrixPosition(camera.matrixWorld);
+  const deltaCamObj = objectPos.sub(cameraPos);
+  const camDir = camera.getWorldDirection(v3);
+  return deltaCamObj.angleTo(camDir) > Math.PI / 2;
+}
+
+function isObjectVisible(el, camera, raycaster, occlude) {
+  const elPos = v1.setFromMatrixPosition(el.matrixWorld);
+  const screenPos = elPos.clone();
+  screenPos.project(camera);
+  raycaster.setFromCamera(screenPos, camera);
+  const intersects = raycaster.intersectObjects(occlude, true);
+
+  if (intersects.length) {
+    const intersectionDistance = intersects[0].distance;
+    const pointDistance = elPos.distanceTo(raycaster.ray.origin);
+    return pointDistance < intersectionDistance;
+  }
+
+  return true;
+}
+
+function objectScale(el, camera) {
+  if (camera instanceof three__WEBPACK_IMPORTED_MODULE_3__.OrthographicCamera) {
+    return camera.zoom;
+  } else if (camera instanceof three__WEBPACK_IMPORTED_MODULE_3__.PerspectiveCamera) {
+    const objectPos = v1.setFromMatrixPosition(el.matrixWorld);
+    const cameraPos = v2.setFromMatrixPosition(camera.matrixWorld);
+    const vFOV = camera.fov * Math.PI / 180;
+    const dist = objectPos.distanceTo(cameraPos);
+    const scaleFOV = 2 * Math.tan(vFOV / 2) * dist;
+    return 1 / scaleFOV;
+  } else {
+    return 1;
+  }
+}
+
+function objectZIndex(el, camera, zIndexRange) {
+  if (camera instanceof three__WEBPACK_IMPORTED_MODULE_3__.PerspectiveCamera || camera instanceof three__WEBPACK_IMPORTED_MODULE_3__.OrthographicCamera) {
+    const objectPos = v1.setFromMatrixPosition(el.matrixWorld);
+    const cameraPos = v2.setFromMatrixPosition(camera.matrixWorld);
+    const dist = objectPos.distanceTo(cameraPos);
+    const A = (zIndexRange[1] - zIndexRange[0]) / (camera.far - camera.near);
+    const B = zIndexRange[1] - A * camera.far;
+    return Math.round(A * dist + B);
+  }
+
+  return undefined;
+}
+
+const epsilon = value => Math.abs(value) < 1e-10 ? 0 : value;
+
+function getCSSMatrix(matrix, multipliers, prepend = '') {
+  let matrix3d = 'matrix3d(';
+
+  for (let i = 0; i !== 16; i++) {
+    matrix3d += epsilon(multipliers[i] * matrix.elements[i]) + (i !== 15 ? ',' : ')');
+  }
+
+  return prepend + matrix3d;
+}
+
+const getCameraCSSMatrix = (multipliers => {
+  return matrix => getCSSMatrix(matrix, multipliers);
+})([1, -1, 1, 1, 1, -1, 1, 1, 1, -1, 1, 1, 1, -1, 1, 1]);
+
+const getObjectCSSMatrix = (scaleMultipliers => {
+  return (matrix, factor) => getCSSMatrix(matrix, scaleMultipliers(factor), 'translate(-50%,-50%)');
+})(f => [1 / f, 1 / f, 1 / f, 1, -1 / f, -1 / f, -1 / f, -1, 1 / f, 1 / f, 1 / f, 1, 1, 1, 1, 1]);
+
+const Html = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.forwardRef(({
+  children,
+  eps = 0.001,
+  style,
+  className,
+  prepend,
+  center,
+  fullscreen,
+  portal,
+  distanceFactor,
+  sprite = false,
+  transform = false,
+  occlude,
+  onOcclude,
+  zIndexRange = [16777271, 0],
+  calculatePosition = defaultCalculatePosition,
+  as = 'div',
+  wrapperClass,
+  pointerEvents = 'auto',
+  ...props
+}, ref) => {
+  var _portal$current;
+
+  const gl = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.w)(({
+    gl
+  }) => gl);
+  const camera = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.w)(({
+    camera
+  }) => camera);
+  const scene = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.w)(({
+    scene
+  }) => scene);
+  const size = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.w)(({
+    size
+  }) => size);
+  const raycaster = (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.w)(({
+    raycaster
+  }) => raycaster);
+  const [el] = react__WEBPACK_IMPORTED_MODULE_1__.useState(() => document.createElement(as));
+  const root = react__WEBPACK_IMPORTED_MODULE_1__.useRef();
+  const group = react__WEBPACK_IMPORTED_MODULE_1__.useRef(null);
+  const oldZoom = react__WEBPACK_IMPORTED_MODULE_1__.useRef(0);
+  const oldPosition = react__WEBPACK_IMPORTED_MODULE_1__.useRef([0, 0]);
+  const transformOuterRef = react__WEBPACK_IMPORTED_MODULE_1__.useRef(null);
+  const transformInnerRef = react__WEBPACK_IMPORTED_MODULE_1__.useRef(null);
+  const target = (_portal$current = portal == null ? void 0 : portal.current) !== null && _portal$current !== void 0 ? _portal$current : gl.domElement.parentNode;
+  react__WEBPACK_IMPORTED_MODULE_1__.useEffect(() => {
+    if (group.current) {
+      const currentRoot = root.current = react_dom_client__WEBPACK_IMPORTED_MODULE_2__.createRoot(el);
+      scene.updateMatrixWorld();
+
+      if (transform) {
+        el.style.cssText = `position:absolute;top:0;left:0;pointer-events:none;overflow:hidden;`;
+      } else {
+        const vec = calculatePosition(group.current, camera, size);
+        el.style.cssText = `position:absolute;top:0;left:0;transform:translate3d(${vec[0]}px,${vec[1]}px,0);transform-origin:0 0;`;
+      }
+
+      if (target) {
+        if (prepend) target.prepend(el);else target.appendChild(el);
+      }
+
+      return () => {
+        if (target) target.removeChild(el);
+        currentRoot.unmount();
+      };
+    }
+  }, [target, transform]);
+  react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect(() => {
+    if (wrapperClass) el.className = wrapperClass;
+  }, [wrapperClass]);
+  const styles = react__WEBPACK_IMPORTED_MODULE_1__.useMemo(() => {
+    if (transform) {
+      return {
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: size.width,
+        height: size.height,
+        transformStyle: 'preserve-3d',
+        pointerEvents: 'none'
+      };
+    } else {
+      return {
+        position: 'absolute',
+        transform: center ? 'translate3d(-50%,-50%,0)' : 'none',
+        ...(fullscreen && {
+          top: -size.height / 2,
+          left: -size.width / 2,
+          width: size.width,
+          height: size.height
+        }),
+        ...style
+      };
+    }
+  }, [style, center, fullscreen, size, transform]);
+  const transformInnerStyles = react__WEBPACK_IMPORTED_MODULE_1__.useMemo(() => ({
+    position: 'absolute',
+    pointerEvents
+  }), [pointerEvents]);
+  react__WEBPACK_IMPORTED_MODULE_1__.useLayoutEffect(() => {
+    if (transform) {
+      var _root$current;
+
+      (_root$current = root.current) == null ? void 0 : _root$current.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        ref: transformOuterRef,
+        style: styles
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        ref: transformInnerRef,
+        style: transformInnerStyles
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        ref: ref,
+        className: className,
+        style: style,
+        children: children
+      }))));
+    } else {
+      var _root$current2;
+
+      (_root$current2 = root.current) == null ? void 0 : _root$current2.render( /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("div", {
+        ref: ref,
+        style: styles,
+        className: className,
+        children: children
+      }));
+    }
+  });
+  const visible = react__WEBPACK_IMPORTED_MODULE_1__.useRef(true);
+  (0,_react_three_fiber__WEBPACK_IMPORTED_MODULE_4__.x)(() => {
+    if (group.current) {
+      camera.updateMatrixWorld();
+      group.current.updateWorldMatrix(true, false);
+      const vec = transform ? oldPosition.current : calculatePosition(group.current, camera, size);
+
+      if (transform || Math.abs(oldZoom.current - camera.zoom) > eps || Math.abs(oldPosition.current[0] - vec[0]) > eps || Math.abs(oldPosition.current[1] - vec[1]) > eps) {
+        const isBehindCamera = isObjectBehindCamera(group.current, camera);
+        let raytraceTarget = false;
+
+        if (typeof occlude === 'boolean') {
+          if (occlude === true) {
+            raytraceTarget = [scene];
+          }
+        } else if (Array.isArray(occlude)) {
+          raytraceTarget = occlude.map(item => item.current);
+        }
+
+        const previouslyVisible = visible.current;
+
+        if (raytraceTarget) {
+          const isvisible = isObjectVisible(group.current, camera, raycaster, raytraceTarget);
+          visible.current = isvisible && !isBehindCamera;
+        } else {
+          visible.current = !isBehindCamera;
+        }
+
+        if (previouslyVisible !== visible.current) {
+          if (onOcclude) onOcclude(!visible.current);else el.style.display = visible.current ? 'block' : 'none';
+        }
+
+        el.style.zIndex = `${objectZIndex(group.current, camera, zIndexRange)}`;
+
+        if (transform) {
+          const [widthHalf, heightHalf] = [size.width / 2, size.height / 2];
+          const fov = camera.projectionMatrix.elements[5] * heightHalf;
+          const {
+            isOrthographicCamera,
+            top,
+            left,
+            bottom,
+            right
+          } = camera;
+          const cameraMatrix = getCameraCSSMatrix(camera.matrixWorldInverse);
+          const cameraTransform = isOrthographicCamera ? `scale(${fov})translate(${epsilon(-(right + left) / 2)}px,${epsilon((top + bottom) / 2)}px)` : `translateZ(${fov}px)`;
+          let matrix = group.current.matrixWorld;
+
+          if (sprite) {
+            matrix = camera.matrixWorldInverse.clone().transpose().copyPosition(matrix).scale(group.current.scale);
+            matrix.elements[3] = matrix.elements[7] = matrix.elements[11] = 0;
+            matrix.elements[15] = 1;
+          }
+
+          el.style.width = size.width + 'px';
+          el.style.height = size.height + 'px';
+          el.style.perspective = isOrthographicCamera ? '' : `${fov}px`;
+
+          if (transformOuterRef.current && transformInnerRef.current) {
+            transformOuterRef.current.style.transform = `${cameraTransform}${cameraMatrix}translate(${widthHalf}px,${heightHalf}px)`;
+            transformInnerRef.current.style.transform = getObjectCSSMatrix(matrix, 1 / ((distanceFactor || 10) / 400));
+          }
+        } else {
+          const scale = distanceFactor === undefined ? 1 : objectScale(group.current, camera) * distanceFactor;
+          el.style.transform = `translate3d(${vec[0]}px,${vec[1]}px,0) scale(${scale})`;
+        }
+
+        oldPosition.current = vec;
+        oldZoom.current = camera.zoom;
+      }
+    }
+  });
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1__.createElement("group", (0,_babel_runtime_helpers_esm_extends__WEBPACK_IMPORTED_MODULE_0__["default"])({}, props, {
+    ref: group
+  }));
+});
 
 
 
@@ -3764,13 +4148,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/index-4f1a8e2f.esm.js");
-/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
+/* harmony import */ var _react_three_fiber__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @react-three/fiber */ "./node_modules/@react-three/fiber/dist/react-three-fiber.esm.js");
 /* harmony import */ var three_examples_jsm_controls_OrbitControls__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! three/examples/jsm/controls/OrbitControls */ "./node_modules/three/examples/jsm/controls/OrbitControls.js");
-/* harmony import */ var react_colorful__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-colorful */ "./node_modules/react-colorful/dist/index.mjs");
+/* harmony import */ var react_colorful__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! react-colorful */ "./node_modules/react-colorful/dist/index.mjs");
 /* harmony import */ var _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Customizer.module.css */ "./src/Components/CustomizerFolder/Customizer.module.css");
-/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/PerspectiveCamera.js");
-/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/Environment.js");
-/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/Stars.js");
+/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/useProgress.js");
+/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/web/Html.js");
+/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/PerspectiveCamera.js");
+/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/Environment.js");
+/* harmony import */ var _react_three_drei__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! @react-three/drei */ "./node_modules/@react-three/drei/core/Stars.js");
 /* harmony import */ var _RingTextured__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./RingTextured */ "./src/Components/CustomizerFolder/RingTextured.js");
 
 
@@ -3795,6 +4181,20 @@ const CameraController = () => {
   }, [camera, gl]);
   return null;
 };
+
+function Loader() {
+  const {
+    progress
+  } = (0,_react_three_drei__WEBPACK_IMPORTED_MODULE_5__.useProgress)();
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_6__.Html, {
+    center: true,
+    style: {
+      color: 'white',
+      fontSize: '100px',
+      maxWidth: '100vw'
+    }
+  }, progress, " % loaded");
+}
 
 function Customizer3D(props) {
   //Object rotation being set with sliders
@@ -3996,7 +4396,7 @@ function Customizer3D(props) {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerGrid
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.customizerCanvas
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_5__.Canvas, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CameraController, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_6__.PerspectiveCamera, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_fiber__WEBPACK_IMPORTED_MODULE_7__.Canvas, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(CameraController, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_8__.PerspectiveCamera, {
     makeDefault: true,
     fov: 35,
     position: [3.5, 3.5, -3.5]
@@ -4011,9 +4411,11 @@ function Customizer3D(props) {
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("pointLight", {
     intensity: 5,
     position: [10, 10, 10]
-  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_7__.Environment, {
+  })), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, {
+    fallback: /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(Loader, null)
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_9__.Environment, {
     preset: "studio"
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_8__.Stars, {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_react_three_drei__WEBPACK_IMPORTED_MODULE_10__.Stars, {
     radius: 5,
     depth: 50,
     count: 5000,
@@ -4021,7 +4423,7 @@ function Customizer3D(props) {
     saturation: 0,
     fade: true,
     speed: 1
-  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react__WEBPACK_IMPORTED_MODULE_0__.Suspense, null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_RingTextured__WEBPACK_IMPORTED_MODULE_3__["default"], {
+  }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_RingTextured__WEBPACK_IMPORTED_MODULE_3__["default"], {
     rotation: [xRotation, yRotation, zRotation],
     materialColor1: materialColor1,
     materialColor2: materialColor2,
@@ -4099,7 +4501,7 @@ function Customizer3D(props) {
     onClick: () => setZRotation(0)
   }, "reset"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("br", null)), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiAmbientLightControls
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "ambient light color & intensity"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_9__.HexColorPicker, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "ambient light color & intensity"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_11__.HexColorPicker, {
     color: ambientLightColor,
     onChange: setAmbientLightColor,
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPickerAmbientLight,
@@ -4161,7 +4563,7 @@ function Customizer3D(props) {
     style: {
       borderColor: materialColor1
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_9__.HexColorPicker, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_11__.HexColorPicker, {
     color: materialColor1,
     onChange: setMaterialColor1,
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPicker,
@@ -4262,7 +4664,7 @@ function Customizer3D(props) {
     style: {
       borderColor: materialColor2
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_9__.HexColorPicker, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_11__.HexColorPicker, {
     color: materialColor2,
     onChange: setMaterialColor2,
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPicker,
@@ -4359,7 +4761,7 @@ function Customizer3D(props) {
     style: {
       borderColor: materialColor3
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_9__.HexColorPicker, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_11__.HexColorPicker, {
     color: materialColor3,
     onChange: setMaterialColor3,
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPicker,
@@ -4456,7 +4858,7 @@ function Customizer3D(props) {
     style: {
       borderColor: materialColor4
     }
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_9__.HexColorPicker, {
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_colorful__WEBPACK_IMPORTED_MODULE_11__.HexColorPicker, {
     color: materialColor4,
     onChange: setMaterialColor4,
     className: _Customizer_module_css__WEBPACK_IMPORTED_MODULE_2__.uiHexColorPicker,
