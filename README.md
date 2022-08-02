@@ -14,8 +14,6 @@ This program allows you to manipulate a 3D model I made of a ring. I made it usi
 
 You can rotate the object, the camera, select the ambient light color & intensity, and for each of the 4 meshes you're able to show their wireframes, hide them, display the default texture, or create your own by using react-colourful's picker and sliders for roughness and metalness.
 
-
-
 # Learned how to:
 
 - Convert models created in Blender into valid JSX allowing them to be used like react components using React Three Fiber
@@ -25,7 +23,7 @@ You can rotate the object, the camera, select the ambient light color & intensit
 - Use react-colourful to get and set hex colour data
 - Control an objects material using state being set from a complex ui
 - Work with CSS modules
-
+- Implement a loader to make it obvious the 3D model is loading in and that the app isn't just broken
 
 # Next steps:
 
