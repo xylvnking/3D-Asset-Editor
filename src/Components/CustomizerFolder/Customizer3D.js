@@ -151,7 +151,7 @@ export default function Customizer3D(props) {
          
             
                 <div className={customizerGrid}>
-                    <div className={customizerCanvas}>
+                    <div className={customizerCanvas} aria-hidden="true">
                         <Canvas>
                             <CameraController />
                             <PerspectiveCamera 
