@@ -4547,7 +4547,7 @@ module.exports = JSON.parse('{"name":"gatsby","description":"Blazing fast modern
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"polyfill":["/polyfill-9b6acfdc55acd7df6516.js"],"app":["/app-b7971cf3ba08d78b20f0.js"],"component---src-pages-404-js":["/component---src-pages-404-js-9d0d137c6d07767b9582.js"],"component---src-pages-index-js":["/component---src-pages-index-js-cc2d3ccbc77e8a1b7551.js"]}');
+module.exports = JSON.parse('{"polyfill":["/polyfill-9b6acfdc55acd7df6516.js"],"app":["/app-b7971cf3ba08d78b20f0.js"],"component---src-pages-404-js":["/component---src-pages-404-js-9d0d137c6d07767b9582.js"],"component---src-pages-index-js":["/component---src-pages-index-js-d9d888085bffc521bf18.js"]}');
 
 /***/ })
 

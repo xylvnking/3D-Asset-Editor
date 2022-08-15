@@ -1,6 +1,7 @@
 
 import React, { useRef, useState, useEffect, Suspense } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
+import { Helmet } from 'react-helmet';
 
 
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
@@ -64,6 +65,7 @@ const CameraController = () => {
 
 
 export default function Customizer3D(props) {
+    
 
     //Object rotation being set with sliders
     const [xRotation, setXRotation] = useState(0) //0-11
@@ -151,6 +153,9 @@ export default function Customizer3D(props) {
          
             
                 <div className={customizerGrid}>
+                    <Helmet>
+                        <title>Three.js Editor</title>
+                    </Helmet>
                     <div className={customizerCanvas} aria-hidden="true">
                         <Canvas>
                             <CameraController />
